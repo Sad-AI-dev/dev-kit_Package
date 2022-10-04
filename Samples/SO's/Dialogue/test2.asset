@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b78c6dc0aaccb949a3867c5b024092c, type: 3}
+  m_Name: test2
+  m_EditorClassIdentifier: 
+  dialogue:
+  - speaker: cylinder
+    dialogue: Yeah, you heard me!
+    unskippable: 0
+  - speaker: cylinder
+    dialogue: 'L   O   N   G
+
+      M  E  S  S  A  G  E
+
+      T  I  M  E  !'
+    unskippable: 0
+  - speaker: cylinder
+    dialogue: WOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO!
+    unskippable: 0
+  - speaker: me
+    dialogue: I'm going to leave now :)
+    unskippable: 0
+  responses: []

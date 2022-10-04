@@ -1,0 +1,25 @@
+{
+  "name": "com.arvid-dev.dev-kit",
+  "version": "1.0.0",
+  "displayName": "Arvid's Dev Kit",
+  "description": "A collection of scripts that aims to speed up prototyping in Unity.",
+  "unity": "2021.3",
+  "unityRelease": "1f1",
+  "documentationUrl": "https://example.com/ [CHANGE THIS]",
+  "changelogUrl": "https://example.com/changelog.html [CHANGE THIS]",
+  "licensesUrl": "https://example.com/licensing.html [CHANGE THIS]",
+  "dependencies": {
+    "com.unity.textmeshpro": "3.0.6"
+  },
+  "hideInEditor": false,
+  "keywords": [
+    "Scripts pack",
+    "Fast Prototyping"
+  ],
+  "author": {
+    "name": "Arvid van den Hoogen",
+    "email": "ArvidvdHoogen@gmail.com",
+    "url": "https://www.unity3d.com [CHANGE THIS]"
+  },
+  "type": "library"
+}
