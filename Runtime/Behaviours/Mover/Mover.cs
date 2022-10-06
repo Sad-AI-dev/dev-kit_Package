@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class Mover : MonoBehaviour
 {
     [Header("Settings")]
@@ -11,8 +12,12 @@ public class Mover : MonoBehaviour
     //states
     private bool moving;
 
+    //external
+    private Rigidbody rb;
+
     private void Start()
     {
+        rb = GetComponent<Rigidbody>();
         if (moveOnStart) StartMove();
     }
 
@@ -28,13 +33,14 @@ public class Mover : MonoBehaviour
     }
 
     //----------movement----------
-    private void Update()
+    private void FixedUpdate()
     {
         if (moving) Move();
     }
 
     private void Move()
     {
-        transform.Translate(moveDirection * Time.deltaTime);
+        Vector3 speed = moveDirection * (100 * Time.deltaTime);
+        rb.velocity = transform.right * speed.x + transform.up * speed.y + transform.forward * speed.z; //convert to local space
     }
 }

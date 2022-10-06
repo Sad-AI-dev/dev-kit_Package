@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody))]
 public class DroneController : MonoBehaviour
@@ -9,6 +10,8 @@ public class DroneController : MonoBehaviour
     [SerializeField] private float horTopSpeed;
     [SerializeField] private float horAcceleration;
     [SerializeField] private float horDeceleration;
+    [Space(10f)]
+    [SerializeField] private UnityEvent<Vector2> onChangeHorMoveDir;
     //horizontal move vars
     Vector2 horMoveDir;
     float horSpeed;
@@ -17,6 +20,8 @@ public class DroneController : MonoBehaviour
     [SerializeField] private float verTopSpeed;
     [SerializeField] private float verAcceleration;
     [SerializeField] private float verDeceleration;
+    [Space(10f)]
+    [SerializeField] private UnityEvent<float> OnChangeVerMoveDir;
     //vertical move vars
     float verMoveDir;
     float verSpeed;
@@ -33,19 +38,19 @@ public class DroneController : MonoBehaviour
     public void SetHorMoveDir(Vector2 dir)
     {
         if (dir.magnitude > 1f) { dir.Normalize(); } //force dir in expected bounds
+        if (dir != horMoveDir) { onChangeHorMoveDir?.Invoke(dir); }
         horMoveDir = dir;
     }
 
     public void SetVerMoveDir(float dir)
     {
-        if (dir > 1f || dir < -1f) { //force dir in expected bounds
-            dir = Mathf.Clamp(dir, -1f, 1f);
-        }
+        dir = Mathf.Clamp(dir, -1f, 1f); //force dir in expected bounds
+        if (dir != verMoveDir) { OnChangeVerMoveDir?.Invoke(dir); }
         verMoveDir = dir;
     }
 
     //----------main update loop-------------
-    private void Update()
+    private void FixedUpdate()
     {
         //hor movement
         UpdateHorSpeed();

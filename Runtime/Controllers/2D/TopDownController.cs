@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class TopDownController : MonoBehaviour
@@ -13,6 +14,8 @@ public class TopDownController : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private float topSpeed;
     [SerializeField] private float acceleration;
+    [Space(10f)]
+    [SerializeField] private UnityEvent<Vector2> onChangeMoveDir;
 
     [Header("Technical")]
     [Tooltip("Sets the way movement is handled" +
@@ -35,8 +38,9 @@ public class TopDownController : MonoBehaviour
 
     public void SetMoveDir(Vector2 input)
     {
-        if (input.magnitude > 1f) { moveDir = input.normalized; }
-        else { moveDir = input; }
+        if (input.magnitude > 1f) { input.Normalize(); } //normalize input
+        if (input != moveDir) { onChangeMoveDir?.Invoke(input); } //check dir change
+        moveDir = input;
     }
 
     private void FixedUpdate()

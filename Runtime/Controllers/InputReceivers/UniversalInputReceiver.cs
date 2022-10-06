@@ -12,6 +12,7 @@ public class UniversalInputReceiver : MonoBehaviour
     {
         public string name; //label for editor
         public UnityEvent onButtonDown;
+        public UnityEvent onButtonHeld;
         public UnityEvent onButtonUp;
         [Header("Input codes")]
         public List<KeyCode> codes;
@@ -78,6 +79,7 @@ public class UniversalInputReceiver : MonoBehaviour
             //read keys
             foreach (KeyCode code in input.codes) {
                 if (Input.GetKeyDown(code)) { input.onButtonDown?.Invoke(); break; }
+                else if (Input.GetKey(code)) { input.onButtonHeld?.Invoke(); break; }
                 else if (Input.GetKeyUp(code)) { input.onButtonUp?.Invoke(); break; }
             }
             //read input manager strings

@@ -18,7 +18,7 @@ public class WaveSpawner : MonoBehaviour
     private struct WaveData
     {
         [System.Serializable]
-        public class PrefabCount
+        public struct PrefabCount
         {
             public GameObject prefab;
             public int count;
@@ -39,6 +39,8 @@ public class WaveSpawner : MonoBehaviour
         "Delay: waits for a delay, then automatically spawns the next wave.")]
     [SerializeField] private ActivateMode activateMode;
     [SerializeField] private bool spawnOnStart;
+    [Tooltip("When set to true, final wave can be repeated.")]
+    [SerializeField] private bool repeatFinalWave;
 
     [Header("Technical Modes")]
     [Tooltip("Dictates which spawnpoint is chosen when spawning a prefab\n\n" +
@@ -79,16 +81,24 @@ public class WaveSpawner : MonoBehaviour
     {
         if (!isSpawning) {
             if (waveNum < waves.Count) { //check if next next wave exists
-                //register vars
-                isSpawning = true;
-                UpdateSpawnVars();
-                //start wave spawning
-                StartCoroutine(SpawnWaveCo());
+                StartSpawnWave();
+            }
+            else if (repeatFinalWave && waveNum == waves.Count) { //spawned final wave, can repeat
+                waveNum--;
+                StartSpawnWave();
             }
         }
     }
+
+    private void StartSpawnWave()
+    {
+        UpdateSpawnVars();
+        //start wave spawning
+        StartCoroutine(SpawnWaveCo());
+    }
     private void UpdateSpawnVars()
     {
+        isSpawning = true;
         currentWave = new List<WaveData.PrefabCount>(waves[waveNum].content);
     }
 
@@ -155,7 +165,7 @@ public class WaveSpawner : MonoBehaviour
 
     private void RegisterObjectSpawn(int index)
     {
-        currentWave[index].count--;
+        currentWave[index] = new WaveData.PrefabCount { count = currentWave[index].count - 1, prefab = currentWave[index].prefab };
         if (currentWave[index].count <= 0) { //if type is depleted, remove type
             currentWave.RemoveAt(index);
         }

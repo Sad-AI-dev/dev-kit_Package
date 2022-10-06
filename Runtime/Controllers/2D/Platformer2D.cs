@@ -31,7 +31,7 @@ public class Platformer2D : MonoBehaviour
 
     [Header("Technical Settings")]
     //external components
-    [SerializeField] private GroundDetector2D groundDetector;
+    [SerializeField] private ObjectDetector groundDetector;
     private Rigidbody2D rb;
 
     private void Start()
@@ -39,13 +39,13 @@ public class Platformer2D : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = fallGrav;
         //ground detection
-        if (groundDetector == null) { Debug.LogError("Please assign a 2D ground detector on" + transform.name + "!"); }
+        if (groundDetector == null) { Debug.LogError("Please assign an object detector on" + transform.name + "!"); }
         else { RegisterDetectorEvents(); }
     }
     private void RegisterDetectorEvents()
     {
-        groundDetector.onTouchGround.AddListener(OnTouchGround);
-        groundDetector.onLeaveGround.AddListener(OnLeaveGround);
+        groundDetector.onDetectFirstObject.AddListener(OnTouchGround);
+        groundDetector.onLeaveLastObject.AddListener(OnLeaveGround);
     }
 
     private void FixedUpdate()

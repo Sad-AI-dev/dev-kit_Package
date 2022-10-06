@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(CharacterController))]
 public class Platformer3D_CharacterController : MonoBehaviour
@@ -9,6 +10,8 @@ public class Platformer3D_CharacterController : MonoBehaviour
     [SerializeField] private float topSpeed;
     [SerializeField] private float acceleration;
     [SerializeField] private float deceleration;
+    [Space(10f)]
+    [SerializeField] private UnityEvent<Vector2> onMoveDirChanged;
     //movement vars
     private Vector2 moveDir = Vector2.zero;
     private Vector3 velocity = Vector3.zero;
@@ -50,6 +53,7 @@ public class Platformer3D_CharacterController : MonoBehaviour
     public void SetMoveDir(Vector2 input)
     {
         if (input.magnitude > 1f) { input.Normalize(); }
+        if (moveDir != input) { onMoveDirChanged?.Invoke(input); }
         moveDir = input;
     }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Platformer3D_Rigidbody : MonoBehaviour
@@ -9,6 +10,8 @@ public class Platformer3D_Rigidbody : MonoBehaviour
     [SerializeField] private float topSpeed;
     [SerializeField] private float acceleration;
     [SerializeField] private float deceleration;
+    [Space(10f)]
+    [SerializeField] private UnityEvent onMoveDirChanged;
     //movement vars
     private Vector2 moveDir = Vector2.zero;
     private float speed;
@@ -25,20 +28,20 @@ public class Platformer3D_Rigidbody : MonoBehaviour
 
     [Header("Technical Settings")]
     //external components
-    [SerializeField] private GroundDetector3D groundDetector;
+    [SerializeField] private ObjectDetector groundDetector;
     private Rigidbody rb;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         //ground detection
-        if (groundDetector == null) { Debug.LogError("Please assign a 3D ground detector on" + transform.name + "!"); }
+        if (groundDetector == null) { Debug.LogError("Please assign an object detector on" + transform.name + "!"); }
         else { RegisterDetectorEvents(); }
     }
     private void RegisterDetectorEvents()
     {
-        groundDetector.onTouchGround.AddListener(OnTouchGround);
-        groundDetector.onLeaveGround.AddListener(OnLeaveGround);
+        groundDetector.onDetectFirstObject.AddListener(OnTouchGround);
+        groundDetector.onLeaveLastObject.AddListener(OnLeaveGround);
     }
 
     private void FixedUpdate()
@@ -50,8 +53,9 @@ public class Platformer3D_Rigidbody : MonoBehaviour
     //---------------------Movement--------------------------------
     public void SetMoveDir(Vector2 input)
     {
-        if (input.magnitude > 1f) { moveDir = input.normalized; }
-        else { moveDir = input; }
+        if (input.magnitude > 1f) { input.Normalize(); }
+        if (moveDir != input) { onMoveDirChanged?.Invoke(); }
+        moveDir = input;
     }
 
     private void UpdateSpeed()

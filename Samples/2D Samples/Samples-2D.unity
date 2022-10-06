@@ -1055,6 +1055,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   topSpeed: 5
   acceleration: 0.5
+  onChangeMoveDir:
+    m_PersistentCalls:
+      m_Calls: []
   mode: 1
 --- !u!58 &645709926
 CircleCollider2D:
@@ -1417,7 +1420,7 @@ MonoBehaviour:
   fallGrav: 30
   jumpBufferTime: 0.1
   coyoteTime: 0.1
-  groundDetector: {fileID: 900584499}
+  groundDetector: {fileID: 900584501}
 --- !u!61 &764966825
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1638,7 +1641,7 @@ GameObject:
   m_Component:
   - component: {fileID: 900584498}
   - component: {fileID: 900584500}
-  - component: {fileID: 900584499}
+  - component: {fileID: 900584501}
   m_Layer: 0
   m_Name: GroundCheck
   m_TagString: Untagged
@@ -1661,26 +1664,6 @@ Transform:
   m_Father: {fileID: 764966822}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &900584499
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 900584497}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be95d276b3a209840a105902076ba46c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onTouchGround:
-    m_PersistentCalls:
-      m_Calls: []
-  onLeaveGround:
-    m_PersistentCalls:
-      m_Calls: []
-  ignoreTags:
-  - Player
 --- !u!61 &900584500
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1707,6 +1690,29 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.99, y: 0.05}
   m_EdgeRadius: 0
+--- !u!114 &900584501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900584497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c235bce6508626940b254fd8d5486161, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onDetectFirstObject:
+    m_PersistentCalls:
+      m_Calls: []
+  onDetectObject:
+    m_PersistentCalls:
+      m_Calls: []
+  onLeaveLastObject:
+    m_PersistentCalls:
+      m_Calls: []
+  ignoreTags:
+  - Player
 --- !u!1 &904774929
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ public class HealthManager : MonoBehaviour
     }
 
     [SerializeField] private float health;
-    private float maxHealth;
+    [SerializeField] private float maxHealth;
 
     [Header("Settings")]
     [Tooltip("Determines how health is displayed.\n\n" +
@@ -35,27 +35,23 @@ public class HealthManager : MonoBehaviour
     [SerializeField] private Transform targetTransform;
 
     [Header("Events")]
-    public UnityEvent onHit;
-    public UnityEvent onDeath;
+    public UnityEvent<float> onHit;
+    public UnityEvent<float> onHeal;
 
-    public UnityEvent onHeal;
+    public UnityEvent onDeath;
 
     //vars
     private float startSize; //used for transform healthbar mode
 
     private void Start()
     {
-        maxHealth = health;
-        if (hitOnDeath) { //call on hit when on death is called
-            onDeath.AddListener(() => onHit?.Invoke());
-        }
+        if (maxHealth <= 0f) { maxHealth = health; }
         //check external components
         switch (healthBarMode) {
             case HealthBarMode.Slider:
                 if (targetSlider == null) { Debug.LogError("No healthbar slider was set on " + transform.name + "!"); }
                 targetSlider.minValue = 0f;
                 targetSlider.maxValue = 1f;
-                targetSlider.value = 1f;
                 break;
 
             case HealthBarMode.Transform:
@@ -63,6 +59,7 @@ public class HealthManager : MonoBehaviour
                 startSize = targetTransform.localScale.x;
                 break;
         }
+        UpdateHealthBar(); //initialize health bar
     }
 
     //-------manage health-------
@@ -71,7 +68,7 @@ public class HealthManager : MonoBehaviour
         if (!allowNegDamage && damage < 0f) { return; } //neg damage check
         //take damage
         health -= damage;
-        HandleHealthChange(damage > 0f);
+        HandleHealthChange(damage > 0f, damage);
         //health bar
         UpdateHealthBar();
     }
@@ -81,22 +78,25 @@ public class HealthManager : MonoBehaviour
         if (!allowNegHeal && toHeal < 0f) { return; } //neg heal check
         //heal
         health += toHeal;
-        HandleHealthChange(toHeal < 0f);
+        HandleHealthChange(toHeal < 0f, toHeal);
         //health bar
         UpdateHealthBar();
     }
 
-    private void HandleHealthChange(bool tookDamage)
+    private void HandleHealthChange(bool tookDamage, float healthChange)
     {
         //handle health
         bool died = health <= 0f;
         health = Mathf.Clamp(health, 0f, allowOverHeal? health : maxHealth); //if not allowOverHeal clamp to maxhealth, else clamp to healt (I.E. no limit)
         //call events
         if (tookDamage) {
-            if (died) { onDeath?.Invoke(); }
-            else { onHit?.Invoke(); }
+            if (died) { 
+                onDeath?.Invoke();
+                if (hitOnDeath) { onHit?.Invoke(healthChange); }
+            }
+            else { onHit?.Invoke(healthChange); }
         }
-        else { onHeal?.Invoke(); }
+        else { onHeal?.Invoke(healthChange); }
     }
 
     //-----------manage health bar------------

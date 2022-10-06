@@ -14,6 +14,8 @@ The input reciever contains 3 seperate input types:
         Used for orginazation in the editor, has no technical purpose.
         - **On Button Down**  *UnityEvent*  
         Invoked when a tracked input is pressed down.
+        - **On Button Held** *UnityEvent*  
+        Invoked when a tracked input is held down.
         - **On Button Up** *UnityEvent*  
         Invoked when a tracked input is released.  
         
@@ -100,7 +102,10 @@ The controller has the following features:
 - **Top Speed** *float*  
 Dictates the max velocity.
 - **Acceleration** *float*  
-Dictates how fast the controller reached top speed.  
+Dictates how fast the controller reached top speed.
+
+- **On Change Move Dir** *UnityEvent\<Vector2\>*  
+Event that is invoked when the move direction chances, passes Vector2 move direction as a parameter.
 
 - **Mode** *enum*  
 Determines the way movement is handled. Has 3 modes:
@@ -117,7 +122,9 @@ Dictates the top speed.
 - **Acceleration** *float*  
 Dictates how fast the controller reached max velocity.
 - **Deceleration** *float*  
-Dictates how fast the controller slows down.  
+Dictates how fast the controller slows down.
+- **On Change Move Dir** *UnityEvent\<Vector2\>*  
+Event that is invoked when the move direction chances, passes Vector2 move direction as a parameter.  
 
 - **Jump Height** *float*  
 Dictates how high the controller jumps.  
@@ -140,7 +147,9 @@ Dictates the top speed.
 - **Acceleration** *float*  
 Dictates how fast the controller reached max velocity.
 - **Deceleration** *float*  
-Dictates how fast the controller slows down.  
+Dictates how fast the controller slows down.
+- **On Change Move Dir** *UnityEvent\<Vector2\>*  
+Event that is invoked when the move direction chances, passes Vector2 move direction as a parameter.  
 
 - **Jump Height** *float*  
 Dictates how high the controller jumps.  
@@ -162,41 +171,36 @@ Dictates the top speed on the horizontal axis.
 - **Hor Acceleration** *float*  
 Dictates how fast the controller reached max velocity on the horizontal axis.
 - **Hor Deceleration** *float*  
-Dictates how fast the controller slows down on the horizontal axis.  
+Dictates how fast the controller slows down on the horizontal axis.
+- **On Change Hor Move Dir** *UnityEvent\<Vector2\>*  
+Event that is invoked when the horizontal move direction changes, passes *Vector2* move direction as a parameter.  
 
 - **Ver Top Speed** *float*  
 Dictates the top speed on the vertical axis.
 - **Ver Acceleration** *float*  
 Dictates how fast the controller reached max velocity on the vertical axis.
 - **Ver Deceleration** *float*  
-Dictates how fast the controller slows down on the vertical axis.  
-
-## Others:
-There are a few support scripts used by some of the controllers, these are:  
-1. GroundDetector2D
-    - Used to detect if something is overlapping with an attached trigger 2D collider, has the following features:
-        - **On Touch Ground** *UnityEvent*  
-        Event that is Invoked when the first object is found.
-        - **On Leave Ground** *UnityEvent*  
-        Event that is Invoked when last object goes out of range.  
-        
-        - **Ignore Tags** *List\<string\>*  
-        List of tags that are ignored when an object is detected.  
-        
-2. GroundDetector3D
-    - Used to detect if something is overlapping with an attached trigger collider, has the following features:
-        - **On Touch Ground** *UnityEvent*  
-        Event that is Invoked when the first object is found.
-        - **On Leave Ground** *UnityEvent*  
-        Event that is Invoked when last object goes out of range.  
-        
-        - **Ignore Tags** *List\<string\>*  
-        List of tags that are ignored when an object is detected.
-        
-**A quick note on Ground Detectors**  
-Controllers always setup event listeners on their own for the ground detectors. The Unity Events are purely for custom behaviour.
+Dictates how fast the controller slows down on the vertical axis.
+- **On Change Ver Move Dir** *UnityEvent\<Vector2\>*  
+Event that is invoked when the vertical move direction changes, passes *float* move direction as a parameter 
 
 # ==Behaviors==
+## Object Detector
+Used to detect if something is overlapping with an attached (2D) trigger collider, has the following features:
+
+- **On Detect First Object** *UnityEvent*  
+Event that is Invoked when the first object is found.
+- **On Detect Object** *UnityEvent*  
+Event that is Invoked every time a object is detected.
+- **On Leave Last Object** *UnityEvent*  
+Event that is Invoked when last object goes out of range.  
+
+- **Ignore Tags** *List\<string\>*  
+List of tags that are ignored when an object is detected.
+
+**A quick note on use with Controllers**  
+Controllers always setup event listeners on their own for the object detectors. The Unity Events are purely for custom behaviour.
+
 ## Object Spawner
 The Object Spawner is used to spawn a prefab (or a selection of prefabs) at a list of positions. 
 Use the *SpawnObject* function to activate the behavior.  
@@ -241,6 +245,8 @@ Dictates how waves are started, has the following options:
     
 - **Spawn on Start** *bool*  
 If set to true, automatically spawns the first wave when *Start* is Invoked, otherwise, does nothing.
+- **Repeat Final Wave** *bool*  
+If set to true, final wave can be spawned multiple times, otherwise, does nothing.  
 
 - **Spawn Point Selection Mode** *enum*  
 Dictates which spawnpoint is chosen when spawning a prefab, has the following options:
@@ -657,7 +663,9 @@ Use the *TakeDamage* and *Heal* functions to interact with the system.
 It has the following features:
 
 - **Health** *float*  
-Determines the maximum health and the health the object starts with.
+Determines the health the object starts with.
+- **Max Health** *float*  
+Determines the maximum health. If set to 0 or lower, *health* will be used as maximum health.
 
 - **Health Bar Mode** *enum*  
 Determines how and if health is displayed, has the following settings:
@@ -688,14 +696,15 @@ When using the slider, the following settings are recommended:
 - **Target Transform** *Transform*  
 Only used when *Health Bar Move* is set to *Transform*. Will be scaled on the local x-axis to display health.
 
-- **On Hit** *UnityEvent*  
-Will be invoked when damage is taken. Will *not* be invoked when the damage resulst in death, unless *Hit On Death* is set to *True*.
+- **On Hit** *UnityEvent\<float\>*  
+Will be invoked when damage is taken. Will *not* be invoked when the damage resulst in death, unless *Hit On Death* is set to *True*.  
+Passes the amount of damage taken as a float parameter.
+
+- **On Heal** *UnityEvent\<float\>*  
+Will be invoked when object is healed. Passes the amount healed as a float parameter.
 
 - **On Death** *UnityEvent*  
 Will be invoked when damage taken results in health reaching 0 or lower.
-
-- **On Heal** *UnityEvent*  
-Will be invoked when object is healed.
 
 ## Sound Manager
 The Sound Manager is a *singleton* system for playing sounds.  

@@ -2,9 +2,37 @@
 All notable changes to this package will be documented in this file.  
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [Unreleased]
+### Added
+- ObjectDetector class
+    - A behavior that can be used to detect object using tags.
+    
+- OnChangeMoveDir event to the TopDownController, Platformer3D_Rigidbody and Platformer3D_CharacterController scripts.
+- OnChangeHorMoveDir and OnChangeVerMoveDir events to the DroneController script.
+
+- OnButtonHeld event to Button Inputs in the UniversalInputReciever script.
+
+- Repeat Final Wave feature to Wave Spawner.
+
+- Max health field to Health Manager.
+- On Hit and On Heal events on Health Manager now pass the amount healed / damage taken as a float parameter.
+
+### Removed
+- GroundDetector 2D, GroundDetector 3D
+    - These scripts have been replaced by the object detector behavior.
+
+### Changed
+- Mover now uses Rigidbody to move.
+    - The Mover class was always intended to be used for objects like bullets, so it should be able to detect collision.
+
+### Fixed
+- Drone controller moving faster after building (switched from update to fixedUpdate).
+
+
 ## [1.0.1] - 05-10-2022
 ### Fixed
 - Editor assembly definition file throwing errors on project build
+
 
 ## [1.0.0] - 04-10-2022
 ### Added
