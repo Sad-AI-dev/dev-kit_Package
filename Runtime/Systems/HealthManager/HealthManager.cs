@@ -28,9 +28,13 @@ public class HealthManager : MonoBehaviour
     [Tooltip("when true, allows taking damage through negative healing")]
     [SerializeField] private bool allowNegHeal = false;
 
-    [Space(10)]
+    [Header("Slider Settings")]
     [Tooltip("Only used when health bar mode is 'Slider'")]
     [SerializeField] private Slider targetSlider;
+    [SerializeField] private Image fillImage;
+    [SerializeField] private Gradient gradient;
+
+    [Header("Transform Bar Settings")]
     [Tooltip("Only used when health bar mode is 'Transform'")]
     [SerializeField] private Transform targetTransform;
 
@@ -104,12 +108,18 @@ public class HealthManager : MonoBehaviour
     {
         switch (healthBarMode) {
             case HealthBarMode.Slider:
-                targetSlider.value = (health / maxHealth);
+                UpdateSliderBar();
                 break;
 
             case HealthBarMode.Transform:
                 targetTransform.localScale = new Vector3((health / maxHealth) * startSize, targetTransform.localScale.y, targetTransform.localScale.z);
                 break;
         }
+    }
+
+    private void UpdateSliderBar()
+    {
+        targetSlider.value = (health / maxHealth);
+        fillImage.color = gradient.Evaluate(1f - (health / maxHealth));
     }
 }

@@ -1,46 +1,35 @@
-using System.Collections.Generic;
-
 [System.Serializable]
 public class SimpleInventory<T>
 {
-    [System.Serializable]
-    public class ItemStack {
-        public T item;
-        public int count;
-    }
+    public UnityDictionary<T, int> inventory;
 
-    public List<ItemStack> inventory = new List<ItemStack>();
-
-    //-----------item management-----------
+    //-----------Item Management---------------
     public bool UseItem(T item, int count = 1)
     {
-        for (int i = 0; i < inventory.Count; i++) {
-            if (item.Equals(inventory[i].item)) {
-                if (inventory[i].count >= count) {
-                    inventory[i].count -= count;
-                    if (inventory[i].count <= 0) { RemoveItemType(i); }
-                    return true;
-                }
-                else return false; //not enough items of requested type
+        if (inventory.dict.ContainsKey(item)) {
+            if (inventory.dict[item] >= count) {
+                inventory.dict[item] -= count;
+                RemoveItemTypeCheck(item);
+                return true;
             }
+            else { return false; } //not enough items of requested type
         }
-        return false; //item not in inventory
+        else { return false; }
     }
 
-    private void RemoveItemType(int index)
+    public void GainItem(T item, int count  = 1)
     {
-        inventory.RemoveAt(index);
+        if (inventory.dict.ContainsKey(item)) {
+            inventory.dict[item] += count;
+        }
+        else { inventory.dict.Add(item, count); }
     }
 
-    public void GainItem(T item, int count = 1)
+    //----------------remove item types--------------
+    private void RemoveItemTypeCheck(T item)
     {
-        for (int i = 0; i < inventory.Count; i++) {
-            if (item.Equals(inventory[i].item)) {
-                inventory[i].count += count;
-                return;
-            }
+        if (inventory.dict[item] <= 0) {
+            inventory.dict.Remove(item);
         }
-        //add new item type to inventory
-        inventory.Add(new ItemStack { item = item, count = count });
     }
 }

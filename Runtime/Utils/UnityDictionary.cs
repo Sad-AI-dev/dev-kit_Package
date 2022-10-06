@@ -16,7 +16,16 @@ public class UnityDictionary<Key, Value> : ISerializationCallbackReceiver
     public Dictionary<Key, Value> dict = new Dictionary<Key, Value>();
 
     //----------------serialization--------------------
-    public void OnBeforeSerialize() { }
+    //dictionary to lists
+    public void OnBeforeSerialize() {
+        if (dict != null && ListIsValid()) {
+            dictionary.Clear();
+            //populate list
+            foreach (var kvp in dict) {
+                dictionary.Add(new Pair { key = kvp.Key, value = kvp.Value });
+            }
+        }
+    }
 
     //lists to dictionary
     public void OnAfterDeserialize()
@@ -26,5 +35,18 @@ public class UnityDictionary<Key, Value> : ISerializationCallbackReceiver
         for (int i = 0; i < dictionary.Count; i++) {
             dict.Add(dictionary[i].key, dictionary[i].value);
         }
+    }
+
+    //-----------valid lists check------------
+    private bool ListIsValid()
+    {
+        List<Key> keys = new List<Key>();
+        foreach (Pair pair in dictionary) {
+            if (keys.Contains(pair.key)) {
+                return false; //duplicate key found
+            }
+            keys.Add(pair.key); //register key
+        }
+        return true; //no duplicate keys found
     }
 }

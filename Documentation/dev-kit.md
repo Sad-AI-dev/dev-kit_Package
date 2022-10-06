@@ -641,8 +641,8 @@ The system has no build in visuals.
 The simple inventory is not a MonoBehavior, to use it, add it as a variable to a different MonoBehavior.  
 It has the following features:
 
-- **inventory** *List\<ItemStack\>*  
-List of every item and their respective count.
+- **inventory** *UnityDictionary*  
+Dictionary of every item and their respective count.
 
 To interact with the system, use the following functions:
 
@@ -692,6 +692,11 @@ When using the slider, the following settings are recommended:
     - Set the *Left* and *Right* padding on the *Fill Area* object to 0. The *Fill Area* is a child of created object by default.
     - Set the width of the *Fill* object to 0. The *Fill* object is a child of the *Fill Area* object, which is a child of the created object by default.
     - Delete the *Handle Slide Area* object. The *Handle Slide Area* is a child of the created object by default.
+- **Fill Image** *Image*  
+Only used when *Health Bar Mode* is set to *Slider*. This is the target image of which the color will be changed based on the *Gradient*.  
+When using the standard UI slider, this should be set to the *Fill* object, which can be found under the *Fill Area* object.
+- **Gradient** *Gradient*  
+A gradient that is used to color the fill image. The leftmost color is used when the healthbar is full and the rightmost when the healthbar is empty.
 
 - **Target Transform** *Transform*  
 Only used when *Health Bar Move* is set to *Transform*. Will be scaled on the local x-axis to display health.
