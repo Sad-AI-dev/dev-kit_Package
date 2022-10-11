@@ -992,6 +992,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+    onButtonHeld:
+      m_PersistentCalls:
+        m_Calls: []
     onButtonUp:
       m_PersistentCalls:
         m_Calls: []
@@ -1095,7 +1098,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &645709928
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1360,6 +1363,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+    onButtonHeld:
+      m_PersistentCalls:
+        m_Calls: []
     onButtonUp:
       m_PersistentCalls:
         m_Calls:
@@ -1908,7 +1914,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 990724489}
-        m_TargetAssemblyTypeName: MessageDebugger, Assembly-CSharp
+        m_TargetAssemblyTypeName: MessageDebugger, arvid-dev.dev-kit
         m_MethodName: DebugMessage
         m_Mode: 5
         m_Arguments:

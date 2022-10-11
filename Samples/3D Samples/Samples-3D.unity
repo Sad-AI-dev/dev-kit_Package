@@ -762,7 +762,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &279077095
 Transform:
   m_ObjectHideFlags: 0
@@ -3600,7 +3600,7 @@ MonoBehaviour:
   endPosition: {fileID: 1837497341}
   moveMode: 0
   moveSpeed: 5
-  moveOnStart: 0
+  moveOnStart: 1
 --- !u!114 &1374206581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3720,7 +3720,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 8
   maxHealth: 10
-  healthBarMode: 1
+  healthBarMode: 2
   hitOnDeath: 1
   allowOverHeal: 0
   allowNegDamage: 0
@@ -3959,7 +3959,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1467986410
 Transform:
   m_ObjectHideFlags: 0
@@ -4242,7 +4242,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activateMode: 1
-  spawnOnStart: 0
+  spawnOnStart: 1
   repeatFinalWave: 1
   spawnPointSelectMode: 0
   objectSelectMode: 1
@@ -4470,7 +4470,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1648663448
 Transform:
   m_ObjectHideFlags: 0
@@ -4943,7 +4943,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1827003440
 Transform:
   m_ObjectHideFlags: 0
@@ -5096,7 +5096,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1867498521
 Transform:
   m_ObjectHideFlags: 0
@@ -5261,7 +5261,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1942793693
 Transform:
   m_ObjectHideFlags: 0
@@ -5441,7 +5441,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2050511760
 Transform:
   m_ObjectHideFlags: 0
@@ -5584,12 +5584,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2062554928}
-        m_TargetAssemblyTypeName: DialogueActivator, Assembly-CSharp
+        m_TargetAssemblyTypeName: DialogueActivator, arvid-dev.dev-kit
         m_MethodName: StartDialogue
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 2074569221}
-          m_ObjectArgumentAssemblyTypeName: DialogueUI, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: DialogueUI, arvid-dev.dev-kit
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -5693,12 +5693,12 @@ MonoBehaviour:
         m_PersistentCalls:
           m_Calls:
           - m_Target: {fileID: 2062554928}
-            m_TargetAssemblyTypeName: DialogueActivator, Assembly-CSharp
+            m_TargetAssemblyTypeName: DialogueActivator, arvid-dev.dev-kit
             m_MethodName: SetDialogueData
             m_Mode: 2
             m_Arguments:
               m_ObjectArgument: {fileID: 11400000, guid: 07f16907556902446a023b8351febbf0, type: 2}
-              m_ObjectArgumentAssemblyTypeName: DialogueData, Assembly-CSharp
+              m_ObjectArgumentAssemblyTypeName: DialogueData, arvid-dev.dev-kit
               m_IntArgument: 0
               m_FloatArgument: 0
               m_StringArgument: 
