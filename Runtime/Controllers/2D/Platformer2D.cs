@@ -6,22 +6,23 @@ using UnityEngine;
 public class Platformer2D : MonoBehaviour
 {
     [Header("Movement Settings")]
-    [SerializeField] private float topSpeed;
-    [SerializeField] private float acceleration;
-    [SerializeField] private float deceleration;
+    public float topSpeed;
+    public float acceleration;
+    public float deceleration;
     //movement vars
     private float moveDir;
     private float speed;
     //move states
     [SerializeField] private bool facingLeft;
+    public bool IsFacingLeft { get { return facingLeft; } }
 
     [Header("Jump Settings")]
-    [SerializeField] private float jumpHeight;
-    [SerializeField] private float riseGrav;
-    [SerializeField] private float fallGrav;
+    public float jumpHeight;
+    public float riseGrav;
+    public float fallGrav;
     [Space(10)]
-    [Range(0, 1f)] [SerializeField] private float jumpBufferTime;
-    [Range(0, 1f)] [SerializeField] private float coyoteTime;
+    [Range(0, 1f)] public float jumpBufferTime;
+    [Range(0, 1f)] public float coyoteTime;
     //jump vars
     private bool grounded;
     private bool rising;
@@ -31,7 +32,7 @@ public class Platformer2D : MonoBehaviour
 
     [Header("Technical Settings")]
     //external components
-    [SerializeField] private ObjectDetector groundDetector;
+    public ObjectDetector groundDetector;
     private Rigidbody2D rb;
 
     private void Start()

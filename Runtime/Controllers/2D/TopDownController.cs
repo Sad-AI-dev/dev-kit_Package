@@ -12,10 +12,10 @@ public class TopDownController : MonoBehaviour
     }
 
     [Header("Settings")]
-    [SerializeField] private float topSpeed;
-    [SerializeField] private float acceleration;
+    public float topSpeed;
+    public float acceleration;
     [Space(10f)]
-    [SerializeField] private UnityEvent<Vector2> onChangeMoveDir;
+    public UnityEvent<Vector2> onChangeMoveDir;
 
     [Header("Technical")]
     [Tooltip("Sets the way movement is handled" +

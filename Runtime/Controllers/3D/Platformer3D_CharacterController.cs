@@ -7,22 +7,22 @@ using UnityEngine.Events;
 public class Platformer3D_CharacterController : MonoBehaviour
 {
     [Header("Movement Settings")]
-    [SerializeField] private float topSpeed;
-    [SerializeField] private float acceleration;
-    [SerializeField] private float deceleration;
+    public float topSpeed;
+    public float acceleration;
+    public float deceleration;
     [Space(10f)]
-    [SerializeField] private UnityEvent<Vector2> onMoveDirChanged;
+    public UnityEvent<Vector2> onMoveDirChanged;
     //movement vars
     private Vector2 moveDir = Vector2.zero;
     private Vector3 velocity = Vector3.zero;
     private float speed;
 
     [Header("Jump Settings")]
-    [SerializeField] private float jumpHeight;
-    [SerializeField] private float gravity = 9.81f;
+    public float jumpHeight;
+    public float gravity = 9.81f;
     [Space(10)]
-    [SerializeField] [Range(0f, 1f)] private float jumpBufferTime;
-    [SerializeField] [Range(0f, 1f)] private float coyoteTime;
+    [Range(0f, 1f)] public float jumpBufferTime;
+    [Range(0f, 1f)] public float coyoteTime;
     //jump vars
     private bool grounded;
     private bool canBufferJump;

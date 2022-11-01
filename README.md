@@ -94,6 +94,7 @@ Dictates how fast the controller reached max velocity.
 Dictates how fast the controller slows down.
 - **Facing Left** *bool*  
 Determines which way the controller is facing, can be used to set the starting facing direction.  
+Use *IsFacingLeft* to check if controller is facing left, cannot be set.
 
 - **Jump Height** *float*  
 Dictates how high the controller jumps.

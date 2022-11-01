@@ -7,20 +7,20 @@ using UnityEngine.Events;
 public class Platformer3D_Rigidbody : MonoBehaviour
 {
     [Header("Movement Settings")]
-    [SerializeField] private float topSpeed;
-    [SerializeField] private float acceleration;
-    [SerializeField] private float deceleration;
+    public float topSpeed;
+    public float acceleration;
+    public float deceleration;
     [Space(10f)]
-    [SerializeField] private UnityEvent onMoveDirChanged;
+    public UnityEvent onMoveDirChanged;
     //movement vars
     private Vector2 moveDir = Vector2.zero;
     private float speed;
 
     [Header("Jump Settings")]
-    [SerializeField] private float jumpHeight;
+    public float jumpHeight;
     [Space(10)]
-    [Range(0, 1f)] [SerializeField] private float jumpBufferTime;
-    [Range(0, 1f)] [SerializeField] private float coyoteTime;
+    [Range(0, 1f)] public float jumpBufferTime;
+    [Range(0, 1f)] public float coyoteTime;
     //jump vars
     private bool grounded;
     private bool canBufferJump;
@@ -28,7 +28,7 @@ public class Platformer3D_Rigidbody : MonoBehaviour
 
     [Header("Technical Settings")]
     //external components
-    [SerializeField] private ObjectDetector groundDetector;
+    public ObjectDetector groundDetector;
     private Rigidbody rb;
 
     private void Start()

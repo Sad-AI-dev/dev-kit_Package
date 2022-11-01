@@ -7,21 +7,21 @@ using UnityEngine.Events;
 public class DroneController : MonoBehaviour
 {
     [Header("Horizontal movement")]
-    [SerializeField] private float horTopSpeed;
-    [SerializeField] private float horAcceleration;
-    [SerializeField] private float horDeceleration;
+    public float horTopSpeed;
+    public float horAcceleration;
+    public float horDeceleration;
     [Space(10f)]
-    [SerializeField] private UnityEvent<Vector2> onChangeHorMoveDir;
+    public UnityEvent<Vector2> onChangeHorMoveDir;
     //horizontal move vars
     Vector2 horMoveDir;
     float horSpeed;
 
     [Header("Vertical movement")]
-    [SerializeField] private float verTopSpeed;
-    [SerializeField] private float verAcceleration;
-    [SerializeField] private float verDeceleration;
+    public float verTopSpeed;
+    public float verAcceleration;
+    public float verDeceleration;
     [Space(10f)]
-    [SerializeField] private UnityEvent<float> OnChangeVerMoveDir;
+    public UnityEvent<float> OnChangeVerMoveDir;
     //vertical move vars
     float verMoveDir;
     float verSpeed;
