@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 
 
-## [1.2.0] - 06-10-2022
+## [1.2.0] - Selfish Colors Update - 06-10-2022
 This minor update adds some more ambitious features that I personally wanted to add.  
 It also includes a fix that makes Unity Dictionary a lot more viable to work with.
 
@@ -21,7 +21,7 @@ It also includes a fix that makes Unity Dictionary a lot more viable to work wit
 - Unity Dictionary not displaying modified values in inspector.
 
 
-## [1.1.0] - 06-10-2022
+## [1.1.0] - Jammin' Update - 06-10-2022
 This update adds a veriaty of requested features that was gathered as feedback.  
 It also fixes some issues that were found during testing.
 
@@ -58,7 +58,7 @@ this patch fixes some technical settings that resulted in errors while building 
 - Editor assembly definition file throwing errors on project build
 
 
-## [1.0.0] - 04-10-2022
+## [1.0.0] - Launch Update - 04-10-2022
 This is the official release of the dev kit.
 
 ### Added
