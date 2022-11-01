@@ -4,6 +4,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [unreleased]
 
+
+## [1.3.0] - Going Public Update - 01-11-2022
+This update aims to make the package easier to work with by turning a lot of variables public instead of private.
+
 ### Added
 - Output *Audio Mixer Group* to *Sound* class
     - this should allow for better mixing options
@@ -11,10 +15,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Removed
 - On Interact Void event on the Interactable
     - During development, the *Interactor* parameter was added to the On Interact event. The On Interact Void event is a relic of development that has no reason to exist.
-    
-- Interactor debug line
-    - Left over from development
 
+### Changed
+- Most variables changed from private to public.
+    - This is a leftover result of my personal development style. In order to make the package as a whole easier to work with, I wanted to make as much as possible public. A few variables are still private, because they shouldn't be changed during runtime.
+    
+### Fixed
+- Interactor debug log
+    - Left over from development, no reason to exist
 
 ## [1.2.0] - Selfish Colors Update - 06-10-2022
 This minor update adds some more ambitious features that I personally wanted to add.  
