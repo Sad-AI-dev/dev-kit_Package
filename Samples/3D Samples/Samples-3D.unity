@@ -2655,7 +2655,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3959,7 +3959,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1467986410
 Transform:
   m_ObjectHideFlags: 0
@@ -3987,11 +3987,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ebeeac615fff24479170913a8653b51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onInteractVoid:
+  onInteract:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1467986411}
-        m_TargetAssemblyTypeName: Interactable, Assembly-CSharp
+        m_TargetAssemblyTypeName: Interactable, arvid-dev.dev-kit
         m_MethodName: DestroyInteractable
         m_Mode: 1
         m_Arguments:
@@ -4002,9 +4002,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onInteract:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!65 &1467986412
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4872,7 +4869,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5577,9 +5574,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ebeeac615fff24479170913a8653b51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onInteractVoid:
-    m_PersistentCalls:
-      m_Calls: []
   onInteract:
     m_PersistentCalls:
       m_Calls:

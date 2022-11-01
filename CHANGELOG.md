@@ -4,6 +4,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [unreleased]
 
+### Added
+- Output *Audio Mixer Group* to *Sound* class
+    - this should allow for better mixing options
+
+### Removed
+- On Interact Void event on the Interactable
+    - During development, the *Interactor* parameter was added to the On Interact event. The On Interact Void event is a relic of development that has no reason to exist.
 
 
 ## [1.2.0] - Selfish Colors Update - 06-10-2022

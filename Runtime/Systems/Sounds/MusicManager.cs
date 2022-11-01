@@ -48,9 +48,10 @@ public class MusicManager : MonoBehaviour
     //--------------------setup track--------------------
     private void SetupTrack(Sound sound)
     {
-        source.clip = sound.clip;
         //settings
-        source.pitch = sound.pitch;
+        float volume = source.volume;
+        sound.SetupSource(source);
+        source.volume = volume; //keep old volume
         //play
         source.Play();
     }

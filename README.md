@@ -527,9 +527,6 @@ If the interactable needs the be destroyed, use the *DestroyInteractable* functi
 In order to function, the interactable needs a trigger collider to detect interactors.  
 It has the following features:
 
-- **On Interact Void** *UnityEvent*  
-Event is Invoked when an interactor interacts with this object.
-
 - **On Interact** *UnityEvent\<Interactor\>*  
 Identical to On Interact Void, but passes the interactor that interacted with the object as a parameter.
 
@@ -741,6 +738,8 @@ Because this is a dictionary, each *Key* must be unique. Each *Key* is associate
 A *Sound* has the following features:  
     - **Clip** *AudioClip*  
     The sound that can be played.
+    - **Output** *Audio Mixer Group*  
+    The output audio mixer group, works identical to the *AudioSource* output mixer group.
     - **Volume** *float*  
     The volume of the sound.
     - **Pitch** *float*  

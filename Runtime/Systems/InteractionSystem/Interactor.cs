@@ -39,7 +39,6 @@ public class Interactor : MonoBehaviour
         Debug.Log("interactables: " + interactables.Count);
         if (interactables.Count > 0) {
             SortInteractables(); //interact with closest interactable
-            interactables[0].onInteractVoid?.Invoke();
             interactables[0].onInteract?.Invoke(this);
         }
     }
