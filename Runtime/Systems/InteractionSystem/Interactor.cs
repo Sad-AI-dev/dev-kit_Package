@@ -35,7 +35,6 @@ public class Interactor : MonoBehaviour
     //----------------interact with interactable---------------
     public void TryInteract()
     {
-        Debug.Log("interactables: " + interactables.Count);
         if (interactables.Count > 0) {
             SortInteractables(); //interact with closest interactable
             interactables[0].onInteract?.Invoke(this);

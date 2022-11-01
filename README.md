@@ -846,7 +846,10 @@ public class MyClass {
 
 ## Unity Dictionary
 A class that integrates the Dictionary class into the unity editor.  
-To utilize the class, use it the same as you would a dictionary.
+Has the following features:
+
+- **dictionary** *Dictionary*  
+Internal dictionary class, use this to modify / access data
 
 ## Collection Utils
 A class with some utlity functions for collections.  

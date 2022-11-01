@@ -15,7 +15,7 @@ public class WaveSpawner : MonoBehaviour
     }
 
     [System.Serializable]
-    private struct WaveData
+    public struct WaveData
     {
         [System.Serializable]
         public struct PrefabCount
