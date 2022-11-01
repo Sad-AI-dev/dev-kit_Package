@@ -11,7 +11,7 @@ public class ObjectDetector : MonoBehaviour
     public UnityEvent onLeaveLastObject;
 
     [Header("Settings")]
-    [SerializeField] private List<string> ignoreTags;
+    public List<string> ignoreTags;
 
     private List<Transform> trackedObjects;
 
@@ -22,7 +22,7 @@ public class ObjectDetector : MonoBehaviour
     //---------------------------2D detection-------------------------------
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (ValidGroundCheck(collision.transform)) {
+        if (ValidObjectCheck(collision.transform)) {
             onDetectObject?.Invoke();
             if (trackedObjects.Count <= 0) { onDetectFirstObject?.Invoke(); } //check if just detected first object
             if (!trackedObjects.Contains(collision.transform)) { trackedObjects.Add(collision.transform); } //track object
@@ -31,7 +31,7 @@ public class ObjectDetector : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (ValidGroundCheck(collision.transform)) {
+        if (ValidObjectCheck(collision.transform)) {
             trackedObjects.Remove(collision.transform); //stop tracking object
             if (trackedObjects.Count <= 0) { onLeaveLastObject?.Invoke(); } //check if just left last object
         }
@@ -40,7 +40,7 @@ public class ObjectDetector : MonoBehaviour
     //------------------------------------3D detection-------------------------------------------------
     private void OnTriggerEnter(Collider collision)
     {
-        if (ValidGroundCheck(collision.transform)) {
+        if (ValidObjectCheck(collision.transform)) {
             if (trackedObjects.Count <= 0) { onDetectFirstObject?.Invoke(); } //check if just detected first object
             if (!trackedObjects.Contains(collision.transform)) { trackedObjects.Add(collision.transform); } //track object
         }
@@ -48,14 +48,14 @@ public class ObjectDetector : MonoBehaviour
 
     private void OnTriggerExit(Collider collision)
     {
-        if (ValidGroundCheck(collision.transform)) {
+        if (ValidObjectCheck(collision.transform)) {
             trackedObjects.Remove(collision.transform); //stop tracking object
             if (trackedObjects.Count <= 0) { onLeaveLastObject?.Invoke(); } //check if just left last object
         }
     }
 
     //-----------------------util-------------------------
-    private bool ValidGroundCheck(Transform toCheck)
+    private bool ValidObjectCheck(Transform toCheck)
     {
         foreach (string tag in ignoreTags) {
             if (toCheck.CompareTag(tag)) { return false; }

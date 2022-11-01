@@ -8,13 +8,13 @@ public class MusicManager : MonoBehaviour
     public static MusicManager instance;
 
     //data
-    [SerializeField] private UnityDictionary<string, Sound> tracks;
+    public UnityDictionary<string, Sound> tracks;
 
     [Header("Settings")]
     [Tooltip("Time it takes for the last track to be muted")]
-    [SerializeField] private float muteTime = 0.5f;
+    public float muteTime = 0.5f;
     [Tooltip("Time it takes for the new track to reach normal volume")]
-    [SerializeField] private float transitionTime = 1f;
+    public float transitionTime = 1f;
 
     //vars
     private bool switching;

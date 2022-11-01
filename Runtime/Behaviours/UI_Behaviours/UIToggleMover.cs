@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class UIToggleMover : MonoBehaviour
 {
-    private enum MoveMode {
+    public enum MoveMode {
         Linear, Lerp
     }
 
     [Header("Settings")]
     [SerializeField] private RectTransform endPosition;
-    [SerializeField] private MoveMode moveMode;
+    [Tooltip("Dictates how the rect transform travels to the target destination, has the following options:\n\n" +
+        "Linear: Moves towards the target destination linearly.\n" +
+        "Lerp: Moves towards the target smoothly.")]
+    public MoveMode moveMode;
     [Space(10f)]
-    [SerializeField] private float moveSpeed;
+    public float moveSpeed;
     [SerializeField] private bool moveOnStart;
 
     //vars

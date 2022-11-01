@@ -5,7 +5,7 @@ using UnityEngine;
 public class Rotator : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] private Vector3 rotateDirection;
+    public Vector3 rotateDirection;
     [SerializeField] private bool rotateOnStart = true;
 
     //states

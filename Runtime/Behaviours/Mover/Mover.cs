@@ -6,7 +6,7 @@ using UnityEngine;
 public class Mover : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] private Vector3 moveDirection;
+    public Vector3 moveDirection;
     [SerializeField] private bool moveOnStart = true;
 
     //states

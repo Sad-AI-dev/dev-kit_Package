@@ -5,43 +5,43 @@ using UnityEngine;
 public class UIPathFollower : MonoBehaviour
 {
     [System.Serializable]
-    private struct PathPoint {
+    public struct PathPoint {
         public RectTransform transform;
         [Tooltip("Time to wait before moving on to the next point in the path.")]
         public float delay;
     }
 
     [System.Serializable]
-    private enum LoopMode {
+    public enum LoopMode {
         Reset, Loop, Bounce
     }
 
     [System.Serializable]
-    private enum StepMode {
+    public enum StepMode {
         Step, Cycle, Continuous
     }
 
     //settings
     [Header("movement settings")]
-    [SerializeField] private float moveSpeed;
+    public float moveSpeed;
 
     [Tooltip("Dictates how many steps are taken along the path when StartMove() is called.\n\n" +
         "Step: the object takes a single step along the path.\n" +
         "Cycle: the object follows the entire path once.\n" +
         "Continuous: the object follows the path untill told to stop.")]
-    [SerializeField] private StepMode stepMode;
+    public StepMode stepMode;
 
     [Tooltip("Dictates what happens when the object reaches the end of the path.\n\n" +
         "Reset: When the object reaches the end of the path, it is teleported back to the first point.\n" +
         "Loop: When the object reaches the end of the path, it travels back to the first point.\n" +
         "Bounce: When the object reaches the end of the path, it gets sent back through the path in reverse order")]
-    [SerializeField] private LoopMode loopMode;
+    public LoopMode loopMode;
 
     [Header("path settings")]
     [SerializeField] private bool moveOnStart;
 
     [Space(10f)]
-    [SerializeField] private List<PathPoint> path;
+    public List<PathPoint> path;
     [Tooltip("==OPTIONAL==\n\n" +
         "Rect transform that holds all spawnpoint transforms. used to auto compile spawnpoint list.")]
     [SerializeField] private RectTransform pathHolder;

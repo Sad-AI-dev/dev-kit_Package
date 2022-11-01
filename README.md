@@ -431,7 +431,7 @@ Destination to travel towards.
 - **Move Mode** *enum*  
 Dictates how the rect transform travels to the target destination, has the following options:
     - *Linear*: Moves towards the target destination linearly.
-    - *Lerp*: Moves towards the target smoothly.
+    - *Lerp*: Moves towards the target smoothly using linear interpolation.
     
 - **Move Speed** *float*  
 Determines how fast the rect transform travels.

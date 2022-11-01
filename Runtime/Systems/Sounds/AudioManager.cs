@@ -7,7 +7,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
 
     //data
-    [SerializeField] private UnityDictionary<string, Sound> sounds;
+    public UnityDictionary<string, Sound> sounds;
 
     private void Awake()
     {

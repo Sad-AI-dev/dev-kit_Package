@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -7,9 +6,9 @@ public class Interactor : MonoBehaviour
 {
     [Header("Events")]
     [Tooltip("triggers when the interactor comes in range of the first interactable")]
-    [SerializeField] private UnityEvent onCanInteract;
+    public UnityEvent onCanInteract;
     [Tooltip("triggers when the interactor leaves the range of the last interactable")]
-    [SerializeField] private UnityEvent onStopCanInteract;
+    public UnityEvent onStopCanInteract;
     //vars
     private List<Interactable> interactables;
 

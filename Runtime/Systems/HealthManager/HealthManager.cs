@@ -8,8 +8,8 @@ public class HealthManager : MonoBehaviour
         None, Slider, Transform
     }
 
-    [SerializeField] private float health;
-    [SerializeField] private float maxHealth;
+    public float health;
+    public float maxHealth;
 
     [Header("Settings")]
     [Tooltip("Determines how health is displayed.\n\n" +
@@ -20,23 +20,23 @@ public class HealthManager : MonoBehaviour
 
     [Space(10)]
     [Tooltip("When true, triggers onHit event when onDeath is triggered")]
-    [SerializeField] private bool hitOnDeath = false;
+    public bool hitOnDeath = false;
     [Tooltip("When true, allows healing to surpass max health")]
-    [SerializeField] private bool allowOverHeal = false;
+    public bool allowOverHeal = false;
     [Tooltip("when true, allows healing through taking negative damage")]
-    [SerializeField] private bool allowNegDamage = false;
+    public bool allowNegDamage = false;
     [Tooltip("when true, allows taking damage through negative healing")]
-    [SerializeField] private bool allowNegHeal = false;
+    public bool allowNegHeal = false;
 
     [Header("Slider Settings")]
     [Tooltip("Only used when health bar mode is 'Slider'")]
-    [SerializeField] private Slider targetSlider;
-    [SerializeField] private Image fillImage;
-    [SerializeField] private Gradient gradient;
+    public Slider targetSlider;
+    public Image fillImage;
+    public Gradient gradient;
 
     [Header("Transform Bar Settings")]
     [Tooltip("Only used when health bar mode is 'Transform'")]
-    [SerializeField] private Transform targetTransform;
+    public Transform targetTransform;
 
     [Header("Events")]
     public UnityEvent<float> onHit;

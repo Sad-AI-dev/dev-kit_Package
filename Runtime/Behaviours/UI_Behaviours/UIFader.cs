@@ -4,30 +4,30 @@ using UnityEngine;
 
 public class UIFader : MonoBehaviour
 {
-    private enum FadeMode {
+    public enum FadeMode {
         Single, Cycle, Blink, Blink_continuous
     }
 
-    [SerializeField] private CanvasGroup targetGroup;
+    public CanvasGroup targetGroup;
     [Tooltip("Dictates how fader behaves when 'StartFade' is called.\n\n" +
         "Single: fades in, or fades out, based on current state.\n" +
         "Cycle: fades in and fades out.\n" +
         "Blink: blinks for a set time.\n" +
         "Blink_continuous: blinks until 'StopFade' is called.")]
-    [SerializeField] private FadeMode fadeMode;
+    public FadeMode fadeMode;
     [SerializeField] private bool fadeOnStart;
 
     [Header("Fade Settings")]
     [Tooltip("Duration of full fade.")]
-    [SerializeField] private float fadeTime = 1f;
+    public float fadeTime = 1f;
     [Tooltip("Delay between end of fade-in and start of fade-out.")]
-    [SerializeField] private float fadedInDelay = 0.5f;
+    public float fadedInDelay = 0.5f;
     [Tooltip("Delay between end of fade-out and start of fade-in.")]
-    [SerializeField] private float fadedOutDelay = 1f;
+    public float fadedOutDelay = 1f;
 
     [Header("Blink Settings")]
     [Tooltip("If Fade Mode is set to 'blink', sets total time fader blinks.")]
-    [SerializeField] private float blinkTime = 1f;
+    public float blinkTime = 1f;
 
     //vars
     private float timer = 0f;

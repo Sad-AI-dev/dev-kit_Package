@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour
 {
-    private enum ActivateMode {
+    public enum ActivateMode {
         Manual, Delay
     }
-    private enum SpawnPointSelectMode {
+    public enum SpawnPointSelectMode {
         Random, Round_robin
     }
-    private enum ObjectSelectMode {
+    public enum ObjectSelectMode {
         In_order, Random
     }
 
@@ -37,7 +37,7 @@ public class WaveSpawner : MonoBehaviour
     [Tooltip("Dictates how waves are started\n\n" +
         "Manual: each wave must be manually started by another script.\n" +
         "Delay: waits for a delay, then automatically spawns the next wave.")]
-    [SerializeField] private ActivateMode activateMode;
+    public ActivateMode activateMode;
     [SerializeField] private bool spawnOnStart;
     [Tooltip("When set to true, final wave can be repeated.")]
     [SerializeField] private bool repeatFinalWave;
@@ -46,17 +46,17 @@ public class WaveSpawner : MonoBehaviour
     [Tooltip("Dictates which spawnpoint is chosen when spawning a prefab\n\n" +
         "Random: a random point is chosen.\n" +
         "Round_robin: points are chosen in order.")]
-    [SerializeField] private SpawnPointSelectMode spawnPointSelectMode;
+    public SpawnPointSelectMode spawnPointSelectMode;
 
     [Tooltip("Dictates the order objects within a wave are spawned in\n\n" +
         "In_order: objects are spawned in the order of the content list.\n" +
         "Random: objects are spawned in a random order.")]
-    [SerializeField] private ObjectSelectMode objectSelectMode;
+    public ObjectSelectMode objectSelectMode;
 
     [Header("Waves")]
-    [SerializeField] private List<WaveData> waves;
+    public List<WaveData> waves;
     [Space(10)]
-    [SerializeField] private List<Transform> spawnPoints;
+    public List<Transform> spawnPoints;
     [Space(10)]
     [Tooltip("==OPTIONAL==\n\n" +
         "transform that holds all spawnpoint transforms. used to auto compile spawnpoint list.")]
@@ -187,16 +187,6 @@ public class WaveSpawner : MonoBehaviour
     }
 
     //--------------spawn point registration---------------
-    public void AddSpawnPoint(Transform t)
-    {
-        spawnPoints.Add(t);
-    }
-
-    public void RemoveSpawnPoint(Transform t)
-    {
-        spawnPoints.Remove(t);
-    }
-
     public void CompileSpawnPoints()
     {
         if (pointHolder != null) {

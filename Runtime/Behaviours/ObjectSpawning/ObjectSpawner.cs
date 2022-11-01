@@ -9,7 +9,7 @@ public class ObjectSpawner : MonoBehaviour
         Random,
         Round_robin
     }
-    private enum PrefabSelectMode {
+    public enum PrefabSelectMode {
         Random,
         Round_robin
     }
@@ -24,12 +24,12 @@ public class ObjectSpawner : MonoBehaviour
     [Tooltip("Decides which prefab is selected.\n\n" +
         "Random: picks a random prefab\n" +
         "Round_robin: picks a prefab in order")]
-    [SerializeField] private PrefabSelectMode prefabSelectMode;
+    public PrefabSelectMode prefabSelectMode;
 
     [Header("Settings")]
-    [SerializeField] private List<GameObject> prefabs;
+    public List<GameObject> prefabs;
     [Space(10)]
-    [SerializeField] private List<Transform> spawnPoints;
+    public List<Transform> spawnPoints;
     [Tooltip("==OPTIONAL==\n\n" +
         "transform that holds all spawnpoint transforms. used to auto compile spawnpoint list.")]
     [SerializeField] private Transform pointHolder;
@@ -95,28 +95,6 @@ public class ObjectSpawner : MonoBehaviour
                 return prefabs[prefabSelectCounter];
         }
         return null;
-    }
-
-    //-------------------Spawn point registration----------------------
-    public void AddSpawnPoint(Transform t)
-    {
-        spawnPoints.Add(t);
-    }
-
-    public void RemoveSpawnPoint(Transform t)
-    {
-        spawnPoints.Remove(t);
-    }
-
-    //---------------------Prefab registration--------------------------
-    public void AddPrefab(GameObject obj)
-    {
-        prefabs.Add(obj);
-    }
-
-    public void RemovePrefab(GameObject obj)
-    {
-        prefabs.Remove(obj);
     }
 
     //---------------------compile spawn points------------------------
