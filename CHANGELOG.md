@@ -5,6 +5,31 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [unreleased]
 
 
+### Added
+- Priority *int* to *Sound* class
+    - allows setting of priority of each sound.
+- Bypass settings to *Sound* class
+    - additional settings for bypassing effects.
+    
+- moveSpeed *float* to *Mover* Behavior
+    - this seperates the move direction from the move speed, making it easier to be changed by an external source.
+    
+### Changed
+- moveDirection on the *Mover* Behavior is now normalized on start.
+    - this is to ensure move direction and move speed are seperated.
+    
+- TryInteract() on the *Interactor* class will now return a bool.
+    - returns true is an *Interactable* is found, returns false if not.
+
+### Fixed
+- Missing and inconsistent documentation on functions.
+
+- UIPathFollower StartMove function being private.
+    - It is now public.
+    
+- Issue where *Sound* class default values were not set.
+
+
 ## [1.3.0] - Going Public Update - 01-11-2022
 This update aims to make the package easier to work with by turning a lot of variables public instead of private.
 
@@ -12,17 +37,18 @@ This update aims to make the package easier to work with by turning a lot of var
 - Output *Audio Mixer Group* to *Sound* class
     - this should allow for better mixing options
 
-### Removed
-- On Interact Void event on the Interactable
-    - During development, the *Interactor* parameter was added to the On Interact event. The On Interact Void event is a relic of development that has no reason to exist.
-
 ### Changed
 - Most variables changed from private to public.
     - This is a leftover result of my personal development style. In order to make the package as a whole easier to work with, I wanted to make as much as possible public. A few variables are still private, because they shouldn't be changed during runtime.
+
+### Removed
+- On Interact Void event on the Interactable
+    - During development, the *Interactor* parameter was added to the On Interact event. The On Interact Void event is a relic of development that has no reason to exist.
     
 ### Fixed
 - Interactor debug log
     - Left over from development, no reason to exist
+
 
 ## [1.2.0] - Selfish Colors Update - 06-10-2022
 This minor update adds some more ambitious features that I personally wanted to add.  

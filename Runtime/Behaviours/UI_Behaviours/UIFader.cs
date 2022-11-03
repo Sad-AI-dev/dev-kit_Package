@@ -46,8 +46,8 @@ public class UIFader : MonoBehaviour
 
     private void DetermineStartState()
     {
+        fadingIn = true;
         if (targetGroup.alpha >= 0.5f) { fadingIn = false; }
-        else { fadingIn = true; }
     }
 
     //----------state management-----------

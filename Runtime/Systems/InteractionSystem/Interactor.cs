@@ -33,12 +33,14 @@ public class Interactor : MonoBehaviour
     }
 
     //----------------interact with interactable---------------
-    public void TryInteract()
+    public bool TryInteract()
     {
         if (interactables.Count > 0) {
             SortInteractables(); //interact with closest interactable
             interactables[0].onInteract?.Invoke(this);
+            return true;
         }
+        return false;
     }
 
     private void SortInteractables()

@@ -7,6 +7,7 @@ public class Mover : MonoBehaviour
 {
     [Header("Settings")]
     public Vector3 moveDirection;
+    public float moveSpeed = 1f;
     [SerializeField] private bool moveOnStart = true;
 
     //states
@@ -18,6 +19,8 @@ public class Mover : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        moveDirection.Normalize(); //normalize direction
+
         if (moveOnStart) StartMove();
     }
 
@@ -40,7 +43,7 @@ public class Mover : MonoBehaviour
 
     private void Move()
     {
-        Vector3 speed = moveDirection * (100 * Time.deltaTime);
+        Vector3 speed = moveDirection * (100 * moveSpeed * Time.deltaTime);
         rb.velocity = transform.right * speed.x + transform.up * speed.y + transform.forward * speed.z; //convert to local space
     }
 }

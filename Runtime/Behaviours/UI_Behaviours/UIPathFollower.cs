@@ -65,7 +65,7 @@ public class UIPathFollower : MonoBehaviour
         if (moveOnStart) { StartMove(); }
     }
 
-    private void StartMove()
+    public void StartMove()
     {
         moving = true;
     }
