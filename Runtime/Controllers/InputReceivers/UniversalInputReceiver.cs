@@ -32,6 +32,8 @@ namespace DevKit {
             [Header("Input Manager Axis Codes")]
             [Tooltip("Used to read virtual axis from the input manager.")]
             public List<string> axisCodes;
+            [Header("Scroll Wheel Input")]
+            public bool readMouseScrollWheel;
         }
 
         [Serializable]
@@ -109,6 +111,10 @@ namespace DevKit {
                 foreach (string s in input.axisCodes) {
                     try { output = Input.GetAxisRaw(s); }
                     catch { Debug.LogError("'" + s + "' is not a valid virtual axis code!\n" + transform.name); }
+                }
+                //read scroll wheel instead of key presses
+                if (input.readMouseScrollWheel) {
+                    output = Input.mouseScrollDelta.y;
                 }
                 //call event
                 input.output?.Invoke(output);

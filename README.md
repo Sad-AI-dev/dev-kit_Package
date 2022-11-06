@@ -56,6 +56,9 @@ The input reciever contains 3 seperate input types:
         - **Axis Codes** *List\<string\>*  
         List of strings, these are input manager codes that are tracked for inputs.  
         
+        - **Read Mouse Scroll Wheel** *bool*  
+        When set to true, reads the mouse scroll wheel as input source. Scrolling up is represented as positive and down as negative.
+        
 3. **Directional Input**
     - Directional inputs are intended for 4 seperate inputs that act as a singular Vector2 from (-1, -1) to (1, 1). It has the following features:
         - **Name** *string*  
@@ -538,6 +541,15 @@ Used to start rotating.
 
 - **StopRotate**()  
 Used to stop rotating.
+
+## Camera Shaker
+The Camera shaker is a behavior that emulates camera shake.  
+When using this behavior, do not change the position of the camera's gameObject, instead use a parent object.  
+It has the following functions:
+
+- **ShakeCamera**(duration *float*, magnitude *float*)  
+Used to add camera shake. Shakes the gameObject for *duration* in seconds.  
+*magnitude* determines the severity of the shake effect.
 
 ## UI Path Follower
 The UI Path Follower moves the rect transform along a predefined list of rect transforms.  

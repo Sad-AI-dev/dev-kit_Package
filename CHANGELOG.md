@@ -6,10 +6,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 
 ### Added
-- Cost Based Activator
-    - A new Behavior for procedural budget based option activation.
+New scripts:
+
+- Cost Based Activator behavior
+    - A behavior for procedural budget based option activation.
     - Includes rampup and save features.
         - I've made entire games around similar systems to this, so I'm very happy to create a definitive and expanded version of those systems.
+        
+- Camera Shaker behavior
+    - A  behavior for simulating camera shake.
+        - The current version is very bare-bones, so I hope to add more features to it in the future.
+
+Additions to existing scripts:
+
+- Read Mouse Scroll Wheel *bool* to *Axis Input* in *Universal Input Receiver* behavior
+    - setting this option to true allows for reading the scrollwheel as input.
 
 - Priority *int* to *Sound* class
     - allows setting of priority of each sound.
@@ -20,7 +31,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
     - this seperates the move direction from the move speed, making it easier to be changed by an external source.
     
 ### Changed
-- All scripts included in the package are now in the 'DevKit' namespace
+- All scripts included in the package are now under the 'DevKit' namespace
 
 - moveDirection on the *Mover* Behavior is now normalized on start.
     - this is to ensure move direction and move speed are seperated.
