@@ -3,49 +3,49 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace DevKit {
-public static class LookAt2D
-{
-    /// <summary>
-    /// Returns rotation that results in target transform looking towards lookAt position
-    /// </summary>
-    /// <param name="target">transform to be rotated</param>
-    /// <param name="lookAt">position to be looked at</param>
-    /// <returns>Output rotation</returns>
-    public static Quaternion LookAtTransform(Transform target, Vector3 lookAt)
+    public static class LookAt2D
     {
-        Vector2 dir = lookAt - target.position;
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        return Quaternion.AngleAxis(angle, Vector3.forward);
-    }
+        /// <summary>
+        /// Returns rotation that results in target transform looking towards lookAt position
+        /// </summary>
+        /// <param name="target">transform to be rotated</param>
+        /// <param name="lookAt">position to be looked at</param>
+        /// <returns>Output rotation</returns>
+        public static Quaternion LookAtTransform(Transform target, Vector3 lookAt)
+        {
+            Vector2 dir = lookAt - target.position;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            return Quaternion.AngleAxis(angle, Vector3.forward);
+        }
 
-    public static Quaternion LookAtTransform(Transform target, Transform lookAt)
-    {
-        return LookAtTransform(target, lookAt.position);
-    }
+        public static Quaternion LookAtTransform(Transform target, Transform lookAt)
+        {
+            return LookAtTransform(target, lookAt.position);
+        }
 
-    /// <summary>
-    /// Returns rotation that results in target transform looking towards mouse cursor. If camera is left empty, main camera will be used
-    /// </summary>
-    /// <param name="target">transform to be rotated</param>
-    /// <param name="targetCamera">camera to get cursor position through. If left empty, main camera will be used</param>
-    /// <returns>Output rotation</returns>
-    public static Quaternion LookAtMouse(Transform target, Camera targetCamera = null)
-    {
-        if (targetCamera == null) { targetCamera = Camera.main; }
-        return LookAtTransform(target, targetCamera.ScreenToWorldPoint(Input.mousePosition));
-    }
+        /// <summary>
+        /// Returns rotation that results in target transform looking towards mouse cursor. If camera is left empty, main camera will be used
+        /// </summary>
+        /// <param name="target">transform to be rotated</param>
+        /// <param name="targetCamera">camera to get cursor position through. If left empty, main camera will be used</param>
+        /// <returns>Output rotation</returns>
+        public static Quaternion LookAtMouse(Transform target, Camera targetCamera = null)
+        {
+            if (targetCamera == null) { targetCamera = Camera.main; }
+            return LookAtTransform(target, targetCamera.ScreenToWorldPoint(Input.mousePosition));
+        }
 
-    /// <summary>
-    /// Returns rotation that results in target transform looking towards UI element. If camera is left empty, main camera will be used
-    /// </summary>
-    /// <param name="target">transform to be rotated</param>
-    /// <param name="lookAt">target UI element to be looked towards</param>
-    /// <param name="targetCamera">camera used to determine UI element position, if left empty, main camera will be used</param>
-    /// <returns>Output rotation</returns>
-    public static Quaternion LookAtRectTransform(Transform target, RectTransform lookAt, Camera targetCamera = null)
-    {
-        if (targetCamera == null) { targetCamera = Camera.main; }
-        return LookAtTransform (target, targetCamera.ScreenToWorldPoint(lookAt.position));
+        /// <summary>
+        /// Returns rotation that results in target transform looking towards UI element. If camera is left empty, main camera will be used
+        /// </summary>
+        /// <param name="target">transform to be rotated</param>
+        /// <param name="lookAt">target UI element to be looked towards</param>
+        /// <param name="targetCamera">camera used to determine UI element position, if left empty, main camera will be used</param>
+        /// <returns>Output rotation</returns>
+        public static Quaternion LookAtRectTransform(Transform target, RectTransform lookAt, Camera targetCamera = null)
+        {
+            if (targetCamera == null) { targetCamera = Camera.main; }
+            return LookAtTransform (target, targetCamera.ScreenToWorldPoint(lookAt.position));
+        }
     }
-}
 }

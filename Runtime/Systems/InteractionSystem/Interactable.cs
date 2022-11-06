@@ -4,57 +4,57 @@ using UnityEngine;
 using UnityEngine.Events;
 
 namespace DevKit {
-public class Interactable : MonoBehaviour
-{
-    public UnityEvent<Interactor> onInteract;
-
-    private List<Interactor> interactors;
-
-    private void Start()
+    public class Interactable : MonoBehaviour
     {
-        interactors = new List<Interactor>();
-    }
+        public UnityEvent<Interactor> onInteract;
 
-    //--------------remove management-----------
-    public void DestroyInteractable()
-    {
-        foreach (Interactor interactor in interactors) {
-            interactor.RemoveInteractable(this);
+        private List<Interactor> interactors;
+
+        private void Start()
+        {
+            interactors = new List<Interactor>();
         }
-        Destroy(gameObject);
-    }
 
-    //-------------trigger events--------------
-    private void OnTriggerEnter(Collider other) {
-        AddToInteractor(other.gameObject);
-    }
-    private void OnTriggerExit(Collider other) {
-        RemoveFromInteractor(other.gameObject);
-    }
+        //--------------remove management-----------
+        public void DestroyInteractable()
+        {
+            foreach (Interactor interactor in interactors) {
+                interactor.RemoveInteractable(this);
+            }
+            Destroy(gameObject);
+        }
 
-    //-----2D trigger events----
-    private void OnTriggerEnter2D(Collider2D collision) {
-        AddToInteractor(collision.gameObject);
-    }
-    private void OnTriggerExit2D(Collider2D collision) {
-        RemoveFromInteractor(collision.gameObject);
-    }
+        //-------------trigger events--------------
+        private void OnTriggerEnter(Collider other) {
+            AddToInteractor(other.gameObject);
+        }
+        private void OnTriggerExit(Collider other) {
+            RemoveFromInteractor(other.gameObject);
+        }
 
-    //---on find interactor reactions---
-    private void AddToInteractor(GameObject obj)
-    {
-        if (obj.TryGetComponent(out Interactor interactor)) {
-            interactors.Add(interactor);
-            interactor.AddInteractable(this);
+        //-----2D trigger events----
+        private void OnTriggerEnter2D(Collider2D collision) {
+            AddToInteractor(collision.gameObject);
+        }
+        private void OnTriggerExit2D(Collider2D collision) {
+            RemoveFromInteractor(collision.gameObject);
+        }
+
+        //---on find interactor reactions---
+        private void AddToInteractor(GameObject obj)
+        {
+            if (obj.TryGetComponent(out Interactor interactor)) {
+                interactors.Add(interactor);
+                interactor.AddInteractable(this);
+            }
+        }
+
+        private void RemoveFromInteractor(GameObject obj)
+        {
+            if (obj.TryGetComponent(out Interactor interactor)) {
+                interactors.Remove(interactor);
+                interactor.RemoveInteractable(this);
+            }
         }
     }
-
-    private void RemoveFromInteractor(GameObject obj)
-    {
-        if (obj.TryGetComponent(out Interactor interactor)) {
-            interactors.Remove(interactor);
-            interactor.RemoveInteractable(this);
-        }
-    }
-}
 }

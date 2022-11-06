@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEditor;
+using DevKit;
 
 [CustomEditor(typeof(DialogueResponseEvents))]
 public class DialogueResponseEventsEditor : Editor

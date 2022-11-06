@@ -3,125 +3,125 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 namespace DevKit {
-public class HealthManager : MonoBehaviour
-{
-    public enum HealthBarMode {
-        None, Slider, Transform
-    }
-
-    public float health;
-    public float maxHealth;
-
-    [Header("Settings")]
-    [Tooltip("Determines how health is displayed.\n\n" +
-        "None: health will not be displayed.\n" +
-        "Slider: target slider will be used.\n" +
-        "Transform: transform will be scaled.")]
-    [SerializeField] private HealthBarMode healthBarMode;
-
-    [Space(10)]
-    [Tooltip("When true, triggers onHit event when onDeath is triggered")]
-    public bool hitOnDeath = false;
-    [Tooltip("When true, allows healing to surpass max health")]
-    public bool allowOverHeal = false;
-    [Tooltip("when true, allows healing through taking negative damage")]
-    public bool allowNegDamage = false;
-    [Tooltip("when true, allows taking damage through negative healing")]
-    public bool allowNegHeal = false;
-
-    [Header("Slider Settings")]
-    [Tooltip("Only used when health bar mode is 'Slider'")]
-    public Slider targetSlider;
-    public Image fillImage;
-    public Gradient gradient;
-
-    [Header("Transform Bar Settings")]
-    [Tooltip("Only used when health bar mode is 'Transform'")]
-    public Transform targetTransform;
-
-    [Header("Events")]
-    public UnityEvent<float> onHit;
-    public UnityEvent<float> onHeal;
-
-    public UnityEvent onDeath;
-
-    //vars
-    private float startSize; //used for transform healthbar mode
-
-    private void Start()
+    public class HealthManager : MonoBehaviour
     {
-        if (maxHealth <= 0f) { maxHealth = health; }
-        //check external components
-        switch (healthBarMode) {
-            case HealthBarMode.Slider:
-                if (targetSlider == null) { Debug.LogError("No healthbar slider was set on " + transform.name + "!"); }
-                targetSlider.minValue = 0f;
-                targetSlider.maxValue = 1f;
-                break;
-
-            case HealthBarMode.Transform:
-                if (targetTransform == null) { Debug.LogError("No healthbar tarnsform was set on " + transform.name +"!"); }
-                startSize = targetTransform.localScale.x;
-                break;
+        public enum HealthBarMode {
+            None, Slider, Transform
         }
-        UpdateHealthBar(); //initialize health bar
-    }
 
-    //-------manage health-------
-    public void TakeDamage(float damage)
-    {
-        if (!allowNegDamage && damage < 0f) { return; } //neg damage check
-        //take damage
-        health -= damage;
-        HandleHealthChange(damage > 0f, damage);
-        //health bar
-        UpdateHealthBar();
-    }
+        public float health;
+        public float maxHealth;
 
-    public void Heal(float toHeal)
-    {
-        if (!allowNegHeal && toHeal < 0f) { return; } //neg heal check
-        //heal
-        health += toHeal;
-        HandleHealthChange(toHeal < 0f, toHeal);
-        //health bar
-        UpdateHealthBar();
-    }
+        [Header("Settings")]
+        [Tooltip("Determines how health is displayed.\n\n" +
+            "None: health will not be displayed.\n" +
+            "Slider: target slider will be used.\n" +
+            "Transform: transform will be scaled.")]
+        [SerializeField] private HealthBarMode healthBarMode;
 
-    private void HandleHealthChange(bool tookDamage, float healthChange)
-    {
-        //handle health
-        bool died = health <= 0f;
-        health = Mathf.Clamp(health, 0f, allowOverHeal? health : maxHealth); //if not allowOverHeal clamp to maxhealth, else clamp to healt (I.E. no limit)
-        //call events
-        if (tookDamage) {
-            if (died) { 
-                onDeath?.Invoke();
-                if (hitOnDeath) { onHit?.Invoke(healthChange); }
+        [Space(10)]
+        [Tooltip("When true, triggers onHit event when onDeath is triggered")]
+        public bool hitOnDeath = false;
+        [Tooltip("When true, allows healing to surpass max health")]
+        public bool allowOverHeal = false;
+        [Tooltip("when true, allows healing through taking negative damage")]
+        public bool allowNegDamage = false;
+        [Tooltip("when true, allows taking damage through negative healing")]
+        public bool allowNegHeal = false;
+
+        [Header("Slider Settings")]
+        [Tooltip("Only used when health bar mode is 'Slider'")]
+        public Slider targetSlider;
+        public Image fillImage;
+        public Gradient gradient;
+
+        [Header("Transform Bar Settings")]
+        [Tooltip("Only used when health bar mode is 'Transform'")]
+        public Transform targetTransform;
+
+        [Header("Events")]
+        public UnityEvent<float> onHit;
+        public UnityEvent<float> onHeal;
+
+        public UnityEvent onDeath;
+
+        //vars
+        private float startSize; //used for transform healthbar mode
+
+        private void Start()
+        {
+            if (maxHealth <= 0f) { maxHealth = health; }
+            //check external components
+            switch (healthBarMode) {
+                case HealthBarMode.Slider:
+                    if (targetSlider == null) { Debug.LogError("No healthbar slider was set on " + transform.name + "!"); }
+                    targetSlider.minValue = 0f;
+                    targetSlider.maxValue = 1f;
+                    break;
+
+                case HealthBarMode.Transform:
+                    if (targetTransform == null) { Debug.LogError("No healthbar tarnsform was set on " + transform.name +"!"); }
+                    startSize = targetTransform.localScale.x;
+                    break;
             }
-            else { onHit?.Invoke(healthChange); }
+            UpdateHealthBar(); //initialize health bar
         }
-        else { onHeal?.Invoke(healthChange); }
-    }
 
-    //-----------manage health bar------------
-    private void UpdateHealthBar()
-    {
-        switch (healthBarMode) {
-            case HealthBarMode.Slider:
-                UpdateSliderBar();
-                break;
+        //-------manage health-------
+        public void TakeDamage(float damage)
+        {
+            if (!allowNegDamage && damage < 0f) { return; } //neg damage check
+            //take damage
+            health -= damage;
+            HandleHealthChange(damage > 0f, damage);
+            //health bar
+            UpdateHealthBar();
+        }
 
-            case HealthBarMode.Transform:
-                targetTransform.localScale = new Vector3((health / maxHealth) * startSize, targetTransform.localScale.y, targetTransform.localScale.z);
-                break;
+        public void Heal(float toHeal)
+        {
+            if (!allowNegHeal && toHeal < 0f) { return; } //neg heal check
+            //heal
+            health += toHeal;
+            HandleHealthChange(toHeal < 0f, toHeal);
+            //health bar
+            UpdateHealthBar();
+        }
+
+        private void HandleHealthChange(bool tookDamage, float healthChange)
+        {
+            //handle health
+            bool died = health <= 0f;
+            health = Mathf.Clamp(health, 0f, allowOverHeal? health : maxHealth); //if not allowOverHeal clamp to maxhealth, else clamp to healt (I.E. no limit)
+            //call events
+            if (tookDamage) {
+                if (died) { 
+                    onDeath?.Invoke();
+                    if (hitOnDeath) { onHit?.Invoke(healthChange); }
+                }
+                else { onHit?.Invoke(healthChange); }
+            }
+            else { onHeal?.Invoke(healthChange); }
+        }
+
+        //-----------manage health bar------------
+        private void UpdateHealthBar()
+        {
+            switch (healthBarMode) {
+                case HealthBarMode.Slider:
+                    UpdateSliderBar();
+                    break;
+
+                case HealthBarMode.Transform:
+                    targetTransform.localScale = new Vector3((health / maxHealth) * startSize, targetTransform.localScale.y, targetTransform.localScale.z);
+                    break;
+            }
+        }
+
+        private void UpdateSliderBar()
+        {
+            targetSlider.value = (health / maxHealth);
+            fillImage.color = gradient.Evaluate(1f - (health / maxHealth));
         }
     }
-
-    private void UpdateSliderBar()
-    {
-        targetSlider.value = (health / maxHealth);
-        fillImage.color = gradient.Evaluate(1f - (health / maxHealth));
-    }
-}
 }
