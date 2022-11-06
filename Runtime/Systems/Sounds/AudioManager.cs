@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace DevKit {
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
@@ -37,4 +38,5 @@ public class AudioManager : MonoBehaviour
         //debug info
         else { Debug.LogError(transform.name + " contains no sound for " + name); }
     }
+}
 }

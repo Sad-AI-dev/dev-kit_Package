@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+namespace DevKit {
 public class Interactable : MonoBehaviour
 {
     public UnityEvent<Interactor> onInteract;
@@ -55,4 +56,5 @@ public class Interactable : MonoBehaviour
             interactor.RemoveInteractable(this);
         }
     }
+}
 }

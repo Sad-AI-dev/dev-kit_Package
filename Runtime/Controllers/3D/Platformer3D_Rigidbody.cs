@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+namespace DevKit {
 [RequireComponent(typeof(Rigidbody))]
 public class Platformer3D_Rigidbody : MonoBehaviour
 {
@@ -116,4 +117,5 @@ public class Platformer3D_Rigidbody : MonoBehaviour
         grounded = false;
         if (rb.velocity.y <= 0f) { StartCoroutine(CoyoteJumpCo()); } //fell off a platform? allow coyote jump
     }
+}
 }

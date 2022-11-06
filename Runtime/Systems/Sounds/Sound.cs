@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Audio;
 
+namespace DevKit {
 [System.Serializable]
 public class Sound : ISerializationCallbackReceiver
 {
@@ -46,4 +47,5 @@ public class Sound : ISerializationCallbackReceiver
             setBaseValues = true;
         }
     }
+}
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+namespace DevKit {
 [RequireComponent(typeof(CharacterController))]
 public class Platformer3D_CharacterController : MonoBehaviour
 {
@@ -133,4 +134,5 @@ public class Platformer3D_CharacterController : MonoBehaviour
         grounded = false;
         if (velocity.y < 0f) { StartCoroutine(CoyoteJumpCo()); } //fell off platform, allow coyote jump
     }
+}
 }

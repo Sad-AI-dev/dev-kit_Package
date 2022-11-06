@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace DevKit {
 [RequireComponent(typeof(DialogueResponseEvents))]
 public class DialogueActivator : MonoBehaviour
 {
@@ -36,4 +37,5 @@ public class DialogueActivator : MonoBehaviour
     {
         this.data = data;
     }
+}
 }

@@ -1,3 +1,4 @@
+namespace DevKit {
 [System.Serializable]
 public class SimpleInventory<T>
 {
@@ -32,4 +33,5 @@ public class SimpleInventory<T>
             inventory.dict.Remove(item);
         }
     }
+}
 }

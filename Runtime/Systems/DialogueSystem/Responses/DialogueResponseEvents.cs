@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 
+namespace DevKit {
 public class DialogueResponseEvents : MonoBehaviour
 {
     [System.Serializable]
@@ -53,4 +54,5 @@ public class DialogueResponseEvents : MonoBehaviour
             }
         }
     }
+}
 }

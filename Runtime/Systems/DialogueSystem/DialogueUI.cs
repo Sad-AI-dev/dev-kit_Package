@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
 
+namespace DevKit {
 [RequireComponent(typeof(ResponseHandler), typeof(TypewriterEffect))]
 public class DialogueUI : MonoBehaviour
 {
@@ -124,4 +125,5 @@ public class DialogueUI : MonoBehaviour
             advanceQueued = true;
         }
     }
+}
 }

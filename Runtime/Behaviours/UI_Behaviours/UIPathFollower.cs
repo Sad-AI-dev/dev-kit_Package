@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace DevKit {
 public class UIPathFollower : MonoBehaviour
 {
     [System.Serializable]
@@ -157,4 +158,5 @@ public class UIPathFollower : MonoBehaviour
             }
         }
     }
+}
 }

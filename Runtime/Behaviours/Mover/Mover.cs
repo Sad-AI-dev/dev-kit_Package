@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace DevKit {
 [RequireComponent(typeof(Rigidbody))]
 public class Mover : MonoBehaviour
 {
@@ -46,4 +47,5 @@ public class Mover : MonoBehaviour
         Vector3 speed = moveDirection * (100 * moveSpeed * Time.deltaTime);
         rb.velocity = transform.right * speed.x + transform.up * speed.y + transform.forward * speed.z; //convert to local space
     }
+}
 }

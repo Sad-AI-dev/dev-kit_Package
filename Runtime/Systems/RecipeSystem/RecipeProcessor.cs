@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Collections.Generic;
 
+namespace DevKit {
 [System.Serializable]
 public class RecipeProcessor<Input, Output>
 {
@@ -33,4 +34,5 @@ public class RecipeProcessor<Input, Output>
             return onlyInRecipe.Count <= 0;
         }
     }
+}
 }

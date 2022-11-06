@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace DevKit {
 [CreateAssetMenu(menuName = "ScriptableObjects/Dialogue")]
 public class DialogueData : ScriptableObject
 {
@@ -21,4 +22,5 @@ public class DialogueData : ScriptableObject
     public Response[] Responses => responses;
     //responseCheck
     public bool HasResponses => responses != null && responses.Length > 0;
+}
 }

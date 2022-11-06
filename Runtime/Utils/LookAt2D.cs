@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace DevKit {
 public static class LookAt2D
 {
     /// <summary>
@@ -46,4 +47,5 @@ public static class LookAt2D
         if (targetCamera == null) { targetCamera = Camera.main; }
         return LookAtTransform (target, targetCamera.ScreenToWorldPoint(lookAt.position));
     }
+}
 }

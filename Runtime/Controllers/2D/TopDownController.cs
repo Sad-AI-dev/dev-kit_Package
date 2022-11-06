@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+namespace DevKit {
 [RequireComponent(typeof(Rigidbody2D))]
 public class TopDownController : MonoBehaviour
 {
@@ -75,4 +76,5 @@ public class TopDownController : MonoBehaviour
                 break;
         }
     }
+}
 }

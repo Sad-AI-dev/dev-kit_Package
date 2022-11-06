@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace DevKit {
 [RequireComponent(typeof(AudioSource))]
 public class MusicManager : MonoBehaviour
 {
@@ -98,4 +99,5 @@ public class MusicManager : MonoBehaviour
             yield return null;
         }
     }
+}
 }

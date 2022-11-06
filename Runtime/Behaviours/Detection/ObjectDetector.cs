@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+namespace DevKit {
 public class ObjectDetector : MonoBehaviour
 {
     [Header("Events")]
@@ -61,4 +62,5 @@ public class ObjectDetector : MonoBehaviour
         }
         return true;
     }
+}
 }

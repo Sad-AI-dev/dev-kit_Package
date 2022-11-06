@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace DevKit {
 public class ObjectSpawner : MonoBehaviour
 {
     private enum SpawnMode {
@@ -107,4 +108,5 @@ public class ObjectSpawner : MonoBehaviour
             }
         }
     }
+}
 }

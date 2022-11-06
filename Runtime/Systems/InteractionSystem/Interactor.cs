@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+namespace DevKit {
 public class Interactor : MonoBehaviour
 {
     [Header("Events")]
@@ -49,4 +50,5 @@ public class Interactor : MonoBehaviour
             Vector3.Distance(transform.position, a.transform.position).CompareTo(Vector3.Distance(transform.position, b.transform.position))
         );
     }
+}
 }

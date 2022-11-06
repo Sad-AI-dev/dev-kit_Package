@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace DevKit {
 [Serializable]
 public class UnityDictionary<Key, Value> : ISerializationCallbackReceiver
 {
@@ -49,4 +50,5 @@ public class UnityDictionary<Key, Value> : ISerializationCallbackReceiver
         }
         return true; //no duplicate keys found
     }
+}
 }

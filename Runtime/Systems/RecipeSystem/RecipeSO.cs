@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace DevKit {
 public class RecipeSO<Input, Output> : ScriptableObject
 {
     public List<Input> inputs;
@@ -9,4 +10,5 @@ public class RecipeSO<Input, Output> : ScriptableObject
     public bool perfectMatch = true;
     [Space(10)]
     public Output output;
+}
 }

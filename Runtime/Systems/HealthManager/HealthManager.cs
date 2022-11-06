@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
+namespace DevKit {
 public class HealthManager : MonoBehaviour
 {
     public enum HealthBarMode {
@@ -122,4 +123,5 @@ public class HealthManager : MonoBehaviour
         targetSlider.value = (health / maxHealth);
         fillImage.color = gradient.Evaluate(1f - (health / maxHealth));
     }
+}
 }

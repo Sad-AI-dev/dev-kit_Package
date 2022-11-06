@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+namespace DevKit {
 public class TypewriterEffect : MonoBehaviour
 {
     [System.Serializable]
@@ -69,4 +70,5 @@ public class TypewriterEffect : MonoBehaviour
         waitTime = default;
         return false;
     }
+}
 }

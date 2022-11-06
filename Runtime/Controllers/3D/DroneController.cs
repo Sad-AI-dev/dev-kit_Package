@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+namespace DevKit {
 [RequireComponent(typeof(Rigidbody))]
 public class DroneController : MonoBehaviour
 {
@@ -95,4 +96,5 @@ public class DroneController : MonoBehaviour
         //output result
         rb.velocity = new Vector3(rb.velocity.x, toMove, rb.velocity.z);
     }
+}
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace DevKit {
 public class UIFader : MonoBehaviour
 {
     public enum FadeMode {
@@ -140,4 +141,5 @@ public class UIFader : MonoBehaviour
         yield return new WaitForSeconds(blinkTime);
         fading = false;
     }
+}
 }

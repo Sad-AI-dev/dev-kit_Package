@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace DevKit {
 public class WaveSpawner : MonoBehaviour
 {
     public enum ActivateMode {
@@ -196,4 +197,5 @@ public class WaveSpawner : MonoBehaviour
             }
         }
     }
+}
 }

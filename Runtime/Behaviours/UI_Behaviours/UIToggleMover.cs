@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace DevKit {
 public class UIToggleMover : MonoBehaviour
 {
     public enum MoveMode {
@@ -86,4 +87,5 @@ public class UIToggleMover : MonoBehaviour
     {
         moving = false;
     }
+}
 }

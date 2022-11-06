@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
+namespace DevKit {
 public class ResponseHandler : MonoBehaviour
 {
     [Tooltip("RectTransform that holds the responseContainer. \nThis element resizes to account for responses")]
@@ -85,4 +86,5 @@ public class ResponseHandler : MonoBehaviour
             dialogueUI.EndDialogue();
         }
     }
+}
 }

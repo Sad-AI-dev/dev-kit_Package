@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace DevKit {
 public class Rotator : MonoBehaviour
 {
     [Header("Settings")]
@@ -37,4 +38,5 @@ public class Rotator : MonoBehaviour
     {
         transform.Rotate(rotateDirection * Time.deltaTime, Space.Self);
     }
+}
 }

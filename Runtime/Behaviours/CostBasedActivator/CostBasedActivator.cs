@@ -1,0 +1,286 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Events;
+
+namespace DevKit {
+public class CostBasedActivator : MonoBehaviour
+{
+    [System.Serializable]
+    public class Option : ISerializationCallbackReceiver {
+        public string name;
+        public int price;
+        public UnityEvent onSelect;
+        [HideInInspector] public bool initialized;
+
+        public void OnBeforeSerialize() { }
+        public void OnAfterDeserialize() {
+            if (!initialized) {
+                price = 1;
+                initialized = true;
+            }
+        }
+    }
+
+    public enum ActivateMode {
+        Manual, Interval
+    }
+
+    public enum SaveMode {
+        None, Random, Interval, Interval_Random
+    }
+
+    [Header("Budget Settings")]
+    public int budget;
+    [SerializeField] private bool activateOnStart;
+    [Space(10f)]
+    //gain values
+    public int budgetGain;
+    public int GainRampup;
+    public int GainRampupFrequency;
+    [Space(10f)]
+    //gain mode values
+    [Tooltip("Determines when behavior is activated.\n\n" +
+        "Manual: only activates when Activate() is called.\n" +
+        "Interval: activates periodically.\n")]
+    public ActivateMode activateMode;
+    [Tooltip("Only used when 'Activate Mode' is set to 'Interval'.\n" +
+        "Determines the interval in seconds.")]
+    public float ActivateIntervalTime;
+
+    [Header("Save Behavior Settings")]
+    [Tooltip("Determines how the save behavior is activated.\n\n" +
+        "None: save behavior will never be activated.\n" +
+        "Random: save behavior will randomly be activated.\n" +
+        "Interval: save behavior will be activated once per set interval.\n" +
+        "Interval_Random: similar to 'Interval', but interval time is randomly picked.")]
+    public SaveMode saveMode;
+    [Space(10f)]
+    [Tooltip("Only used when 'Save Mode' is set to 'Random'.\n" +
+        "Determines the chance for the save behavior to activate, in percentage.")]
+    [Range(0f, 100f)] public float saveChance;
+    [Tooltip("Only used when 'Save Mode' is set to 'Interval'.\n" +
+        "Determines after how many budget gains the save behavior should activate.")]
+    public int saveInterval;
+    [Tooltip("Only used when 'Save Mode' is set to 'Interval_Random'.")]
+    public int minRandInterval;
+    [Tooltip("Only used when 'Save Mode' is set to 'Interval_Random'.")]
+    public int maxRandInterval;
+    [Space(10f)]
+    [Range(0f, 100f)] public float minSavePercent;
+    [Range(0f, 100f)] public float maxSavePercent;
+
+    [Header("Options")]
+    [SerializeField] private List<Option> options;
+
+    //vars
+    private int rampupCounter;
+    private int savedBudget;
+    private int saveCounter;
+
+    //option decision vars
+    private int minPrice;
+
+    //editor pollish
+    private float oldMinSave;
+    private float oldMaxSave;
+    private float oldMinInterval;
+    private float oldMaxInterval;
+
+    private void Start()
+    {
+        minPrice = CalcMinPrice();
+        if (saveMode == SaveMode.Interval_Random) { SetNewRandSaveInterval(); }
+        if (activateOnStart) { Activate(); }
+    }
+
+    //-------------------activate---------------------
+    public void Activate()
+    {
+        //step 1: purchace options
+        PurchaseOptions(); //makes start budget more intuitive + allows for showing current budget in editor
+        //step 2: gain budget
+        GainBudget();
+        //step 3: save behavior
+        if (saveMode != SaveMode.None) { HandleSaveBehavior(); }
+        //repeat?
+        if (activateMode == ActivateMode.Interval) { StartCoroutine(ActivateIntervalCo()); }
+    }
+    private IEnumerator ActivateIntervalCo()
+    {
+        yield return new WaitForSeconds(ActivateIntervalTime);
+        Activate();
+    }
+
+    //-----------------gain budget step---------------
+    private void GainBudget()
+    {
+        budget += budgetGain;
+        HandleSavedBudget();
+        HandleRampup();
+    }
+
+    private void HandleSavedBudget()
+    {
+        budget += savedBudget;
+        savedBudget = 0;
+    }
+
+    private void HandleRampup()
+    {
+        rampupCounter++;
+        if (rampupCounter == GainRampupFrequency) {
+            budgetGain += GainRampup;
+            rampupCounter = 0;
+        }
+    }
+
+    //------------------save step---------------------
+    private void HandleSaveBehavior()
+    {
+        switch (saveMode) {
+            case SaveMode.Random:
+                HandleRandomSave(); break;
+
+            case SaveMode.Interval:
+            case SaveMode.Interval_Random:
+                HandleIntervalSave(); break;
+        }
+    }
+
+    private void HandleRandomSave()
+    {
+        if (Random.Range(0.0f, 100.0f) < saveChance) {
+            SaveBudget();
+        }
+    }
+
+    private void HandleIntervalSave()
+    {
+        saveCounter++;
+        if (saveCounter >= saveInterval) {
+            if (saveMode == SaveMode.Interval_Random) { SetNewRandSaveInterval(); }
+            SaveBudget();
+            saveCounter = 0;
+        }
+    }
+    private void SetNewRandSaveInterval()
+    {
+        saveInterval = Random.Range(minRandInterval, maxRandInterval + 1);
+    }
+
+    private void SaveBudget()
+    {
+        int toSave = Mathf.RoundToInt((Random.Range(minSavePercent, maxSavePercent) / 100) * budget);
+        savedBudget = toSave;
+        budget -= toSave;
+    }
+
+    //----------------purchase step------------------
+    private void PurchaseOptions()
+    {
+        while (budget >= minPrice) {
+            List<Option> availableOptions = GetAvailableOptions();
+            Option chosenOption = availableOptions[Random.Range(0, availableOptions.Count)];
+            budget -= chosenOption.price; //pay
+            chosenOption.onSelect?.Invoke();
+        }
+    }
+
+    //-------price calcs-------
+    private int CalcMinPrice()
+    {
+        int minPrice = options[0].price;
+        for (int i = 1; i < options.Count - 1; i++) {
+            if (options[i].price < minPrice) {
+                minPrice = options[i].price;
+            }
+        }
+        return minPrice;
+    }
+
+    private List<Option> GetAvailableOptions()
+    {
+        List<Option> availables = new List<Option>();
+        foreach (Option option in options) {
+            if (option.price <= budget) {
+                availables.Add(option);
+            }
+        }
+        return availables;
+    }
+
+    //-------------------manage options list----------------------
+    public void AddOption(Option option)
+    {
+        options.Add(option);
+        minPrice = CalcMinPrice();
+    }
+
+    public bool RemoveOption(Option option)
+    {
+        if (options.Contains(option)) {
+            options.Remove(option);
+            minPrice = CalcMinPrice();
+            return true;
+        }
+        return false;
+    }
+
+    //----------------------editor pollish------------------------
+    private void OnValidate()
+    {
+        SavePercentageCheck();
+        SaveIntervalCheck();
+        if (options != null) {
+            ValidPricesCheck();
+        }
+    }
+
+    //save percentage check
+    private void SavePercentageCheck()
+    {
+        if (minSavePercent != oldMinSave && minSavePercent > maxSavePercent) {
+            maxSavePercent = minSavePercent;
+            UpdateOldPercentVars();
+        }
+        else if (maxSavePercent != oldMaxSave && maxSavePercent < minSavePercent) {
+            minSavePercent = maxSavePercent;
+            UpdateOldPercentVars();
+        }
+    }
+    private void UpdateOldPercentVars()
+    {
+        oldMinSave = minSavePercent;
+        oldMaxSave = maxSavePercent;
+    }
+
+    //save rand interval check
+    private void SaveIntervalCheck()
+    {
+        if (minRandInterval != oldMinInterval && minRandInterval > maxRandInterval) {
+            maxRandInterval = minRandInterval;
+            UpdateOldIntervalVars();
+        }
+        else if (maxRandInterval != oldMaxInterval && maxRandInterval < minRandInterval) {
+            minRandInterval = maxRandInterval;
+            UpdateOldIntervalVars();
+        }
+    }
+    private void UpdateOldIntervalVars()
+    {
+        oldMinInterval = minRandInterval;
+        oldMaxInterval = maxRandInterval;
+    }
+
+    //valid prices check
+    private void ValidPricesCheck()
+    {
+        foreach (Option opt in options) {
+            if (opt.price <= 0) {
+                Debug.LogWarning($"{transform.name}: option {opt.name} has an invalid price, please make sure price is higher than 0!");
+            }
+        }
+    }
+}
+}

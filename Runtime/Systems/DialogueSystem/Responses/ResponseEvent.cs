@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+namespace DevKit {
 [System.Serializable]
 public class ResponseEvent
 {
@@ -8,4 +9,5 @@ public class ResponseEvent
     [SerializeField] private UnityEvent onResponse;
 
     public UnityEvent OnResponse => onResponse;
+}
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+namespace DevKit {
 public class UniversalInputReceiver : MonoBehaviour
 {
     //------------define input reading types-------------
@@ -154,4 +155,5 @@ public class UniversalInputReceiver : MonoBehaviour
         }
         return largest;
     }
+}
 }

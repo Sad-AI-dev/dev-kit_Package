@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+namespace DevKit {
 [System.Serializable]
 public class Response
 {
@@ -12,4 +13,5 @@ public class Response
     //public get references
     public string Title => responseTitle;
     public DialogueData Data => dialogueData;
+}
 }

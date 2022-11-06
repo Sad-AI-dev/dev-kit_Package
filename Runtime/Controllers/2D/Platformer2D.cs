@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace DevKit {
 [RequireComponent(typeof(Rigidbody2D))]
 public class Platformer2D : MonoBehaviour
 {
@@ -152,4 +153,5 @@ public class Platformer2D : MonoBehaviour
         grounded = false;
         if (rb.velocity.y <= 0f) { StartCoroutine(CoyoteJumpCo()); } //fell off platform? allow coyote jump
     }
+}
 }

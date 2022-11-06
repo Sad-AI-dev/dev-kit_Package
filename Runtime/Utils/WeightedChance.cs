@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace DevKit {
 [System.Serializable]
 public class WeightedChance<T>
 {
@@ -42,4 +43,5 @@ public class WeightedChance<T>
         }
         return chosenOption;
     }
+}
 }

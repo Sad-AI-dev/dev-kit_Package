@@ -123,6 +123,38 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &41907650
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 41907651}
+  m_Layer: 0
+  m_Name: CostBasedActivators
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &41907651
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41907650}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 647866010}
+  m_Father: {fileID: 1039983323}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &71739403
 GameObject:
   m_ObjectHideFlags: 0
@@ -777,7 +809,7 @@ Transform:
   m_Children:
   - {fileID: 670868029}
   m_Father: {fileID: 1039983323}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &291774451
 GameObject:
@@ -809,7 +841,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1039983323}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &291774453
 MonoBehaviour:
@@ -1258,7 +1290,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &479598336
 Transform:
   m_ObjectHideFlags: 0
@@ -1643,6 +1675,172 @@ Transform:
   m_Father: {fileID: 1039983323}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &647866009
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 647866010}
+  - component: {fileID: 647866012}
+  - component: {fileID: 647866011}
+  - component: {fileID: 647866013}
+  m_Layer: 0
+  m_Name: CostBasedActivatorSample
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &647866010
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 647866009}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 41907651}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &647866011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 647866009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a21e38fdff3973747ab49366139b5601, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonInputs:
+  - name: Activate
+    onButtonDown:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 647866012}
+          m_TargetAssemblyTypeName: CostBasedActivator, arvid-dev.dev-kit
+          m_MethodName: Activate
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    onButtonHeld:
+      m_PersistentCalls:
+        m_Calls: []
+    onButtonUp:
+      m_PersistentCalls:
+        m_Calls: []
+    codes: 65000000
+    buttonCodes: []
+  axisInputs: []
+  directionalInputs: []
+--- !u!114 &647866012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 647866009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed7d855c52a1fff419907e7929e696df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  budget: 10
+  activateOnStart: 0
+  budgetGain: 10
+  GainRampup: 0
+  GainRampupFrequency: 0
+  activateMode: 0
+  ActivateIntervalTime: 0
+  saveMode: 0
+  saveChance: 0
+  saveInterval: 0
+  minRandInterval: 0
+  maxRandInterval: 0
+  minSavePercent: 50
+  maxSavePercent: 50
+  options:
+  - name: cheap option
+    price: 1
+    onSelect:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 647866013}
+          m_TargetAssemblyTypeName: MessageDebugger, arvid-dev.dev-kit
+          m_MethodName: DebugMessage
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: bought cheap option (1)
+            m_BoolArgument: 0
+          m_CallState: 2
+    initialized: 1
+  - name: cost 5
+    price: 5
+    onSelect:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 647866013}
+          m_TargetAssemblyTypeName: MessageDebugger, arvid-dev.dev-kit
+          m_MethodName: DebugMessage
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: bought cost 5 option
+            m_BoolArgument: 0
+          m_CallState: 2
+    initialized: 1
+  - name: cost 17
+    price: 17
+    onSelect:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 647866013}
+          m_TargetAssemblyTypeName: MessageDebugger, arvid-dev.dev-kit
+          m_MethodName: DebugMessage
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: bought cost 17 option
+            m_BoolArgument: 0
+          m_CallState: 2
+    initialized: 1
+--- !u!114 &647866013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 647866009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efb26f828d43a0b46931cc310eae3d0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &670868028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2704,6 +2902,7 @@ Transform:
   m_Children:
   - {fileID: 629094083}
   - {fileID: 2050511760}
+  - {fileID: 41907651}
   - {fileID: 1648663448}
   - {fileID: 1827003440}
   - {fileID: 279077095}
@@ -3705,7 +3904,7 @@ Transform:
   m_Children:
   - {fileID: 1483771446}
   m_Father: {fileID: 1039983323}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1406225202
 MonoBehaviour:
@@ -4141,7 +4340,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1039983323}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1492380590
 MonoBehaviour:
@@ -4483,7 +4682,7 @@ Transform:
   m_Children:
   - {fileID: 1573287244}
   m_Father: {fileID: 1039983323}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1651694607
 GameObject:
@@ -4956,7 +5155,7 @@ Transform:
   m_Children:
   - {fileID: 1610330629}
   m_Father: {fileID: 1039983323}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1837497340
 GameObject:
@@ -5110,7 +5309,7 @@ Transform:
   - {fileID: 1467986410}
   - {fileID: 2062554921}
   m_Father: {fileID: 1039983323}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1896392477
 GameObject:
@@ -5276,7 +5475,7 @@ Transform:
   - {fileID: 1843181069}
   - {fileID: 173755191}
   m_Father: {fileID: 1039983323}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1961944063
 GameObject:
@@ -5309,7 +5508,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1039983323}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1961944065
 MonoBehaviour:
@@ -6016,7 +6215,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2096883414
 Transform:
   m_ObjectHideFlags: 0
@@ -6304,7 +6503,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1039983323}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2131755066
 MonoBehaviour:
