@@ -1404,6 +1404,7 @@ MonoBehaviour:
     negInput: 
     axisCodes:
     - Horizontal
+    readMouseScrollWheel: 0
   directionalInputs: []
 --- !u!114 &764966824
 MonoBehaviour:
@@ -1717,7 +1718,8 @@ MonoBehaviour:
   onLeaveLastObject:
     m_PersistentCalls:
       m_Calls: []
-  ignoreTags:
+  whitelistTags: []
+  blacklistTags:
   - Player
 --- !u!1 &904774929
 GameObject:
@@ -1907,9 +1909,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ebeeac615fff24479170913a8653b51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onInteractVoid:
-    m_PersistentCalls:
-      m_Calls: []
   onInteract:
     m_PersistentCalls:
       m_Calls:

@@ -17,18 +17,25 @@ New scripts:
     - A  behavior for simulating camera shake.
         - The current version is very bare-bones, so I hope to add more features to it in the future.
 
+- Texture Scroller
+    - A behavior that scrolls a texture.
+        - It's pretty simple, but I like using this behavior for spicing up static UI screens.
+
 Additions to existing scripts:
 
 - Read Mouse Scroll Wheel *bool* to *Axis Input* in *Universal Input Receiver* behavior
     - setting this option to true allows for reading the scrollwheel as input.
 
+- Whitelist Tags *List\<string\>* to *Object Detector* behavior.
+    - This allows tighter control on which objects should be detected.
+
+- moveSpeed *float* to *Mover* Behavior
+    - this seperates the move direction from the move speed, making it easier to be changed by an external source.
+
 - Priority *int* to *Sound* class
     - allows setting of priority of each sound.
 - Bypass settings to *Sound* class
     - additional settings for bypassing effects.
-    
-- moveSpeed *float* to *Mover* Behavior
-    - this seperates the move direction from the move speed, making it easier to be changed by an external source.
     
 ### Changed
 - All scripts included in the package are now under the 'DevKit' namespace
@@ -38,6 +45,8 @@ Additions to existing scripts:
     
 - TryInteract() on the *Interactor* class will now return a bool.
     - returns true is an *Interactable* is found, returns false if not.
+    
+- renamed *Ignore Tags* to *Blacklist Tags*
 
 ### Fixed
 - Missing and inconsistent documentation on functions.

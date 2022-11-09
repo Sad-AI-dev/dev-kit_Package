@@ -11,7 +11,8 @@ namespace DevKit {
         public UnityEvent onLeaveLastObject;
 
         [Header("Settings")]
-        public List<string> ignoreTags;
+        public List<string> whitelistTags;
+        public List<string> blacklistTags;
 
         private List<Transform> trackedObjects;
 
@@ -57,10 +58,28 @@ namespace DevKit {
         //-----------------------util-------------------------
         private bool ValidObjectCheck(Transform toCheck)
         {
-            foreach (string tag in ignoreTags) {
-                if (toCheck.CompareTag(tag)) { return false; }
+            if (whitelistTags != null && whitelistTags.Count > 0) {
+                return IsInWhiteList(toCheck);
             }
-            return true;
+            else {
+                return !IsInBlackList(toCheck);
+            }
+        }
+
+        private bool IsInWhiteList(Transform toCheck)
+        {
+            foreach (string tag in whitelistTags) {
+                if (toCheck.CompareTag(tag)) { return true; }
+            }
+            return false;
+        }
+
+        private bool IsInBlackList(Transform toCheck)
+        {
+            foreach (string tag in blacklistTags) {
+                if (toCheck.CompareTag(tag)) { return true; }
+            }
+            return false;
         }
     }
 }

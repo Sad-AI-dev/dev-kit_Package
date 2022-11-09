@@ -253,8 +253,11 @@ Event that is Invoked every time a object is detected.
 - **On Leave Last Object** *UnityEvent*  
 Event that is Invoked when last object goes out of range.  
 
-- **Ignore Tags** *List\<string\>*  
-List of tags that are ignored when an object is detected.
+- **Whitelist Tags** *List\<string\>*  
+List of tags that are allowed when an object is detected.
+- **Blacklist Tags** *List\<string\>*  
+List of tags that are ignored when an object is detected.  
+Only used when *Whitelist Tags* is empty.
 
 **A quick note on use with Controllers**  
 Controllers always setup event listeners on their own for the object detectors. The Unity Events are purely for custom behaviour.
@@ -550,6 +553,18 @@ It has the following functions:
 - **ShakeCamera**(duration *float*, magnitude *float*)  
 Used to add camera shake. Shakes the gameObject for *duration* in seconds.  
 *magnitude* determines the severity of the shake effect.
+
+## Texture Scroller
+The Texture Scroller is a behavior that scrolls and loops a UI image.  
+For the best result, set the sprite *Wrap Mode* to *Repeat* in its import settings.  
+It has the following features:
+
+- **Scroll Speed** *float*  
+Determines the speed the image is scrolled at.
+
+- **Scroll Direction** *Vector2*  
+Determines which direction the image is scrolled in.  
+This value is normalized.
 
 ## UI Path Follower
 The UI Path Follower moves the rect transform along a predefined list of rect transforms.  
