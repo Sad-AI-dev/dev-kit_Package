@@ -240,12 +240,13 @@ namespace DevKit {
         //save percentage check
         private void SavePercentageCheck()
         {
-            if (minSavePercent != oldMinSave && minSavePercent > maxSavePercent) {
-                maxSavePercent = minSavePercent;
-                UpdateOldPercentVars();
-            }
-            else if (maxSavePercent != oldMaxSave && maxSavePercent < minSavePercent) {
-                minSavePercent = maxSavePercent;
+            if (minSavePercent > maxSavePercent) {
+                if (minSavePercent != oldMinSave) {
+                    maxSavePercent = minSavePercent; //min moved, move max up to min
+                }
+                else {
+                    minSavePercent = maxSavePercent; //max moved, move min down to max
+                }
                 UpdateOldPercentVars();
             }
         }
@@ -258,14 +259,15 @@ namespace DevKit {
         //save rand interval check
         private void SaveIntervalCheck()
         {
-            if (minRandInterval != oldMinInterval && minRandInterval > maxRandInterval) {
-                maxRandInterval = minRandInterval;
-                UpdateOldIntervalVars();
+            if (minRandInterval > maxRandInterval) {
+                if (minRandInterval != oldMinInterval) {
+                    maxRandInterval = minRandInterval; //min moved, move max up to min
+                }
+                else {
+                    minRandInterval = maxRandInterval; //max moved, move min down to max
+                }
             }
-            else if (maxRandInterval != oldMaxInterval && maxRandInterval < minRandInterval) {
-                minRandInterval = maxRandInterval;
-                UpdateOldIntervalVars();
-            }
+            UpdateOldIntervalVars();
         }
         private void UpdateOldIntervalVars()
         {
