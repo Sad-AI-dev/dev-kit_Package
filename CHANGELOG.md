@@ -2,8 +2,10 @@
 All notable changes to this package will be documented in this file.  
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [unreleased]
-
+## [2.0.0] - New Frontiers Update - 13-11-2022
+This update adds some completely new behaviors that I have been meaning to add.  
+It also adds a few new features to existing classes, and some important fixes.  
+As an important note: All classes are now in the DevKit namespace.
 
 ### Added
 New scripts:
@@ -12,6 +14,10 @@ New scripts:
     - A behavior for procedural budget based option activation.
     - Includes rampup and save features.
         - I've made entire games around similar systems to this, so I'm very happy to create a definitive and expanded version of those systems.
+        
+- Interval Timer Manager
+    - A behavior for managing interval timers.
+        - This was a behavior suggested to me. I'm looking forward to the ways this behavior can be used in projects.
         
 - Camera Shaker behavior
     - A  behavior for simulating camera shake.

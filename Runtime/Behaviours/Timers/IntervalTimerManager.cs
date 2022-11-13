@@ -12,7 +12,6 @@ namespace DevKit {
 
         [System.Serializable]
         public class IntervalTimer {
-            public string name;
             public bool activateOnStart;
             [Header("Time Settings")]
             public float timerLength;
@@ -32,10 +31,10 @@ namespace DevKit {
             [HideInInspector] public float oldMaxTimer;
         }
 
-        public List<IntervalTimer> intervalTimers;
+        public UnityDictionary<string, IntervalTimer> intervalTimers;
 
         private void Start() {
-            foreach (IntervalTimer timer in intervalTimers) {
+            foreach (IntervalTimer timer in intervalTimers.dict.Values) {
                 if (timer.activateOnStart) { ActivateTimer(timer); }
             }
         }
@@ -43,10 +42,8 @@ namespace DevKit {
         //----------------------activate timer-------------------
         public Coroutine ActivateTimer(string timerName)
         {
-            foreach (IntervalTimer timer in intervalTimers) {
-                if (timer.name.Equals(timerName)) {
-                    return ActivateTimer(timer);
-                }
+            if (intervalTimers.dict.ContainsKey(timerName)) {
+                return ActivateTimer(intervalTimers.dict[timerName]);
             }
             //nothing found, throw warning
             Debug.LogWarning($"{name}: No timer with name {timerName} was found!");
@@ -85,11 +82,20 @@ namespace DevKit {
             }
         }
 
+        //---------------------manage timers-------------------
+        public IntervalTimer GetTimer(string timerName)
+        {
+            if (intervalTimers.dict.ContainsKey(timerName)) {
+                return intervalTimers.dict[timerName];
+            }
+            return null;
+        }
+
         //-----------------------editor pollish-----------------------
         private void OnValidate()
         {
             if (intervalTimers != null) {
-                foreach (IntervalTimer timer in intervalTimers) {
+                foreach (IntervalTimer timer in intervalTimers.dict.Values) {
                     RandomTimerBoundsCheck(timer);
                 }
             }
