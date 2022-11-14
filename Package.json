@@ -6,6 +6,7 @@
   "unity": "2021.3",
   "unityRelease": "1f1",
   "documentationUrl": "https://github.com/Sad-AI-dev/dev-kit_Package",
+  "changelogUrl": "https://github.com/Sad-AI-dev/dev-kit_Package/blob/main/CHANGELOG.md",
   "dependencies": {
     "com.unity.textmeshpro": "3.0.6"
   },
