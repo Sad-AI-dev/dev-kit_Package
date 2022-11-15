@@ -2,6 +2,12 @@
 All notable changes to this package will be documented in this file.  
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [2.1.1] - hotfix 1 - 15-11-2022
+Fixes a small issue found witht he new stop functionality from the Cost Based Activator behavior.
+
+### Fixed
+Cost Based Activator
+- issue where budget would be gained before stopping.
 
 ## [2.1.0] - Spawning Specifics Update - 15-11-2022
 While developing a game using this package, I found some features I needed that weren't available.  

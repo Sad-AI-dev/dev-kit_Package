@@ -103,15 +103,15 @@ namespace DevKit {
             //step 3: save behavior
             if (saveMode != SaveMode.None) { HandleSaveBehavior(); }
             //repeat?
-            if (!stopReq && activateMode == ActivateMode.Interval) { 
+            if (activateMode == ActivateMode.Interval) {
                 StartCoroutine(ActivateIntervalCo());
             }
-            else { stopReq = false; } //reset stop request, end loop
         }
         private IEnumerator ActivateIntervalCo()
         {
             yield return new WaitForSeconds(ActivateIntervalTime);
-            Activate();
+            if (!stopReq) { Activate(); }
+            else { stopReq = false; } //reset stopReq
         }
 
         //--------------------stop----------------
