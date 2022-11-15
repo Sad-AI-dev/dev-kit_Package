@@ -77,15 +77,14 @@ namespace DevKit {
         private int rampupCounter;
         private int savedBudget;
         private int saveCounter;
+        private bool stopReq;
 
         //option decision vars
         private int minPrice;
 
         //editor pollish
         private float oldMinSave;
-        private float oldMaxSave;
         private float oldMinInterval;
-        private float oldMaxInterval;
 
         private void Start()
         {
@@ -104,12 +103,21 @@ namespace DevKit {
             //step 3: save behavior
             if (saveMode != SaveMode.None) { HandleSaveBehavior(); }
             //repeat?
-            if (activateMode == ActivateMode.Interval) { StartCoroutine(ActivateIntervalCo()); }
+            if (!stopReq && activateMode == ActivateMode.Interval) { 
+                StartCoroutine(ActivateIntervalCo());
+            }
+            else { stopReq = false; } //reset stop request, end loop
         }
         private IEnumerator ActivateIntervalCo()
         {
             yield return new WaitForSeconds(ActivateIntervalTime);
             Activate();
+        }
+
+        //--------------------stop----------------
+        public void Stop()
+        {
+            stopReq = true;
         }
 
         //-----------------gain budget step---------------
@@ -253,7 +261,6 @@ namespace DevKit {
         private void UpdateOldPercentVars()
         {
             oldMinSave = minSavePercent;
-            oldMaxSave = maxSavePercent;
         }
 
         //save rand interval check
@@ -272,7 +279,6 @@ namespace DevKit {
         private void UpdateOldIntervalVars()
         {
             oldMinInterval = minRandInterval;
-            oldMaxInterval = maxRandInterval;
         }
 
         //valid prices check

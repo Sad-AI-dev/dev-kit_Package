@@ -28,7 +28,6 @@ namespace DevKit {
 
             //vars
             [HideInInspector] public float oldMinTimer;
-            [HideInInspector] public float oldMaxTimer;
         }
 
         public UnityDictionary<string, IntervalTimer> intervalTimers;
@@ -116,7 +115,6 @@ namespace DevKit {
         private void UpdateOldTimerLengths(IntervalTimer timer)
         {
             timer.oldMinTimer = timer.minTimerLength;
-            timer.oldMaxTimer = timer.maxTimerLength;
         }
     }
 }

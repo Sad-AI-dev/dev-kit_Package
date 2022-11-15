@@ -1359,7 +1359,6 @@ MonoBehaviour:
                 m_BoolArgument: 0
               m_CallState: 2
         oldMinTimer: 0.5
-        oldMaxTimer: 0.5
 --- !u!1 &421488573
 GameObject:
   m_ObjectHideFlags: 0
@@ -3326,7 +3325,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1090040645
 Transform:
   m_ObjectHideFlags: 0

@@ -2,6 +2,25 @@
 All notable changes to this package will be documented in this file.  
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+
+## [2.1.0] - Spawning Specifics Update - 15-11-2022
+While developing a game using this package, I found some features I needed that weren't available.  
+To fix this, I added some features to the Object Spawner and the Cost Based Activator.
+
+### Added
+- **SpawnObjectAtPrefabIndex** function to Object Spawner behavior.
+- **Set** option to *PrefabSelectMode* to Object Spawner behavior.
+    - this option is meant to be used when spawning using *SpawnObjectAtPrefabIndex* function.
+    
+- **Stop** function to the Cost Based Activator behavior.
+
+### Fixed
+- small inefficiency with some OnValidate functions.
+
+Known Issues:
+- Wave Spawner 'consumes' it's settings, making it hard / impossible to respawn past waves.
+- Scripts do not show up in the 'Add Component' menu
+
 ## [2.0.0] - New Frontiers Update - 13-11-2022
 This update adds some completely new behaviors that I have been meaning to add.  
 It also adds a few new features to existing classes, and some important fixes.  

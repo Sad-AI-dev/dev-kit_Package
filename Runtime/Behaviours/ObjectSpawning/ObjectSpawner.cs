@@ -12,7 +12,8 @@ namespace DevKit {
         }
         public enum PrefabSelectMode {
             Random,
-            Round_robin
+            Round_robin,
+            Set
         }
 
         //-------modes-------
@@ -24,7 +25,8 @@ namespace DevKit {
 
         [Tooltip("Decides which prefab is selected.\n\n" +
             "Random: picks a random prefab\n" +
-            "Round_robin: picks a prefab in order")]
+            "Round_robin: picks a prefab in order" +
+            "Set: picks a predetermined prefab")]
         public PrefabSelectMode prefabSelectMode;
 
         [Header("Settings")]
@@ -38,7 +40,14 @@ namespace DevKit {
         //round robin vars
         private int spawnSelectCounter = -1;
         private int prefabSelectCounter = -1;
+        //set prefab vars
+        private int prefabSelectIndex;
 
+        private void Start() {
+            prefabSelectIndex = 0;
+        }
+
+        //-----------spawn object--------------
         public void SpawnObject()
         {
             switch (spawnMode) {
@@ -53,6 +62,21 @@ namespace DevKit {
                 case SpawnMode.Round_robin:
                     SpawnRoundRobin();
                     break;
+            }
+        }
+
+        public void SpawnObjectAtPrefabIndex(int index)
+        {
+            SetSelectIndex(index);
+            SpawnObject();
+        }
+        private void SetSelectIndex(int index)
+        {
+            if (index > prefabs.Count - 1) {
+                prefabSelectIndex = index % prefabs.Count;
+            }
+            else if (index >= 0) {
+                prefabSelectIndex = index; //normal
             }
         }
 
@@ -94,6 +118,9 @@ namespace DevKit {
                     prefabSelectCounter++;
                     if (prefabSelectCounter >= prefabs.Count) { prefabSelectCounter = 0; } //loop
                     return prefabs[prefabSelectCounter];
+
+                case PrefabSelectMode.Set:
+                    return prefabs[prefabSelectIndex];
             }
             return null;
         }

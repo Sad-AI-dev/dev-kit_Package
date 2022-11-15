@@ -276,6 +276,7 @@ Dictates how objects are spawned, has the following options:
 Decides how the behavior decides which prefab to spawn, has the following options:  
     - *Random*: The behavior picks a random prefab to spawn.
     - *Round_robin* The behavior picks a prefab in order starting at index 0 and resetting after the last prefab in the list has been chosen.
+    - *Set*: The behavior picks a prefab based on a predetermined index. Recommended to be used with *SpawnObjectAtPrefabIndex*.
 
 - **Prefabs** *List\<GameObject\>*  
 A list that holds the prefabs that are referenced when spawning an object.
@@ -297,6 +298,10 @@ It has the following functions:
 
 - **SpawnObject**()  
 Used to spawn an object using this behaviors settings.
+
+- **SpawnObjectAtPrefabIndex**(index *int*)  
+Used to spawn an object of the prefab at *index* using the baviors settings.  
+If *index* is outside of prefab range, automatically sets *index* to be back in range.
 
 ## Wave Spawner
 The Wave Spawner is used to spawn a predetermined set of prefabs in waves at a list of positions.  
@@ -438,6 +443,10 @@ Activates a single iteration of the behavior. Can be broken down to 3 steps:
     1. 'Purchase' options using budget.
     2. Gain new budget.
     3. Activate save feature (if applicable).
+    4. Repeat (if applicable)
+    
+- **Stop**()  
+Stops the behavior if *Activate Mode* is set to *Interval*. Use *Activate* to resume.
     
 - **AddOption**(option *Option*)  
 Adds an option to the *Options* list.
