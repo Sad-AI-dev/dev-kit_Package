@@ -1,6 +1,7 @@
 # Documentation
 This is the documentation for the dev-kit package. Documentation is split up in 4 categories: Controllers, Behaviors, Systems and Utils.  
-This matches the file structure in the package.
+This matches the file structure in the package.  
+All scripts are in the **DevKit** namespace.
 
 # ==Controllers==
 ## Universal Input Reciever
@@ -40,6 +41,9 @@ The input reciever contains 3 seperate input types:
         - **Axis Codes** *List\<string\>*  
         List of strings, these are input manager codes that are tracked for inputs.  
         
+        - **Read Mouse Scroll Wheel** *bool*  
+        When set to true, reads the mouse scroll wheel as input source. Scrolling up is represented as positive and down as negative.
+        
 3. **Directional Input**
     - Directional inputs are intended for 4 seperate inputs that act as a singular Vector2 from (-1, -1) to (1, 1). It has the following features:
         - **Name** *string*  
@@ -67,9 +71,8 @@ For button inputs, *on button down* and *on button up* can both be Invoked once 
 For axis inputs and directional inputs, when multiple changes are detected on an axis, the input furthest from neutral (0) will be used.
 
 ## Platformer 2D 
-A controller with simple 2D platforming controls, use the *SetMoveDir* function for movement 
-and the *StartJump* and *EndJump* functions for jumping.  
-The controller has the following features:
+A controller with simple 2D platforming controls.  
+It has the following features:
 
 - **Top Speed** *float*  
 Dictates the max velocity.
@@ -79,6 +82,7 @@ Dictates how fast the controller reached max velocity.
 Dictates how fast the controller slows down.
 - **Facing Left** *bool*  
 Determines which way the controller is facing, can be used to set the starting facing direction.  
+Use *IsFacingLeft* to check if controller is facing left, cannot be set.
 
 - **Jump Height** *float*  
 Dictates how high the controller jumps.
@@ -95,9 +99,20 @@ Dictates the length of coyote time. Coyote time allows the controller to jump ju
 - **Ground Detector** *GroundDetector2D*  
 A reference to the ground detector that should be used.
 
+It has the following functions:
+
+- **SetMoveDir**(input *float*)  
+Used to set which direction the controller should move in. Also accepts *Vector2* as input, y value is ignored.
+
+- **StartJump**()  
+Used to start a jump, recommended to be bound to an OnButtonDown event.
+
+- **EndJump**()  
+Used to end a jump. Activates the fall grav. Recommended to be bound to an OnButtonUp event.
+
 ## Top Down Controller
-A controller with simple top down 2D controls, use *SetMoveDir* for movement.  
-The controller has the following features:
+A controller with simple top down 2D controls.  
+It has the following features:
 
 - **Top Speed** *float*  
 Dictates the max velocity.
@@ -112,10 +127,15 @@ Determines the way movement is handled. Has 3 modes:
     - *Set Position*: Directly sets the position of the controller.
     - *Set Velocity*: Directly sets the velocity of the rigidbody2D attached to the object.
     - *Use Force*: Uses the AddForce function on the rigidbody2D attached to the object.
+    
+It has the following functions:
+
+- **SetMoveDir**(input *Vector2*)  
+Used to set which direction the controller should move in.
 
 ## Platformer 3D Rigidbody
-A controller for 3D platforming using the Rigidbody component, use the *SetMoveDir* and *Jump* functions for movement and jumping respectively.  
-The controller has the following features:
+A controller for 3D platforming using the Rigidbody component.  
+It has the following features:
 
 - **Top Speed** *float*  
 Dictates the top speed.
@@ -135,12 +155,19 @@ Dictates the size of the jump input buffer. Jump buffer is used to allow the con
 Dictates the length of coyote time. Coyote time allows the controller to jump just after falling off a platform.  
 
 - **Ground Detector** *GroundDetector3D*  
- reference to the ground detector that should be used.
+reference to the ground detector that should be used.
+
+It has the following functions:
+
+- **SetMoveDir**(input *Vector2*)  
+Used to set which direction the controller should move in. The x value represents left to right and the y value forward to backward.
+
+- **Jump**()  
+Used to jump.
 
 ## Platformer 3D Character Controller
-A controller for 3D platforming using the Character Controller component, 
-use the *SetMoveDir* and *Jump* functions for movement and jumping respectively.  
-The controller has the following features:
+A controller for 3D platforming using the Character Controller component.  
+It has the following features:
 
 - **Top Speed** *float*  
 Dictates the top speed.
@@ -161,10 +188,17 @@ Dictates the size of the jump input buffer. Jump buffer is used to allow the con
 - **Coyote Time** *float*  
 Dictates the length of coyote time. Coyote time allows the controller to jump just after falling off a platform.  
 
+It has the following functions:
+
+- **SetMoveDir**(input *Vector2*)  
+Used to set which direction the controller should move in.
+
+- **Jump**()  
+Used to jump.
+
 ## Drone Controller
-A controller for 3 axis 3D movement, use the *SetVerMoveDir* function for movement along the y axis, 
-and the *SetHorMoveDir* function for all other movement.  
-The controller has the following features:
+A controller for 3 axis 3D movement.  
+It has the following features:
 
 - **Hor Top Speed** *float*  
 Dictates the top speed on the horizontal axis.
@@ -184,9 +218,18 @@ Dictates how fast the controller slows down on the vertical axis.
 - **On Change Ver Move Dir** *UnityEvent\<Vector2\>*  
 Event that is invoked when the vertical move direction changes, passes *float* move direction as a parameter 
 
+It has the following functions:
+
+- **SetHorMoveDir**(dir *Vector2*)  
+Used to set which direction the controller should move in on the horizontal axis. The x value represents left to right and the y value forward to backward.
+
+- **SetVerMoveDir**(dir *float*)  
+used to set which direction the controller should move in on the vertical axis.
+
 # ==Behaviors==
 ## Object Detector
-Used to detect if something is overlapping with an attached (2D) trigger collider, has the following features:
+Used to detect if something is overlapping with an attached (2D) trigger collider.  
+It has the following features:
 
 - **On Detect First Object** *UnityEvent*  
 Event that is Invoked when the first object is found.
@@ -195,16 +238,18 @@ Event that is Invoked every time a object is detected.
 - **On Leave Last Object** *UnityEvent*  
 Event that is Invoked when last object goes out of range.  
 
-- **Ignore Tags** *List\<string\>*  
-List of tags that are ignored when an object is detected.
+- **Whitelist Tags** *List\<string\>*  
+List of tags that are allowed when an object is detected.
+- **Blacklist Tags** *List\<string\>*  
+List of tags that are ignored when an object is detected.  
+Only used when *Whitelist Tags* is empty.
 
 **A quick note on use with Controllers**  
 Controllers always setup event listeners on their own for the object detectors. The Unity Events are purely for custom behaviour.
 
 ## Object Spawner
-The Object Spawner is used to spawn a prefab (or a selection of prefabs) at a list of positions. 
-Use the *SpawnObject* function to activate the behavior.  
-The behavior has the following features: 
+The Object Spawner is used to spawn a prefab (or a selection of prefabs) at a list of positions.  
+It has the following features: 
 
 - **Spawn Mode** *enum*  
 Dictates how objects are spawned, has the following options:
@@ -216,6 +261,7 @@ Dictates how objects are spawned, has the following options:
 Decides how the behavior decides which prefab to spawn, has the following options:  
     - *Random*: The behavior picks a random prefab to spawn.
     - *Round_robin* The behavior picks a prefab in order starting at index 0 and resetting after the last prefab in the list has been chosen.
+    - *Set*: The behavior picks a prefab based on a predetermined index. Recommended to be used with *SpawnObjectAtPrefabIndex*.
 
 - **Prefabs** *List\<GameObject\>*  
 A list that holds the prefabs that are referenced when spawning an object.
@@ -233,10 +279,18 @@ Used for the auto compile featuer. The auto compile feature takes every direct c
 Clicking this will reset the spawn points list, after that, it takes every direct child under the Point Holder transform 
 and adds them to the spawn points list.
 
+It has the following functions:
+
+- **SpawnObject**()  
+Used to spawn an object using this behaviors settings.
+
+- **SpawnObjectAtPrefabIndex**(index *int*)  
+Used to spawn an object of the prefab at *index* using the baviors settings.  
+If *index* is outside of prefab range, automatically sets *index* to be back in range.
+
 ## Wave Spawner
-The Wave Spawner is used to spawn a predetermined set of prefabs in waves at a list of positions.
-Use the *SpawnWave* function to spawn the next wave.
-The behavior has the following features:
+The Wave Spawner is used to spawn a predetermined set of prefabs in waves at a list of positions.  
+It has the following features:
 
 - **Activation Mode** *enum*  
 Dictates how waves are started, has the following options:
@@ -288,10 +342,108 @@ Used for the auto compile featuer. The auto compile feature takes every direct c
 Clicking this will reset the spawn points list, after that, it takes every direct child under the Point Holder transform 
 and adds them to the spawn points list.
 
+It has the following functions:
+
+- **SpawnWave**()  
+Used to spawn the next wave.
+
+## Cost Based Activator
+The Cost Based Activator is a procedural behavior that can invoke unity events based on their assigned costs.  
+This behavior is ideal for systems such as procudural infinite wave spawners.  
+It has the following features:
+
+- **Budget** *int*  
+The budget of the behavior, which it will use the next time it is activated.  
+This is also the starting value for the behavior.
+
+- **Activate On Start** *bool*  
+When set to *true*, calls the *Activate* function on start. When false, does nothing.
+
+- **Budget Gain** *int*  
+The amount that *Budget* will increase by for the next time the *Activate* function is called.
+
+- **Gain Rampup** *int*  
+The amount that *Budget Gain* is increased by the next time Gain Rampup is triggered.
+
+- **Gain Rampup Frequency** *int*  
+Determines how often Gain Rampup is triggered. Measured in the amount of times the *Activate* function needs to be invoked before rampup is triggered. For Example: 
+    - when set to 0, rampup will never trigger.
+    - when set to 1, rampup will trigger every time *Activate* is called.
+    - when set to 2, rampup will trigger every other time *Activate* is called.
+    - etc...
+    
+- **Activate Mode** *enum*  
+Determines when behavior is activated. Has the following options:
+    - *Manual*: only activates when Activate() is called.
+    - *Interval*: activates periodically. Timing is determined by *Activate Interval Time*.
+    
+- **Activate Interval Time** *float*  
+Only used when *Activate Mode* is set to *Interval*.  
+Determines the time the behavior waits before activating again.
+
+- **Save Mode** *enum*  
+Determines how the save feature is activated. Has the following options:
+    - None: save feature will never be activated.
+    - Random: save feature will randomly be activated.
+    - Interval: save feature will be activated once per set interval.
+    - Interval_Random: similar to 'Interval', but interval time is randomly picked."
+    
+- **Save Chance** *float*  
+Only used when 'Save Mode' is set to *Random*.  
+Determines the chance for the save behavior to activate, in percentage.
+
+- **Save Interval** *int*  
+Only used when *Save Mode* is set to *Interval*.  
+Determines how many times *Activate()* needs to be called before save feature is activated.
+
+- **Min Rand Interval** *int*  
+Only used when *Save Mode* is set to *Interval_Random*.  
+Determines the minimum value the interval can be (inclusive).
+
+- **Max Rand Interval** *int*  
+Only used when *Save Mode* is set to *Interval_Random*.  
+Determines the maximum value the interval can be (inclusive).
+
+- *Min Save Percent* *float*  
+Determines the minimum percent of budget to be saved for next time when save feature is activated.
+
+- *Max Save Percent*
+Determines the maximum percent of budget to be saved for next time when save feature is activated.
+
+- **Options** *List\<Option\>*  
+The list of options that the behavior can 'purchase' from.  
+Other scripts cannot interface with this list, use the *AddOption* and *RemoveOption* functions instead.  
+Each *Option* has the following features:
+    - **Name** *string*  
+    The name of the option, only used for organizational purposes.
+    - **Price** *int*  
+    The amount of budget it costs for the behavior to 'purchase' this option.
+    - **On Select** *UnityEvent*  
+    The event that is invoked when the option is 'purchased'.
+
+It has the following functions:
+
+- **Activate**()  
+Activates a single iteration of the behavior. Can be broken down to 3 steps:
+    1. 'Purchase' options using budget.
+    2. Gain new budget.
+    3. Activate save feature (if applicable).
+    4. Repeat (if applicable)
+    
+- **Stop**()  
+Stops the behavior if *Activate Mode* is set to *Interval*. Use *Activate* to resume.
+    
+- **AddOption**(option *Option*)  
+Adds an option to the *Options* list.
+
+- **RemoveOption**(option *Option*) returns *bool*  
+Attempts to remove an option from the *Options* list.  
+Returns *true* is a matching option was found and removed.  
+Returns *false* if no matching option was found.
+
 ## Path Follower
-The path follower makes the gameobject that this behavior is attached to follow a predetermined path. 
-Use the *StartMove* to start moving along the path and *StopMove* to stop moving along the path.  
-The path follower has the following features:
+The path follower makes the gameobject that this behavior is attached to follow a predetermined path.  
+It has the following features:
 
 - **Move Speed** *float*  
 Determines how fast the object moves along the path.
@@ -339,31 +491,116 @@ Used for the auto compile feature. The auto compile feature takes every direct c
 Clicking this will reset the spawn points list, after that, it takes every direct child under the Path Holder transform 
 and adds them to the path list.
 
+It has the following functions:
+
+- **StartMove**()  
+Used to start moving along the path.
+
+- **StopMove**()  
+Used to stop moving along the path.
+
+## Interval Timer Manager
+The interval timer manager is a behavior that allows for easy setting up and interacting with interval timers.  
+It has the following features:
+
+- **Interval Timers** *UnityDictionary\<string, IntervalTimer>*  
+List of all timers. Each Timer has the following features:
+    - **Activate On Start** *bool*  
+    When set to *true*, timer starts on start. Does nothing when set to *false*.
+    - **Timer Length** *float*  
+    The length of the timer in seconds.
+    - **Repeat Count** *int*  
+    Determines the amount of times the timer should be repeated. For example:
+        - when 0, will not repeat.
+        - when 1, timer will repeat once.
+        - when set to a negative value, will repeat infinitely.
+    - **Timer Length Mode** *enum*  
+    Determines how *Timer Length* is calculated when timer repeats.  
+    Has the following options:
+        - *Set*: uses the *timerLength* variable on repeats.
+        - *Random*: uses a random number between *minTimerLength* and *maxTimerLength*.
+    - **Min Timer Length** *float*  
+    Only used when *Timer Length Mode* is set to *Random*. The minimum time in seconds *Timer length* can become.
+    - **Max Timer Length** *float*  
+    Only used when *Timer Length Mode* is set to *Random*. The maximum time in seconds *Timer length* can become.
+    - **On Timer Activated** *UnityEvent*  
+    The event that is invoked whent the timer expires.
+    
+It has the following Functions:
+
+- **ActivateTimer**(timerName *string*) returns *Coroutine*  
+Activates the timer with *Key* *timerName* and returns the activated *Coroutine*.  
+If no timer with *Key* *timerName* is found, throws warning and returns *null*.
+
+- **ActivateTimer**(timer *IntervalTimer*) returns *Coroutine*
+Activates the *timer* and returns the activated *Coroutine.*
+
+- **GetTimer**(timerName *string*) returns *IntervalTimer*  
+Returns the timer with *Key* *timerName*. If no timer with *Key* *timerName* is found, returns *null*.
+
 ## Mover
 The mover moves the gameObject the behavior is attached to in a predifined local direction. 
 Use the *StartMove* and *StopMove* functions to start and end moving respectively.  
 It has the following features:
 
 - **Move Direction** *Vector3*  
-Determines (in local space) which direction the object goes and how fast it travels.
+Determines (in local space) which direction the object travels. This value is normalized on start.
+
+- **Move Speed** *float*  
+Determines how fast the object moves.
 
 - **Move on Start** *bool*  
 If set to true, start moving when *Start* is Invoked. When set to false, the object only starts moving after *StartMove* is Invoked.
 
+It has the following functions:
+
+- **StartMove**()  
+Used to start moving.
+
+- **StopMove**()  
+Used to stop moving.
+
 ## Rotator
-The rotator rotates the gameObject the behavior is attached to in a predifined local direction. 
-Use the *StartRotate* and *StopRotate* functions to start and end rotating respectively.  
+The rotator rotates the gameObject the behavior is attached to in a predifined local direction.
 It has the following features:
 
 - **Rotate Direction** *Vector3*  
-Determines (in local space) which direction the object rotates in and how fast it rotates.
+Determines (in local space) which direction the object rotates in and how fast.
 
 - **Rotate on Start** *bool*  
 If set the true, start rotating when *Start* is Invoked. When set the false, the object only starts rotating after *StartRotate* is Invoked.
 
+It has the following functions:
+
+- **StartRotate**()  
+Used to start rotating.
+
+- **StopRotate**()  
+Used to stop rotating.
+
+## Camera Shaker
+The Camera shaker is a behavior that emulates camera shake.  
+When using this behavior, do not change the position of the camera's gameObject, instead use a parent object.  
+It has the following functions:
+
+- **ShakeCamera**(duration *float*, magnitude *float*)  
+Used to add camera shake. Shakes the gameObject for *duration* in seconds.  
+*magnitude* determines the severity of the shake effect.
+
+## Texture Scroller
+The Texture Scroller is a behavior that scrolls and loops a UI image.  
+For the best result, set the sprite *Wrap Mode* to *Repeat* in its import settings.  
+It has the following features:
+
+- **Scroll Speed** *float*  
+Determines the speed the image is scrolled at.
+
+- **Scroll Direction** *Vector2*  
+Determines which direction the image is scrolled in.  
+This value is normalized.
+
 ## UI Path Follower
-The UI Path Follower moves the rect transform along a predefined list of rect transforms. 
-Use the *StartMove* and *EndMove* functions to start and stop moving respectively.  
+The UI Path Follower moves the rect transform along a predefined list of rect transforms.  
 It has the following features:
 
 - **Move Speed** *float*  
@@ -403,10 +640,17 @@ Used for the auto compile feature. The auto compile feature takes every direct c
 Clicking this will reset the spawn points list, after that, it takes every direct child under the Path Holder transform 
 and adds them to the path list.
 
+It has the following functions:
+
+- **StartMove**()  
+Used to start following the path.
+
+- **StopMove**()  
+Used to stop following the path.
+
 ## UI Toggle Mover
 Used to move the rect transform that the toggle mover is attached to between two defined positions, 
-the position of the rect transform is considered the start position on *Start*. 
-Use the *StartMove* function to move from one point to the other.  
+the position of the rect transform is considered the start position on *Start*.  
 It has the following features:
 
 - **End Position** *RectTransform*  
@@ -415,13 +659,18 @@ Destination to travel towards.
 - **Move Mode** *enum*  
 Dictates how the rect transform travels to the target destination, has the following options:
     - *Linear*: Moves towards the target destination linearly.
-    - *Lerp*: Moves towards the target smoothly.
+    - *Lerp*: Moves towards the target smoothly using linear interpolation.
     
 - **Move Speed** *float*  
 Determines how fast the rect transform travels.
 
 - **Move on Start** *bool*  
 When set to true, the object will start moving when *Start* is Invoked. When false, this does nothing.
+
+It has the following functions:
+
+- **StartMove**()  
+Used to start moving to the other destination.
 
 ## UI Fader
 Used to fade a UI Canvas Group. Use the *StartFade* and *StopFade* functions to start or stop fading the canvas group.  
@@ -452,10 +701,17 @@ Delay between end of fade-out and start of fade-in.
 - **Blink Time** *float*
 Only used when *Fade Mode* is set to *Blink*. Determines for how long the Canvas Group fades.
 
+It has the following functions:
+
+- **StartFade**()  
+Used to start fading the Canvas Group.
+
+- **StopFade**()  
+Used to pause the current fade behavior. Use the *StartFade* function to resume.
+
 # ==Systems==
 ## Recipe System
-The recipe system is a system that takes a number of imputs, compares it to programmed recipes and, if possible, returns a single output. 
-Use the *TryRecipe* function to see if a number of imputs is a recipe and returns an output.  
+The recipe system is a system that takes a number of imputs, compares it to programmed recipes and, if possible, returns a single output.  
 The Recipe System includes the following scripts:
 
 ### Recipe Processor
@@ -465,6 +721,12 @@ It has the following features:
 
 - **Recipes** *List\<RecipeSO\>*  
 The list of recipes referenced by the recipe processor.
+
+It has the following functions:
+
+- **TryRecipe**(inputs *List\<Input\>*) return *Output*  
+Input type and Output type are determined by the class implementing the recipe processor.  
+Takes a list of inputs and checks if it is a valid recipe. Returns the output is it is valid, returns *default* if not.
 
 ### Recipe SO
 The Recipe SO holds the information that makes up a recipe. 
@@ -496,8 +758,7 @@ and call the *TryInteract* function on the Interactor. Attach the Interactable s
 The system has the following scripts:
 
 ### Interactor
-The interactor script can be attached to the object in order to allow it to interact. 
-Use the *TryInteract* function to interact with nearby interactables.  
+The interactor script can be attached to the object in order to allow it to interact.  
 It has the following features:
 
 - **On Can Interact** *UnityEvent*  
@@ -506,17 +767,25 @@ Event is Invoked when the interactor encounters an interactable and no other int
 - **On Stop Can Intreact** *UnityEvent*  
 Event is Invoked when the interactor moves out of range from an interactable and no other interactables are in range.
 
+It has the following functions:
+
+-**TryInteract**() returns *bool*  
+Used to interact with a nearby *Interactable*.  
+If an interactable is found, interaction is activated and returns true, else returns false.
+
 ### Interactable
 The Interactable script can be attached to an object to allow it to be interacted with. 
 If the interactable needs the be destroyed, use the *DestroyInteractable* function. 
 In order to function, the interactable needs a trigger collider to detect interactors.  
 It has the following features:
 
-- **On Interact Void** *UnityEvent*  
-Event is Invoked when an interactor interacts with this object.
-
 - **On Interact** *UnityEvent\<Interactor\>*  
 Identical to On Interact Void, but passes the interactor that interacted with the object as a parameter.
+
+It has the following functions:
+
+- **DestroyInteractable**()  
+Used to properly destroy an interactable object.
 
 ## Dialogue System
 The Dialogue System allows for simple branching dialogue scripted using scriptable objects. 
@@ -524,7 +793,7 @@ It uses Text Mesh Pro UI elements to display dialogue, and requires a butten tem
 Use the Dialogue Activator and the *StartDialogue* function to start a dialogue.
 
 For this system to work as intended, a fairly specific setup of UI elements is required, 
-more details can be found under the features section of this script and the response handler script.
+more details can be found under the features section of the Dialogue UI script and the Response Handler script.
 
 The System has the Following scripts:
 
@@ -550,6 +819,11 @@ Unity Event that is Invoked when a new dialogue is started. Does *not* trigger w
 - **On Dialogue End** *UnityEvent*  
 Unity Event that is Invoked when dialogue ends.
 
+It has the following functions:
+
+- **AdvanceDialogue**()  
+Used to advance the currently active dialogue.
+
 ### Response Handler
 The response handler script handles the displaying of responses and triggering response events.  
 It has the following features:
@@ -562,9 +836,9 @@ Rect Transform that holds the response buttons when they are created.
 This element should be a child of the response box. The rect transform should also be set to *stretch* in both directionts.  
 Additionaly, this rect transform should have the *Vertical Layout Group* component, which has the following settings:
     - *Child Alignment* set to *Middle Right*. (is optional)
-    - For *Control Child Size*, *Width* set to *True* and *Height* set to *False*.
-    - *Use Child Scale* all set to *False*
-    - *Child Force Expand* all set to *True*
+    - For *Control Child Size*, *Width* set to *true* and *Height* set to *false*.
+    - *Use Child Scale* all set to *false*
+    - *Child Force Expand* all set to *true*
     - The *Spacing* should be set to 0, spacing can be created through the *Button Template* prefab.
     
 - **Button Template** *Rect Transform*  
@@ -586,12 +860,19 @@ It has the following elements:
     The additional time that should be waited when the punctuation is encountered.
 
 ### Dialogue Activator
-The Dialogue Activator is used for starting a dialogue sequence. 
-Use the *StartDialogue* to start a dialogue, the function takes a Dialogue UI as a parameter.  
+The Dialogue Activator is used for starting a dialogue sequence.  
 It has the following features:
 
 - **Data** *DialogueData*  
 When *StartDialogue* is Invoked, this dialogue data will be used as a starting point for the dialogue.
+
+It has the following functions:
+
+- **StartDialogue**(targetUI *DialogueUI*)  
+Used to start a dialogue. Takes the target dialogueUI as a paramter.
+
+- **SetDialogueData**(data *DialogueData*)  
+Used to change which dialogue is activated when *StartDialogue* is called.
 
 ### Dialogue Response Events
 The dialogue response events script allows for triggering unity events based on the response chosen in a dialogue.  
@@ -644,22 +925,21 @@ It has the following features:
 - **inventory** *UnityDictionary*  
 Dictionary of every item and their respective count.
 
-To interact with the system, use the following functions:
+It has the following functions:
 
-- **UseItem**(*item*, *count*(optional)) returns *bool*  
+- **UseItem**(item *T*, count *int*(optional)) returns *bool*  
 This function is used to remove items from the inventory.  
 The *item* parameter determines what item will be added to the inventory, it's type is set by the class.  
-The *count* parameter determines how many of the *item* will be removed from the inventory.  
-If the inventory has the item **and** has enough of the item, items will be removed and the function will return *True*, otherwise returns *False*.
+The *count* parameter determines how many of the *item* will be removed from the inventory. *count* is set to 1 by default.  
+If the inventory has the item **and** has enough of the item, items will be removed and the function will return *true*, otherwise returns *false*.
 
-- **GainItem**(*item*, *count*)  
+- **GainItem**(item *T*, count *int*(optional))  
 This function is used to add items to the inventory.  
 The *item* parameter determines what item will be added to the inventory, it's type is set by the class.  
-the *count* parameter determines how many of the *item* will be added to the inventory.
+the *count* parameter determines how many of the *item* will be added to the inventory. *count* is set to 1 by default.
 
 ## Health Manager
-The Health Manager system that handles an (in)visible healthbar. 
-Use the *TakeDamage* and *Heal* functions to interact with the system.  
+The Health Manager system that handles an (in)visible healthbar.  
 It has the following features:
 
 - **Health** *float*  
@@ -674,21 +954,21 @@ Determines how and if health is displayed, has the following settings:
     - *Transform*: *target transform* will be scaled to display health.
 
 - **Hit On Death** *bool*  
-When set to *True*, *OnHit* event will be invoked when *OnDeath* is invoked. When set to *False*, does nothing.
+When set to *true*, *OnHit* event will be invoked when *OnDeath* is invoked. When set to *false*, does nothing.
 
 - **Allow Over Heal** *bool*  
-When set to *True*, the object's health is allowed to surpass max health. When set to *False*, does nothing.
+When set to *true*, the object's health is allowed to surpass max health. When set to *false*, does nothing.
 
 - **Allow Neg Damage** *bool*  
-When set to *True*, the object is allowed to heal through taking negative damage values. When set to *False*, object cannot take less then 0 damage.
+When set to *true*, the object is allowed to heal through taking negative damage values. When set to *false*, object cannot take less then 0 damage.
 
 - **Allow Neg Heal** *bool*  
-When set to *True*, the object is allowed to take damage through healing negative healing values.  When set to *False*, object cannot heal less then 0.
+When set to *true*, the object is allowed to take damage through healing negative healing values.  When set to *false*, object cannot heal less then 0.
 
 - **Target Slider** *Slider*  
 Only used when *Health Bar Mode* is set to *Slider*. Will be used to display health. 
 When using the slider, the following settings are recommended:
-    - on the slider component, set *Interactable* to *False*.
+    - on the slider component, set *Interactable* to *false*.
     - Set the *Left* and *Right* padding on the *Fill Area* object to 0. The *Fill Area* is a child of created object by default.
     - Set the width of the *Fill* object to 0. The *Fill* object is a child of the *Fill Area* object, which is a child of the created object by default.
     - Delete the *Handle Slide Area* object. The *Handle Slide Area* is a child of the created object by default.
@@ -702,7 +982,7 @@ A gradient that is used to color the fill image. The leftmost color is used when
 Only used when *Health Bar Move* is set to *Transform*. Will be scaled on the local x-axis to display health.
 
 - **On Hit** *UnityEvent\<float\>*  
-Will be invoked when damage is taken. Will *not* be invoked when the damage resulst in death, unless *Hit On Death* is set to *True*.  
+Will be invoked when damage is taken. Will *not* be invoked when the damage resulst in death, unless *Hit On Death* is set to *true*.  
 Passes the amount of damage taken as a float parameter.
 
 - **On Heal** *UnityEvent\<float\>*  
@@ -711,29 +991,49 @@ Will be invoked when object is healed. Passes the amount healed as a float param
 - **On Death** *UnityEvent*  
 Will be invoked when damage taken results in health reaching 0 or lower.
 
-## Sound Manager
-The Sound Manager is a *singleton* system for playing sounds.  
+It has the following functions:
+
+- **TakeDamage**(damage *float*)  
+Used to deal damage to the object.
+
+- **Heal**(toHeal *float*)  
+Used to heal the object.
+
+## Audio Manager
+The Audio Manager is a *singleton* system for playing sounds.  
 To use the system through script, use the following pattern:  
 ```
 AudioManager myAudioManager = AudioManager.instance;
 ```
-It should be noted that this only works so long there is a Sound Manager script attached to an object in the current scene.  
+It should be noted that this only works so long there is a Audio Manager script attached to an object in the current scene.  
 It has the following features:
 
 - **Sounds** *UnityDictionary\<string, Sound\>*  
 Dictionary that stores settings for every sound effect in this system. To Add a new sound to the system, add a new entry to the dictionary.  
 Because this is a dictionary, each *Key* must be unique. Each *Key* is associated with a *Sound*.  
+
 A *Sound* has the following features:  
     - **Clip** *AudioClip*  
     The sound that can be played.
+    - **Output** *Audio Mixer Group*  
+    The output audio mixer group, works identical to the *AudioSource* output mixer group.
+    - **Priority** *int*  
+    Determines the priority of this audio source among all the ones that coexist in the scene.  
+    (Priority: 0 = most important. 256 = least important. Default = 128.). Use 0 for music tracks to avoid it getting occasionally swapped out.
     - **Volume** *float*  
     The volume of the sound.
     - **Pitch** *float*  
     The pitch of the sound.
+    - **BypassEffects** *bool*  
+    Bypass effects (Applied from filter components or global listener filters).
+    - **BypassListenerEffects** *bool*  
+    When set global effects on the AudioListener will not be applied to the audio signal generated by the AudioSource. Does not apply if the AudioSource is playing into a mixer group.
+    - **BypassReverbZones** *bool*  
+    When set doesn't route the signal from an AudioSource into the global reverb associated with reverb zones.
     
-To Interact with the system, use the following functions:
+It has the following functions:
 
-- **Play**(*name*)
+- **Play**(name *string*)
 Looks for a sound in the *Sounds* dictionary with a key that matches *name*, if one is found, it is played.  
 If no sound is found, an error will be thrown.
 
@@ -743,7 +1043,7 @@ To use the system through script, use the following pattern:
 ```
 MusicManager myMusicManager = MusicManager.instance;
 ```
-It should be noted that this only works so long there is a Sound Manager script attached to an object in the current scene.  
+It should be noted that this only works so long there is a Music Manager script attached to an object in the current scene.  
 It has the following features:
 
 - **Tracks** *UnityDictionary\<string, Sound\>*  
@@ -763,9 +1063,9 @@ Determines the time it takes for the currently playing track to be muted when sw
 - **Transition Time** *float*  
 Determines the time it takes for the new track to reach the desired volume when switching tracks.
     
-To Interact with the system, use the following functions:
+It has the following functions:
 
-- **SwitchTrack**(*name*)  
+- **SwitchTrack**(name *string*)  
 Looks for a music track in the *Tracks* dictionary with a key that matches *name*. 
 If one is found, the current music track will be muted, the desired track will start playing and is unmuted.  
 If nothing is found, an error will be thrown.
@@ -776,15 +1076,15 @@ LookAt2D is a class that handles looking towards objects in 2D space, it also su
 
 To utilize this class, use the following functions:  
 
-- **LookAtTransform**(*target*, *lookAt*) returns *Quaternion*  
+- **LookAtTransform**(target *Transform*, lookAt *Vector3*) returns *Quaternion*  
 Returns rotation where *target* transform's x positive looks towards *lookAt* position.  
-lookAt can both be a vector3 or a transform.  
+*lookAt* can also be a transform, in this case, the transform's position will be used.  
 Example code:
 ```
 transform.rotation = LookAt2D.LookAtTransform(transform, myVector3);
 ```
 
-- **LookAtMouse**(*target*, *targetCamera* (optional)) returns *Quaternion*  
+- **LookAtMouse**(target *Transform*, targetCamera *Camera*(optional)) returns *Quaternion*  
 Returns rotation where *target* transform's x positive looks towards the mouse cursor.  
 TargetCamera is the camera through which the mouse position in world space is determined, if left empty, Camera.main will be used.  
 Example code:  
@@ -792,7 +1092,7 @@ Example code:
 transform.rotation = LookAt2D.LookAtMouse(transform);
 ```
 
-- **LookAtRectTransform(*target*, *lookAt*, *targetCamera*)** return *Quaternion*  
+- **LookAtRectTransform**(target *Transform*, lookAt *RectTransform*, targetCamera* *Camera*(optional)) return *Quaternion*  
 Returns rotation where *target* transform's x positive looks towards *lookAt* rect transform.  
 TargetCamera is the camera through which the rect transform position in world space is determinded, if left empty, Camera.main will be used.  
 Example code:  
@@ -811,9 +1111,9 @@ The option to be returned when entry is chosen.
 The comparative chance of option being chosen.  
 Example: entry 1 with chance = 3, and entry 2 with chance = 1. In this example, entry 1 would have a 75% chance of being chosen and entry 2 would have a 25% chance.
 
-To utilize this class use the following functions:
+It has the following functions:
 
-- **GetRandomEntry** returns *T*  
+- **GetRandomEntry**() returns *T*  
 Returns random entry from *chances* using weighted chance.  
 Retrun type is determined by class.  
 Example code:
@@ -831,18 +1131,21 @@ public class MyClass {
 
 ## Unity Dictionary
 A class that integrates the Dictionary class into the unity editor.  
-To utilize the class, use it the same as you would a dictionary.
+It has the following features:
+
+- **dictionary** *Dictionary*  
+Internal dictionary class, use this to modify / access data
 
 ## Collection Utils
 A class with some utlity functions for collections.  
-Has the following functions:
+It has the following functions:
 
-- **GetKeyFromValue**(*dictionary*, *value*) returns *key*  
-Searched the dictionary for a key that has a mathing *value*, returns *key* if one is found, else returns default.
+- **GetKeyFromValue**(dictionary *Dictionary\<Key, Value\>*, value *Value*) returns *Key*  
+Searched the dictionary for a key that has a mathing *value*, returns *Key* if one is found, else returns default.
 
 ## Message Debugger
 A class for debugging, particularly usefull for debugging UnityEvents.  
-Has the following functions:
+It has the following functions:
 
-- *DebugMessage*(*msg*)  
+- *DebugMessage*(msg *string*)  
 Debugs the *msg*.
