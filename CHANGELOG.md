@@ -2,9 +2,13 @@
 All notable changes to this package will be documented in this file.  
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [unreleased]
+## [2.2.0] - Anticipating Global Update - 21 - 01 - 2023
+This update rewrites some of the older and messier classes, as well as adding more Util classes.  
+Additionally, all scripts can now be found in the 'AddComponent' menu, isn't that neat?
 
 ## Added
+All MonoBehaviour scripts can now be found under 'DevKit' in the AddComponent context menu.
+
 New scripts:  
 
 - Health Bar
@@ -64,6 +68,8 @@ Additions to existing scripts:
 - Weighted Chance *chances* list is now public, making it easier to interface with.
 
 ## Removed
+Many redundant 'using' references in scripts.
+
 - Object Spawner
     - Removed many variables for controlling prefab and spawn point selection.
         - This was replaced by the option picker classes.
@@ -84,7 +90,7 @@ Additions to existing scripts:
 
 
 ## [2.1.1] - hotfix 1 - 15-11-2022
-Fixes a small issue found witht he new stop functionality from the Cost Based Activator behavior.
+Fixes a small issue found with the new stop functionality from the Cost Based Activator behavior.
 
 ### Fixed
 Cost Based Activator
