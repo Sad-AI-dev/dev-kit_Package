@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 This update rewrites some of the older and messier classes, as well as adding more Util classes.  
 Additionally, all scripts can now be found in the 'AddComponent' menu, isn't that neat?
 
-## Added
+### Added
 All MonoBehaviour scripts can now be found under 'DevKit' in the AddComponent context menu.
 
 New scripts:  
@@ -59,7 +59,7 @@ Additions to existing scripts:
         
         - *DebugMessageGeneric* function
 
-## Changed
+### Changed
 - Readme file no longer includes documentation, it now links to the changelog and documentation file.
 
 - Object Spawner is now based on Option Pickers.
@@ -67,7 +67,7 @@ Additions to existing scripts:
 
 - Weighted Chance *chances* list is now public, making it easier to interface with.
 
-## Removed
+### Removed
 Many redundant 'using' references in scripts.
 
 - Object Spawner
@@ -78,7 +78,7 @@ Many redundant 'using' references in scripts.
     - Removed all variables for controlling Health Bar.
         - These were delegated to the HealthBar classes.
 
-## Fixed
+### Fixed
 - Interactor **TryInteract** function having a return value, making it impossible to call using Unity Events in the editor.
     - It now returns void.  
     The return value wasn't nescessary since it can be determined through other events.
@@ -87,6 +87,9 @@ Many redundant 'using' references in scripts.
     - When *hitOnDeath* is set to *True*, *onDeath* triggers before *onHit*.
         - *onHit* now triggers first. This change in order makes more sense, since *onDeath* is likely to destroy the object.
     - Slightly improved performance.
+
+### Known Issues
+- Wave Spawner is in a outdated state and needs a rewrite. this will be addressed in the next update.
 
 
 ## [2.1.1] - hotfix 1 - 15-11-2022
@@ -111,7 +114,7 @@ To fix this, I added some features to the Object Spawner and the Cost Based Acti
 ### Fixed
 - small inefficiency with some OnValidate functions.
 
-Known Issues:
+### Known Issues:
 - Wave Spawner 'consumes' it's settings, making it hard / impossible to respawn past waves.
 - Scripts do not show up in the 'Add Component' menu
 
