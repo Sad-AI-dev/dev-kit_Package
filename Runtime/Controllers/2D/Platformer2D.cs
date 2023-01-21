@@ -1,8 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace DevKit {
+    [AddComponentMenu("DevKit/Controllers/2D/Platformer 2D")]
     [RequireComponent(typeof(Rigidbody2D))]
     public class Platformer2D : MonoBehaviour
     {

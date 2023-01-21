@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace DevKit {
+    [AddComponentMenu("DevKit/Controllers/3D/Drone Controller")]
     [RequireComponent(typeof(Rigidbody))]
     public class DroneController : MonoBehaviour
     {

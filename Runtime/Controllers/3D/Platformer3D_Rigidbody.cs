@@ -1,9 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace DevKit {
+    [AddComponentMenu("DevKit/Controllers/3D/Platformer 3D Rigidbody")]
     [RequireComponent(typeof(Rigidbody))]
     public class Platformer3D_Rigidbody : MonoBehaviour
     {

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 namespace DevKit {
+    [AddComponentMenu("DevKit/Controllers/Universal Input Receiver")]
     public class UniversalInputReceiver : MonoBehaviour
     {
         //------------define input reading types-------------

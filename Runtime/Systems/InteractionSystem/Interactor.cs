@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 namespace DevKit {
+    [AddComponentMenu("DevKit/Systems/Interaction System/Interactor")]
     public class Interactor : MonoBehaviour
     {
         [Header("Events")]
@@ -34,14 +35,12 @@ namespace DevKit {
         }
 
         //----------------interact with interactable---------------
-        public bool TryInteract()
+        public void TryInteract()
         {
             if (interactables.Count > 0) {
                 SortInteractables(); //interact with closest interactable
                 interactables[0].onInteract?.Invoke(this);
-                return true;
             }
-            return false;
         }
 
         private void SortInteractables()

@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace DevKit {
+    [AddComponentMenu("DevKit/Behaviours/UI Behaviours/Texture Scroller")]
     public class TextureScroller : MonoBehaviour
     {
         [Header("Scroll Settings")]

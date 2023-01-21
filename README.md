@@ -5,8 +5,8 @@ The library contains scripts in 4 categories: Controllers, Behaviors, Systems, a
 Each category has the following characteristics:
 - Controllers
     - Controllers contains scripts that form the basics for player movement, as well as input detection.
-- Behaviors
-    - Behaviors contains simple straight forward components.
+- Behaviours
+    - Behaviours contains simple straight forward components.
 - Systems
     - Systems contains groups of components that work together as a complex system.
 - Utils

@@ -1,5 +1,5 @@
 namespace DevKit {
-[System.Serializable]
+    [System.Serializable]
     public class SimpleInventory<T>
     {
         public UnityDictionary<T, int> inventory;

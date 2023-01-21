@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace DevKit {
+    [AddComponentMenu("DevKit/Behaviours/UI Behaviours/UI Toggle Mover")]
     public class UIToggleMover : MonoBehaviour
     {
         public enum MoveMode {

@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 
 namespace DevKit {
+    [AddComponentMenu("DevKit/Systems/Dialogue System/Typewriter Effect")]
     public class TypewriterEffect : MonoBehaviour
     {
         [System.Serializable]

@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace DevKit {
+    [AddComponentMenu("DevKit/Systems/Dialogue System/Dialogue Activator")]
     [RequireComponent(typeof(DialogueResponseEvents))]
     public class DialogueActivator : MonoBehaviour
     {

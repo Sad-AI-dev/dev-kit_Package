@@ -1,8 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace DevKit {
+    [AddComponentMenu("DevKit/Behaviours/Camera Shaker")]
     public class CameraShaker : MonoBehaviour
     {
         public void ShakeCamera(float duration, float magnitude)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace DevKit {
+    [AddComponentMenu("DevKit/Behaviours/Wave Spawner")]
     public class WaveSpawner : MonoBehaviour
     {
         public enum ActivateMode {

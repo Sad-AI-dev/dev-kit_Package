@@ -4,6 +4,7 @@ using UnityEngine.Events;
 using TMPro;
 
 namespace DevKit {
+    [AddComponentMenu("DevKit/Systems/Dialogue System/Dialogue UI")]
     [RequireComponent(typeof(ResponseHandler), typeof(TypewriterEffect))]
     public class DialogueUI : MonoBehaviour
     {

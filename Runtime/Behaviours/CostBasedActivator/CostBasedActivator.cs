@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 namespace DevKit {
+    [AddComponentMenu("DevKit/Behaviours/Cost Based Activator")]
     public class CostBasedActivator : MonoBehaviour
     {
         [System.Serializable]

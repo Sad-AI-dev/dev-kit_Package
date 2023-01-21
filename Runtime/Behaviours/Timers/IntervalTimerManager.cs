@@ -1,9 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace DevKit {
+    [AddComponentMenu("DevKit/Behaviours/Interval Timer Manager")]
     public class IntervalTimerManager : MonoBehaviour
     {
         public enum TimerLengthMode {
@@ -23,8 +23,9 @@ namespace DevKit {
             [Header("Random Time Settings")]
             public float minTimerLength;
             public float maxTimerLength;
-            [Header("Event")]
+            [Header("Events")]
             public UnityEvent onTimerActivated;
+            public UnityEvent onTimerEnded;
 
             //vars
             [HideInInspector] public float oldMinTimer;
@@ -64,7 +65,10 @@ namespace DevKit {
                 //invoke event
                 timer.onTimerActivated?.Invoke();
                 //done check
-                if (counter == timer.repeatCount) { break; }
+                if (counter == timer.repeatCount) {
+                    timer.onTimerEnded?.Invoke();
+                    break;
+                }
                 counter++; //update after check, repeatCount: 0 means 'no repeat'
             }
         }

@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 
 namespace DevKit {
+    [AddComponentMenu("DevKit/Systems/Dialogue System/Responses/Dialogue Response Events")]
     public class DialogueResponseEvents : MonoBehaviour
     {
         [System.Serializable]

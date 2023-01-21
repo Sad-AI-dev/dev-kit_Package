@@ -1,6 +1,7 @@
 using UnityEngine;
 
 namespace DevKit {
+    [AddComponentMenu("DevKit/Systems/Sounds/Audio Manager")]
     public class AudioManager : MonoBehaviour
     {
         public static AudioManager instance;

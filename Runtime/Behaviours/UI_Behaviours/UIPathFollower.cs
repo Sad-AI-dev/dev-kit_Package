@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace DevKit {
+    [AddComponentMenu("DevKit/Behaviours/UI Behaviours/UI Path Followers")]
     public class UIPathFollower : MonoBehaviour
     {
         [System.Serializable]

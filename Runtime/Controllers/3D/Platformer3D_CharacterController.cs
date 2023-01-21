@@ -1,9 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace DevKit {
+    [AddComponentMenu("DevKit/Controllers/3D/Platformer 3D CharacterController")]
     [RequireComponent(typeof(CharacterController))]
     public class Platformer3D_CharacterController : MonoBehaviour
     {

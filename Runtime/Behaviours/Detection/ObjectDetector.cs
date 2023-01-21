@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 namespace DevKit {
+    [AddComponentMenu("DevKit/Behaviours/Object Detector")]
     public class ObjectDetector : MonoBehaviour
     {
         [Header("Events")]

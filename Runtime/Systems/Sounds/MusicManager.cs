@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 namespace DevKit {
+    [AddComponentMenu("DevKit/Systems/Sounds/Music Manager")]
     [RequireComponent(typeof(AudioSource))]
     public class MusicManager : MonoBehaviour
     {

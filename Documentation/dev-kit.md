@@ -1,5 +1,5 @@
 # Documentation
-This is the documentation for the dev-kit package. Documentation is split up in 4 categories: Controllers, Behaviors, Systems and Utils.  
+This is the documentation for the dev-kit package. Documentation is split up in 4 categories: Controllers, behaviours, Systems and Utils.  
 This matches the file structure in the package.  
 All scripts are in the **DevKit** namespace.
 
@@ -226,7 +226,7 @@ Used to set which direction the controller should move in on the horizontal axis
 - **SetVerMoveDir**(dir *float*)  
 used to set which direction the controller should move in on the vertical axis.
 
-# ==Behaviors==
+# ==behaviours==
 ## Object Detector
 Used to detect if something is overlapping with an attached (2D) trigger collider.  
 It has the following features:
@@ -251,26 +251,14 @@ Controllers always setup event listeners on their own for the object detectors. 
 The Object Spawner is used to spawn a prefab (or a selection of prefabs) at a list of positions.  
 It has the following features: 
 
-- **Spawn Mode** *enum*  
-Dictates how objects are spawned, has the following options:
-    - *Wave*: spawns a prefab at every point in the spawn points list.
-    - *Random*: spawns a single prefab at a randomly selected spawn point.
-    - *Round_robin*: spawns a single prefab at a single spawn point. The spawn point is chosen in order, starting at index 0 and resetting after the last spawn point in the list is chosen.
-    
-- **Prefab Select Mode** *enum*  
-Decides how the behavior decides which prefab to spawn, has the following options:  
-    - *Random*: The behavior picks a random prefab to spawn.
-    - *Round_robin* The behavior picks a prefab in order starting at index 0 and resetting after the last prefab in the list has been chosen.
-    - *Set*: The behavior picks a prefab based on a predetermined index. Recommended to be used with *SpawnObjectAtPrefabIndex*.
+- **Prefabs** *OptionPicker\<GameObject\>*  
+Settings for picking prefabs.
 
-- **Prefabs** *List\<GameObject\>*  
-A list that holds the prefabs that are referenced when spawning an object.
-
-- **Spawn Points** *List\<Transform\>*  
-A list that holds all the possible spawn locations that an object is allowed to be spawned at.
+- **Spawn Points** *OptionPicker\<Transform\>*  
+Settings for picking spawn points.
 
 **Editor functions**
-The following features are to speed up development and don't influence the functionality of the behavior in any way.
+The following features are to speed up development and don't influence the functionality of the behaviour in any way.
 
 - **Point Holder** *Transform*
 Used for the auto compile featuer. The auto compile feature takes every direct child under this transform and adds them to the spawn points list.
@@ -282,11 +270,13 @@ and adds them to the spawn points list.
 It has the following functions:
 
 - **SpawnObject**()  
-Used to spawn an object using this behaviors settings.
+Used to spawn an object using this behaviours settings.
 
 - **SpawnObjectAtPrefabIndex**(index *int*)  
-Used to spawn an object of the prefab at *index* using the baviors settings.  
-If *index* is outside of prefab range, automatically sets *index* to be back in range.
+Used to spawn an object of the prefab at *index* using the baviors settings.
+
+- **SpawnAtAllPoints**()  
+Used to spawn an object at every spawn point using the behaviours settings.
 
 ## Wave Spawner
 The Wave Spawner is used to spawn a predetermined set of prefabs in waves at a list of positions.  
@@ -333,7 +323,7 @@ Stores the information for each wave. Each wave has the following information:
 A list that holds all the possible spawn locations that a prefab is allowed to be spawned at.
 
 **Editor functions**
-The following features are to speed up development and don't influence the functionality of the behavior in any way.
+The following features are to speed up development and don't influence the functionality of the behaviour in any way.
 
 - **Point Holder** *Transform*
 Used for the auto compile featuer. The auto compile feature takes every direct child under this transform and adds them to the spawn points list.
@@ -348,13 +338,13 @@ It has the following functions:
 Used to spawn the next wave.
 
 ## Cost Based Activator
-The Cost Based Activator is a procedural behavior that can invoke unity events based on their assigned costs.  
-This behavior is ideal for systems such as procudural infinite wave spawners.  
+The Cost Based Activator is a procedural behaviour that can invoke unity events based on their assigned costs.  
+This behaviour is ideal for systems such as procudural infinite wave spawners.  
 It has the following features:
 
 - **Budget** *int*  
-The budget of the behavior, which it will use the next time it is activated.  
-This is also the starting value for the behavior.
+The budget of the behaviour, which it will use the next time it is activated.  
+This is also the starting value for the behaviour.
 
 - **Activate On Start** *bool*  
 When set to *true*, calls the *Activate* function on start. When false, does nothing.
@@ -373,13 +363,13 @@ Determines how often Gain Rampup is triggered. Measured in the amount of times t
     - etc...
     
 - **Activate Mode** *enum*  
-Determines when behavior is activated. Has the following options:
+Determines when behaviour is activated. Has the following options:
     - *Manual*: only activates when Activate() is called.
     - *Interval*: activates periodically. Timing is determined by *Activate Interval Time*.
     
 - **Activate Interval Time** *float*  
 Only used when *Activate Mode* is set to *Interval*.  
-Determines the time the behavior waits before activating again.
+Determines the time the behaviour waits before activating again.
 
 - **Save Mode** *enum*  
 Determines how the save feature is activated. Has the following options:
@@ -390,7 +380,7 @@ Determines how the save feature is activated. Has the following options:
     
 - **Save Chance** *float*  
 Only used when 'Save Mode' is set to *Random*.  
-Determines the chance for the save behavior to activate, in percentage.
+Determines the chance for the save behaviour to activate, in percentage.
 
 - **Save Interval** *int*  
 Only used when *Save Mode* is set to *Interval*.  
@@ -411,27 +401,27 @@ Determines the minimum percent of budget to be saved for next time when save fea
 Determines the maximum percent of budget to be saved for next time when save feature is activated.
 
 - **Options** *List\<Option\>*  
-The list of options that the behavior can 'purchase' from.  
+The list of options that the behaviour can 'purchase' from.  
 Other scripts cannot interface with this list, use the *AddOption* and *RemoveOption* functions instead.  
 Each *Option* has the following features:
     - **Name** *string*  
     The name of the option, only used for organizational purposes.
     - **Price** *int*  
-    The amount of budget it costs for the behavior to 'purchase' this option.
+    The amount of budget it costs for the behaviour to 'purchase' this option.
     - **On Select** *UnityEvent*  
     The event that is invoked when the option is 'purchased'.
 
 It has the following functions:
 
 - **Activate**()  
-Activates a single iteration of the behavior. Can be broken down to 3 steps:
+Activates a single iteration of the behaviour. Can be broken down to 3 steps:
     1. 'Purchase' options using budget.
     2. Gain new budget.
     3. Activate save feature (if applicable).
     4. Repeat (if applicable)
     
 - **Stop**()  
-Stops the behavior if *Activate Mode* is set to *Interval*. Use *Activate* to resume.
+Stops the behaviour if *Activate Mode* is set to *Interval*. Use *Activate* to resume.
     
 - **AddOption**(option *Option*)  
 Adds an option to the *Options* list.
@@ -442,7 +432,7 @@ Returns *true* is a matching option was found and removed.
 Returns *false* if no matching option was found.
 
 ## Path Follower
-The path follower makes the gameobject that this behavior is attached to follow a predetermined path.  
+The path follower makes the gameobject that this behaviour is attached to follow a predetermined path.  
 It has the following features:
 
 - **Move Speed** *float*  
@@ -482,7 +472,7 @@ Each point in the path has the following elements:
     Amount of time to wait before being able to move on to the next point.
 
 **Editor functions**
-The following features are to speed up development and don't influence the functionality of the behavior in any way.
+The following features are to speed up development and don't influence the functionality of the behaviour in any way.
 
 - **Path Holder** *Transform*
 Used for the auto compile feature. The auto compile feature takes every direct child under this transform and adds them to the path list.
@@ -500,7 +490,7 @@ Used to start moving along the path.
 Used to stop moving along the path.
 
 ## Interval Timer Manager
-The interval timer manager is a behavior that allows for easy setting up and interacting with interval timers.  
+The interval timer manager is a behaviour that allows for easy setting up and interacting with interval timers.  
 It has the following features:
 
 - **Interval Timers** *UnityDictionary\<string, IntervalTimer>*  
@@ -524,7 +514,9 @@ List of all timers. Each Timer has the following features:
     - **Max Timer Length** *float*  
     Only used when *Timer Length Mode* is set to *Random*. The maximum time in seconds *Timer length* can become.
     - **On Timer Activated** *UnityEvent*  
-    The event that is invoked whent the timer expires.
+    The event that is invoked when the timer expires.
+    - **On Timer Ended** *UnityEvent*
+    This event is invoked when the timer finished repeating for the last time.
     
 It has the following Functions:
 
@@ -539,7 +531,7 @@ Activates the *timer* and returns the activated *Coroutine.*
 Returns the timer with *Key* *timerName*. If no timer with *Key* *timerName* is found, returns *null*.
 
 ## Mover
-The mover moves the gameObject the behavior is attached to in a predifined local direction. 
+The mover moves the gameObject the behaviour is attached to in a predifined local direction. 
 Use the *StartMove* and *StopMove* functions to start and end moving respectively.  
 It has the following features:
 
@@ -561,7 +553,7 @@ Used to start moving.
 Used to stop moving.
 
 ## Rotator
-The rotator rotates the gameObject the behavior is attached to in a predifined local direction.
+The rotator rotates the gameObject the behaviour is attached to in a predifined local direction.
 It has the following features:
 
 - **Rotate Direction** *Vector3*  
@@ -579,8 +571,8 @@ Used to start rotating.
 Used to stop rotating.
 
 ## Camera Shaker
-The Camera shaker is a behavior that emulates camera shake.  
-When using this behavior, do not change the position of the camera's gameObject, instead use a parent object.  
+The Camera shaker is a behaviour that emulates camera shake.  
+When using this behaviour, do not change the position of the camera's gameObject, instead use a parent object.  
 It has the following functions:
 
 - **ShakeCamera**(duration *float*, magnitude *float*)  
@@ -588,7 +580,7 @@ Used to add camera shake. Shakes the gameObject for *duration* in seconds.
 *magnitude* determines the severity of the shake effect.
 
 ## Texture Scroller
-The Texture Scroller is a behavior that scrolls and loops a UI image.  
+The Texture Scroller is a behaviour that scrolls and loops a UI image.  
 For the best result, set the sprite *Wrap Mode* to *Repeat* in its import settings.  
 It has the following features:
 
@@ -631,7 +623,7 @@ Each point in the path has the following elements:
     Amount of time to wait before being able to move on to the next point.
 
 **Editor functions**
-The following features are to speed up development and don't influence the functionality of the behavior in any way.
+The following features are to speed up development and don't influence the functionality of the behaviour in any way.
 
 - **Path Holder** *RectTransform*
 Used for the auto compile feature. The auto compile feature takes every direct child under this transform and adds them to the path list.
@@ -707,7 +699,7 @@ It has the following functions:
 Used to start fading the Canvas Group.
 
 - **StopFade**()  
-Used to pause the current fade behavior. Use the *StartFade* function to resume.
+Used to pause the current fade behaviour. Use the *StartFade* function to resume.
 
 # ==Systems==
 ## Recipe System
@@ -716,7 +708,7 @@ The Recipe System includes the following scripts:
 
 ### Recipe Processor
 The recipe processor holds recipes, use the *TryRecipe* to get a result output if the recipe is valid. 
-The recipe processor is not a MonoBehavior, to use it, add it as a variable to a different MonoBehavior.  
+The recipe processor is not a Monobehaviour, to use it, add it as a variable to a different Monobehaviour.  
 It has the following features:
 
 - **Recipes** *List\<RecipeSO\>*  
@@ -769,9 +761,8 @@ Event is Invoked when the interactor moves out of range from an interactable and
 
 It has the following functions:
 
--**TryInteract**() returns *bool*  
-Used to interact with a nearby *Interactable*.  
-If an interactable is found, interaction is activated and returns true, else returns false.
+-**TryInteract**()  
+Used to interact with a nearby *Interactable*.
 
 ### Interactable
 The Interactable script can be attached to an object to allow it to be interacted with. 
@@ -919,7 +910,7 @@ Holds data for when response is chosen, holds the **On Response** *UnityEvent*.
 ## Simple Inventory
 The Simple Inventory system can keep track of gaining and using items and keeps track of item counts. 
 The system has no build in visuals. 
-The simple inventory is not a MonoBehavior, to use it, add it as a variable to a different MonoBehavior.  
+The simple inventory is not a Monobehaviour, to use it, add it as a variable to a different Monobehaviour.  
 It has the following features:
 
 - **inventory** *UnityDictionary*  
@@ -938,20 +929,15 @@ This function is used to add items to the inventory.
 The *item* parameter determines what item will be added to the inventory, it's type is set by the class.  
 the *count* parameter determines how many of the *item* will be added to the inventory. *count* is set to 1 by default.
 
-## Health Manager
-The Health Manager system that handles an (in)visible healthbar.  
+## Health System
+### Health Manager
+The Health Manager handles health, healing, taking damage and death. Can show it through a healthbar.  
 It has the following features:
 
 - **Health** *float*  
 Determines the health the object starts with.
 - **Max Health** *float*  
 Determines the maximum health. If set to 0 or lower, *health* will be used as maximum health.
-
-- **Health Bar Mode** *enum*  
-Determines how and if health is displayed, has the following settings:
-    - *None*: health will not be displayed.
-    - *Slider*: *target slider* will be used to display health.
-    - *Transform*: *target transform* will be scaled to display health.
 
 - **Hit On Death** *bool*  
 When set to *true*, *OnHit* event will be invoked when *OnDeath* is invoked. When set to *false*, does nothing.
@@ -964,22 +950,6 @@ When set to *true*, the object is allowed to heal through taking negative damage
 
 - **Allow Neg Heal** *bool*  
 When set to *true*, the object is allowed to take damage through healing negative healing values.  When set to *false*, object cannot heal less then 0.
-
-- **Target Slider** *Slider*  
-Only used when *Health Bar Mode* is set to *Slider*. Will be used to display health. 
-When using the slider, the following settings are recommended:
-    - on the slider component, set *Interactable* to *false*.
-    - Set the *Left* and *Right* padding on the *Fill Area* object to 0. The *Fill Area* is a child of created object by default.
-    - Set the width of the *Fill* object to 0. The *Fill* object is a child of the *Fill Area* object, which is a child of the created object by default.
-    - Delete the *Handle Slide Area* object. The *Handle Slide Area* is a child of the created object by default.
-- **Fill Image** *Image*  
-Only used when *Health Bar Mode* is set to *Slider*. This is the target image of which the color will be changed based on the *Gradient*.  
-When using the standard UI slider, this should be set to the *Fill* object, which can be found under the *Fill Area* object.
-- **Gradient** *Gradient*  
-A gradient that is used to color the fill image. The leftmost color is used when the healthbar is full and the rightmost when the healthbar is empty.
-
-- **Target Transform** *Transform*  
-Only used when *Health Bar Move* is set to *Transform*. Will be scaled on the local x-axis to display health.
 
 - **On Hit** *UnityEvent\<float\>*  
 Will be invoked when damage is taken. Will *not* be invoked when the damage resulst in death, unless *Hit On Death* is set to *true*.  
@@ -998,6 +968,51 @@ Used to deal damage to the object.
 
 - **Heal**(toHeal *float*)  
 Used to heal the object.
+
+### Health Bar
+An abstract class for showing changes in health.  
+To create a custom HealthBar, create a script that inherits from this class.  
+It has the following functions:
+
+**UpdateHealthBar**(percentage *float*)  
+An abstract function to be overwritten.  
+*percentage* is a number between 1 and 0, where 1 is full health and 0 is death.
+
+### Slider Health Bar
+Inherits from the Health Bar class. Displays health through a UI Slider.  
+It has the following features:
+
+- **Target Slider** *Slider*  
+Slider to be used to display health. 
+When using the slider, the following settings are recommended:
+    - on the slider component, set *Interactable* to *false*.
+    - Set the *Left* and *Right* padding on the *Fill Area* object to 0. The *Fill Area* is a child of created object by default.
+    - Set the width of the *Fill* object to 0. The *Fill* object is a child of the *Fill Area* object, which is a child of the created object by default.
+    - Delete the *Handle Slide Area* object. The *Handle Slide Area* is a child of the created object by default.
+    
+- **Fill Image** *Image*  
+This is the target image of which the color will be changed based on the *Gradient*.  
+When using the standard UI slider, this should be set to the *Fill* object, which can be found under the *Fill Area* object.
+
+- **Gradient** *Gradient*  
+A gradient that is used to color the fill image. The leftmost color is used when the healthbar is full and the rightmost when the healthbar is empty.
+
+### Transform Health Bar
+Inherits from the Health Bar class. Displays health by scaling a Transform.  
+It has the following features:
+
+- **Target Transform** *Transform*  
+Transform to be scaled.  
+If left empty, current transform will be used.
+
+- **scaleX** *bool*  
+If set to *True*, scales the *targetTransform* over the x-axis.
+
+- **scaleY** *bool*  
+If set to *True*, scales the *targetTransform* over the Y-axis.
+
+- **scaleZ** *bool*  
+If set to *True*, scales the *targetTransform* over the Z-axis.
 
 ## Audio Manager
 The Audio Manager is a *singleton* system for playing sounds.  
@@ -1111,6 +1126,11 @@ The option to be returned when entry is chosen.
 The comparative chance of option being chosen.  
 Example: entry 1 with chance = 3, and entry 2 with chance = 1. In this example, entry 1 would have a 75% chance of being chosen and entry 2 would have a 25% chance.
 
+It has the following features:  
+
+- **Count** *int*  
+The amount of options.
+
 It has the following functions:
 
 - **GetRandomEntry**() returns *T*  
@@ -1122,12 +1142,21 @@ public class MyClass {
 
     public WeightedChance<string> chances;
     
-    //function is externally called by, for example, Universal Input Receiver
+    //function is externally called by, for example, a UnityEvent
     public void ChooseOption() {
         Debug.Log(chances.GetRandomEntry()); //gets a random entry and logs result
     }
 }
 ```
+
+- **GetEntry**(index *int*) returns *T*  
+Returns the entry at *index*.
+
+- **AddOption**(option *WeightedOption*)  
+Adds a new option to the list.
+
+- **RemoveOption**(option *WeightedOption*)
+Removes an option from the list.
 
 ## Unity Dictionary
 A class that integrates the Dictionary class into the unity editor.  
@@ -1147,5 +1176,58 @@ Searched the dictionary for a key that has a mathing *value*, returns *Key* if o
 A class for debugging, particularly usefull for debugging UnityEvents.  
 It has the following functions:
 
-- *DebugMessage*(msg *string*)  
-Debugs the *msg*.
+- **DebugMessage**(msg *string*)  
+Debugs the *msg*.  
+Has various varients that allow for value debugging. It is suggested to use these with *Dynamic Variable* in Unity Events.
+
+- **DebugMessageGeneric**(T *input*)
+Debugs the value of *input* using *ToString()*.
+
+## Behaviour Pool
+A class for managing a reusable pool of MonoBehaviours.  
+To mark a MonoBehaviour ready to be reused, the GameObject the MonoBehviour is attached to must be set to inactive, like this:
+```
+myBehaviour.gameObject.SetActive(false);
+```
+It has the following features:
+
+- **prefab** *GameObject*  
+The prefab to be created when no behaviour is available for reuse.
+
+- **targetHolder** *Transform*  
+The transform to be used as a parent for a newly created object.  
+If left as null, newly created objects will not have a parent object.
+
+- **pool** *List\<T\>*  
+List of behaviours that can be reused.  
+Typically left empty, but can be prefilled with behaviours.
+
+It has the following functions:
+
+- **GetBehaviour**() returns *T*  
+Either returns a behaviour marked ready for reuse, or creates a new behaviour and adds it to the pool if none are available.
+
+### Variant: Object pool
+A variation of the Behaviour pool. Instead of tracking MonoBehaviours, it tracks GameObjects.  
+This class does not have the **GetBehaviour** function, but instead has the **GetObject** function, which functions the same.
+
+## Option Picker
+A class for chosing an option from a list.  
+It has the following features:
+
+**selectMode** *enum*  
+Determines how options are selected.  
+Has the following options:
+    - *Random*: option is selected randomly.
+    - *Round_Robin*: options is selected in order, starting at index 0 and ending at the end of the list, then looping back to 0 again.
+
+**options** *WeightedChance\<T\>*  
+Options that the class can pick from.
+
+It has the following functions:
+
+**GetOption**() returns *T*  
+Returns an option, which is picked according to *selectMode*.
+
+**GetOptionAtIndex**(index *int*) returns *T*  
+Returns the option at *index*.

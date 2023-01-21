@@ -2,12 +2,94 @@
 All notable changes to this package will be documented in this file.  
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [unreleased]
+
+## Added
+New scripts:  
+
+- Health Bar
+    - An abstract class that handles a health bar.
+        - Currently used by the healthManager.
+        
+- SliderHealthBar
+    - Inherits from HealthBar. Shows health using a UI slider.
+    
+- TransformHealthBar
+    - Inherits from Healthbar. Shows health by scaling a Transform.
+
+- Behaviour Pool
+    - A new Util class for reusing a pool of MonoBehaviours.
+    - Variant: Object Pool
+        - Almost identical, but manages a pool of GameObjects instead.
+        
+- Option Picker
+    - Class that handles different ways of choosing an option from a list.
+
+Additions to existing scripts:
+
+- Object Spawner
+    - *SpawnAtAllPoints* function.
+
+- Interval Timer Manager
+    - onTimerEnded *UnityEvent* to Interval Timer.
+
+- HealthManager
+    - healthBar variable
+        - this goes along with the newly added healthBar classes.
+
+- Weighted Chance
+    - *Count* variable.
+
+- Message Debugger
+    - DebugMessage function variants to allow debugging values
+        - currently supports the following types: 
+            - MonoBehaviour
+            - Object
+            - int
+            - float
+            - double
+            - Vector2
+            - Vector3
+            - bool
+            - char
+        
+        - *DebugMessageGeneric* function
+
+## Changed
+- Readme file no longer includes documentation, it now links to the changelog and documentation file.
+
+- Object Spawner is now based on Option Pickers.
+    - This change resulted in a complete rewrite, make sure to check up on this class if you used it in your project!
+
+- Weighted Chance *chances* list is now public, making it easier to interface with.
+
+## Removed
+- Object Spawner
+    - Removed many variables for controlling prefab and spawn point selection.
+        - This was replaced by the option picker classes.
+
+- HealthManager
+    - Removed all variables for controlling Health Bar.
+        - These were delegated to the HealthBar classes.
+
+## Fixed
+- Interactor **TryInteract** function having a return value, making it impossible to call using Unity Events in the editor.
+    - It now returns void.  
+    The return value wasn't nescessary since it can be determined through other events.
+    
+- HealthManager
+    - When *hitOnDeath* is set to *True*, *onDeath* triggers before *onHit*.
+        - *onHit* now triggers first. This change in order makes more sense, since *onDeath* is likely to destroy the object.
+    - Slightly improved performance.
+
+
 ## [2.1.1] - hotfix 1 - 15-11-2022
 Fixes a small issue found witht he new stop functionality from the Cost Based Activator behavior.
 
 ### Fixed
 Cost Based Activator
 - issue where budget would be gained before stopping.
+
 
 ## [2.1.0] - Spawning Specifics Update - 15-11-2022
 While developing a game using this package, I found some features I needed that weren't available.  
@@ -26,6 +108,7 @@ To fix this, I added some features to the Object Spawner and the Cost Based Acti
 Known Issues:
 - Wave Spawner 'consumes' it's settings, making it hard / impossible to respawn past waves.
 - Scripts do not show up in the 'Add Component' menu
+
 
 ## [2.0.0] - New Frontiers Update - 13-11-2022
 This update adds some completely new behaviors that I have been meaning to add.  

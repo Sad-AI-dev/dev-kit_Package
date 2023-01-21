@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,12 +6,13 @@ namespace DevKit {
     public class WeightedChance<T>
     {
         [System.Serializable]
-        private struct WeightedOption {
+        public struct WeightedOption {
             public T option;
             public float chance;
         }
 
-        [SerializeField] private List<WeightedOption> chances;
+        public List<WeightedOption> chances;
+        public int Count { get { return chances.Count; } }
 
         //vars
         private float totalChance;

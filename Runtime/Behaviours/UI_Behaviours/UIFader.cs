@@ -1,8 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace DevKit {
+    [AddComponentMenu("DevKit/Behaviours/UI Behaviours/UI Fader")]
     public class UIFader : MonoBehaviour
     {
         public enum FadeMode {

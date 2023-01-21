@@ -1,9 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace DevKit {
+    [AddComponentMenu("DevKit/Systems/Interaction System/Interactable")]
     public class Interactable : MonoBehaviour
     {
         public UnityEvent<Interactor> onInteract;

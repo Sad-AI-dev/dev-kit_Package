@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace DevKit {
+    [AddComponentMenu("DevKit/Behaviours/Rotator")]
     public class Rotator : MonoBehaviour
     {
         [Header("Settings")]

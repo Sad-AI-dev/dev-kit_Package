@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine.UI;
 
 namespace DevKit {
+    [AddComponentMenu("DevKit/Systems/Dialogue System/Responses/Response Handler")]
     public class ResponseHandler : MonoBehaviour
     {
         [Tooltip("RectTransform that holds the responseContainer. \nThis element resizes to account for responses")]

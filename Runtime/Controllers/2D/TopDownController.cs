@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace DevKit {
+    [AddComponentMenu("DevKit/Controllers/2D/Top Down Controller")]
     [RequireComponent(typeof(Rigidbody2D))]
     public class TopDownController : MonoBehaviour
     {
