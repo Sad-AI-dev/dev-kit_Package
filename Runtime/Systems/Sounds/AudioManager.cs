@@ -37,5 +37,14 @@ namespace DevKit {
             //debug info
             else { Debug.LogError(transform.name + " contains no sound for " + name); }
         }
+
+        public void PlayOneShot(string name)
+        {
+            if (sounds.dict.ContainsKey(name)) {
+                sounds.dict[name].source.PlayOneShot(sounds.dict[name].clip);
+            }
+            //debug info
+            else { Debug.LogError(transform.name + " contains no sound for " + name); }
+        }
     }
 }
