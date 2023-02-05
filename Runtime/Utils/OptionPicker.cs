@@ -34,7 +34,7 @@ namespace DevKit {
         //-----------set index------------
         public T GetOptionAtIndex(int index)
         {
-            return options.chances[roundRobinIndex].option;
+            return options.chances[index].option;
         }
     }
 }
