@@ -13,7 +13,10 @@ namespace DevKit {
         public T GetBehaviour()
         {
             foreach (T obj in pool) {
-                if (obj.gameObject.activeSelf) { return obj; }
+                if (obj.gameObject.activeSelf) {
+                    obj.gameObject.SetActive(true);
+                    return obj;
+                }
             }
             return CreateNewObject();
         }
@@ -21,7 +24,9 @@ namespace DevKit {
         private T CreateNewObject()
         {
             GameObject gO = Object.Instantiate(prefab, targetHolder);
-            return gO.GetComponent<T>();
+            T obj = gO.GetComponent<T>();
+            pool.Add(obj);
+            return obj;
         }
     }
 
@@ -35,14 +40,19 @@ namespace DevKit {
         public GameObject GetObject()
         {
             foreach (GameObject gO in pool) {
-                if (gO.activeSelf) { return gO; }
+                if (gO.activeSelf) {
+                    gO.SetActive(true);
+                    return gO;
+                }
             }
             return CreateNewObject();
         }
 
         private GameObject CreateNewObject()
         {
-            return Object.Instantiate(prefab, targetHolder);
+            GameObject obj = Object.Instantiate(prefab, targetHolder);
+            pool.Add(obj);
+            return obj;
         }
     }
 }

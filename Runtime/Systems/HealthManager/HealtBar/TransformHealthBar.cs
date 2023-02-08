@@ -12,7 +12,7 @@ namespace DevKit {
         //vars
         private Vector3 startSize;
 
-        private void Start()
+        private void Awake()
         {
             if (targetTransform == null) { targetTransform = transform; }
             startSize = targetTransform.localScale;

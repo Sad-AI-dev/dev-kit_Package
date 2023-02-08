@@ -9,7 +9,7 @@ namespace DevKit {
         public Image fillImage;
         public Gradient gradient;
 
-        private void Start()
+        private void Awake()
         {
             if (targetSlider == null) { Debug.LogError("No healthbar slider was set on " + transform.name + "!"); }
             targetSlider.minValue = 0f;

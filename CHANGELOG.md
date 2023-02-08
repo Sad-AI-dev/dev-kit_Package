@@ -2,7 +2,33 @@
 All notable changes to this package will be documented in this file.  
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [2.2.0] - Anticipating Global Update - 21 - 01 - 2023
+## [2.3.0] - Cleaning up Update
+
+
+### Added
+
+- AudioManager
+    - *PlayOneShot* function.
+        - use this function to prevent audio clipping.
+
+### Fixed
+Documentation link in package window linking to readme instead of documentation file.
+
+- SliderHealthbar
+    - Initial values being calculated at *Start*, causing it to occasionally not properly initialize.
+
+- TransformHealthBar
+    - Initial size being calculated at *Start*, causing it to occasionally not properly initialize.
+
+- BehaviourPool & ObjectPool
+    - New objects not being added to internal pool
+    - Reactivated objects not being set to active
+
+- OptionPicker
+    - *GetOptionAtIndex* giving a indexOutOfRange exception.
+
+
+## [2.2.0] - Anticipating Global Update - 21-01-2023
 This update rewrites some of the older and messier classes, as well as adding more Util classes.  
 Additionally, all scripts can now be found in the 'AddComponent' menu, isn't that neat?
 

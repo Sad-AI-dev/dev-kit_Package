@@ -1052,6 +1052,11 @@ It has the following functions:
 Looks for a sound in the *Sounds* dictionary with a key that matches *name*, if one is found, it is played.  
 If no sound is found, an error will be thrown.
 
+- **PlayOneShot**(name *string*)
+Looks for a sound in the *Sounds* dictionary with a key that matches *name*, if one is found, it is played as a oneshot.  
+If no sound is found, an error will be thrown.  
+Use this function to prevent audio clipping.
+
 ## Music Manager
 The Music Manager is a *singleton* system for playing music. This system uses *DontDestroyOnLoad* and can be placed anywhere in the hierarchy.  
 To use the system through script, use the following pattern:
