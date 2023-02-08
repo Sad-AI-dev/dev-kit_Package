@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 
 ### Added
+New Scripts:
+
+- LifeTime
+    - a new behaviour that destroys or disables the gameobject after a set time.
+
+Additions to existing classes:
+
 - AudioManager
     - *PlayOneShot* function.
         - use this function to prevent audio clipping.

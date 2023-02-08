@@ -530,6 +530,20 @@ Activates the *timer* and returns the activated *Coroutine.*
 - **GetTimer**(timerName *string*) returns *IntervalTimer*  
 Returns the timer with *Key* *timerName*. If no timer with *Key* *timerName* is found, returns *null*.
 
+## LifeTime
+The life time behaviour deactivates or destroys a gameobject after a set time.  
+It has the following features:
+
+- **Life Time** *float*:  
+Determines how long, in seconds, before the object is destroyed or deactivated.
+
+- **Destroy On Life Time End** *bool*:  
+When set to *true*, the game object will be destroyed when the timer runs out.  
+When set to *false*, the game object will be disabled when the timer runs out.
+
+- **On Life Time End** *UnityEvent*:  
+This event is invoked when the timer runs out.
+
 ## Mover
 The mover moves the gameObject the behaviour is attached to in a predifined local direction. 
 Use the *StartMove* and *StopMove* functions to start and end moving respectively.  
@@ -1006,13 +1020,13 @@ Transform to be scaled.
 If left empty, current transform will be used.
 
 - **scaleX** *bool*  
-If set to *True*, scales the *targetTransform* over the x-axis.
+If set to *true*, scales the *targetTransform* over the x-axis.
 
 - **scaleY** *bool*  
-If set to *True*, scales the *targetTransform* over the Y-axis.
+If set to *true*, scales the *targetTransform* over the Y-axis.
 
 - **scaleZ** *bool*  
-If set to *True*, scales the *targetTransform* over the Z-axis.
+If set to *true*, scales the *targetTransform* over the Z-axis.
 
 ## Audio Manager
 The Audio Manager is a *singleton* system for playing sounds.  
