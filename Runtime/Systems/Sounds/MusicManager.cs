@@ -61,8 +61,8 @@ namespace DevKit {
         public void SwitchTrack(string name)
         {
             if (!switching) {
-                if (tracks.dict.ContainsKey(name)) {
-                    StartCoroutine(SwitchCo(tracks.dict[name]));
+                if (tracks.ContainsKey(name)) {
+                    StartCoroutine(SwitchCo(tracks[name]));
                 }
                 else { Debug.LogError(transform.name + " contains no sound for " + name); }
             }

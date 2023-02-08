@@ -7,9 +7,9 @@ namespace DevKit {
         //-----------Item Management---------------
         public bool UseItem(T item, int count = 1)
         {
-            if (inventory.dict.ContainsKey(item)) {
-                if (inventory.dict[item] >= count) {
-                    inventory.dict[item] -= count;
+            if (inventory.ContainsKey(item)) {
+                if (inventory[item] >= count) {
+                    inventory[item] -= count;
                     RemoveItemTypeCheck(item);
                     return true;
                 }
@@ -20,17 +20,17 @@ namespace DevKit {
 
         public void GainItem(T item, int count  = 1)
         {
-            if (inventory.dict.ContainsKey(item)) {
-                inventory.dict[item] += count;
+            if (inventory.ContainsKey(item)) {
+                inventory[item] += count;
             }
-            else { inventory.dict.Add(item, count); }
+            else { inventory.Add(item, count); }
         }
 
         //----------------remove item types--------------
         private void RemoveItemTypeCheck(T item)
         {
-            if (inventory.dict[item] <= 0) {
-                inventory.dict.Remove(item);
+            if (inventory[item] <= 0) {
+                inventory.Remove(item);
             }
         }
     }

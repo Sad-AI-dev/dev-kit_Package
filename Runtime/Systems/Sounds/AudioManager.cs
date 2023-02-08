@@ -22,7 +22,7 @@ namespace DevKit {
 
         private void InitializeSounds()
         {
-            foreach (Sound s in sounds.dict.Values) {
+            foreach (Sound s in sounds.Values) {
                 s.source = gameObject.AddComponent<AudioSource>();
                 s.SetupSource();
             }
@@ -31,8 +31,8 @@ namespace DevKit {
         //----------------play sound fx------------------
         public void Play(string name)
         {
-            if (sounds.dict.ContainsKey(name)) {
-                sounds.dict[name].source.Play();
+            if (sounds.ContainsKey(name)) {
+                sounds[name].source.Play();
             }
             //debug info
             else { Debug.LogError(transform.name + " contains no sound for " + name); }
@@ -40,8 +40,8 @@ namespace DevKit {
 
         public void PlayOneShot(string name)
         {
-            if (sounds.dict.ContainsKey(name)) {
-                sounds.dict[name].source.PlayOneShot(sounds.dict[name].clip);
+            if (sounds.ContainsKey(name)) {
+                sounds[name].source.PlayOneShot(sounds[name].clip);
             }
             //debug info
             else { Debug.LogError(transform.name + " contains no sound for " + name); }

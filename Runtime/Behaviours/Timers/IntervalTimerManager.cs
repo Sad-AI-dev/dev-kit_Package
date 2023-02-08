@@ -34,7 +34,7 @@ namespace DevKit {
         public UnityDictionary<string, IntervalTimer> intervalTimers;
 
         private void Start() {
-            foreach (IntervalTimer timer in intervalTimers.dict.Values) {
+            foreach (IntervalTimer timer in intervalTimers.Values) {
                 if (timer.activateOnStart) { ActivateTimer(timer); }
             }
         }
@@ -42,8 +42,8 @@ namespace DevKit {
         //----------------------activate timer-------------------
         public Coroutine ActivateTimer(string timerName)
         {
-            if (intervalTimers.dict.ContainsKey(timerName)) {
-                return ActivateTimer(intervalTimers.dict[timerName]);
+            if (intervalTimers.ContainsKey(timerName)) {
+                return ActivateTimer(intervalTimers[timerName]);
             }
             //nothing found, throw warning
             Debug.LogWarning($"{name}: No timer with name {timerName} was found!");
@@ -88,8 +88,8 @@ namespace DevKit {
         //---------------------manage timers-------------------
         public IntervalTimer GetTimer(string timerName)
         {
-            if (intervalTimers.dict.ContainsKey(timerName)) {
-                return intervalTimers.dict[timerName];
+            if (intervalTimers.ContainsKey(timerName)) {
+                return intervalTimers[timerName];
             }
             return null;
         }
@@ -98,7 +98,7 @@ namespace DevKit {
         private void OnValidate()
         {
             if (intervalTimers != null) {
-                foreach (IntervalTimer timer in intervalTimers.dict.Values) {
+                foreach (IntervalTimer timer in intervalTimers.Values) {
                     RandomTimerBoundsCheck(timer);
                 }
             }

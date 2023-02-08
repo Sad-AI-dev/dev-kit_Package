@@ -1165,10 +1165,18 @@ Removes an option from the list.
 
 ## Unity Dictionary
 A class that integrates the Dictionary class into the unity editor.  
-It has the following features:
+The class can be directly interfaced with, following the same patterns as the c# Dictionary class.  
+Some examples are:  
+```
+UnityDictionary<string, string> myUnityDict;
+//loop over dict
+foreach (KeyValuePair<string, string> pair in myUnityDict) {
+    //execute code per pair here
+}
 
-- **dictionary** *Dictionary*  
-Internal dictionary class, use this to modify / access data
+//get specific index
+string value = myUnityDict["myKey"];
+```
 
 ## Collection Utils
 A class with some utlity functions for collections.  

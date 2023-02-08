@@ -6,10 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 
 ### Added
-
 - AudioManager
     - *PlayOneShot* function.
         - use this function to prevent audio clipping.
+
+### Changed
+- UnityDictionary
+    - Cleaned up appearance in inspector.
+    - Internal dictionary is now private.
+        - UnityDictionary can now directly be interfaced with.
+
+- WeightedChance
+    - Cleaned up appearance in inspector.
 
 ### Fixed
 Documentation link in package window linking to readme instead of documentation file.

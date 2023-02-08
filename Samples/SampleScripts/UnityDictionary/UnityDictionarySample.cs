@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using DevKit;
 
@@ -7,7 +8,7 @@ public class UnityDictionarySample : MonoBehaviour
 
     private void Start()
     {
-        foreach (var pair in names.dict) {
+        foreach (KeyValuePair<int, string> pair in names) {
             Debug.Log(pair.Key + ": " + pair.Value);
         }
     }
