@@ -2,8 +2,10 @@
 All notable changes to this package will be documented in this file.  
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [2.3.0] - Cleaning up Update
-
+## [2.3.0] - Cleaning up Update - 09-02-2023
+This update fixes various issues found during recent events.  
+It also restructeres the documentation, rewrites the wave spawner and cleans up certain inspector windows.  
+Overall, many long standing issues have been resolved, and the package received some nice polish.
 
 ### Added
 New Scripts:

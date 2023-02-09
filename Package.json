@@ -1,6 +1,6 @@
 {
   "name": "com.arvid-dev.dev-kit",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "displayName": "Arvid's Dev Kit",
   "description": "A collection of scripts that aims to speed up prototyping in Unity.",
   "unity": "2021.3",
