@@ -1,5 +1,5 @@
 ### [Main Documentation Page](https://github.com/Sad-AI-dev/dev-kit_Package/blob/main/Documentation/dev-kit.md)
-## Behaviours
+# Behaviours
 Behaviours are single MonoBehaviour classes that serve a singlular purpose.  
 The package includes the following behaviours:
 
@@ -12,4 +12,12 @@ The package includes the following behaviours:
 ### [Object Spawner](https://github.com/Sad-AI-dev/dev-kit_Package/blob/main/Documentation/SubPages/Behaviours/ObjectSpawner.md)
 ### [Path Follower](https://github.com/Sad-AI-dev/dev-kit_Package/blob/main/Documentation/SubPages/Behaviours/PathFollower.md)
 ### [Rotator](https://github.com/Sad-AI-dev/dev-kit_Package/blob/main/Documentation/SubPages/Behaviours/Rotator.md)
-### [Wave Spawner] (https://github.com/Sad-AI-dev/dev-kit_Package/blob/main/Documentation/SubPages/Behaviours/WaveSpawner.md)
+### [Wave Spawner](https://github.com/Sad-AI-dev/dev-kit_Package/blob/main/Documentation/SubPages/Behaviours/WaveSpawner.md)
+
+## UI Behaviours
+These behaviours are meant to be used within the Canvas.
+
+### [Texture Scroller](https://github.com/Sad-AI-dev/dev-kit_Package/blob/main/Documentation/SubPages/Behaviours/UI_Behaviours/TextureScroller.md)
+### [UI Fader](https://github.com/Sad-AI-dev/dev-kit_Package/blob/main/Documentation/SubPages/Behaviours/UI_Behaviours/UIFader.md)
+### [UI PathFollower](https://github.com/Sad-AI-dev/dev-kit_Package/blob/main/Documentation/SubPages/Behaviours/UI_Behaviours/UIPathFollower.md)
+### [UI Toggle Mover](https://github.com/Sad-AI-dev/dev-kit_Package/blob/main/Documentation/SubPages/Behaviours/UI_Behaviours/UIToggleMover.md)
