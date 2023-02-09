@@ -1,12 +1,9 @@
-#### Category/System
-## Class Name
-Short Description.  
-It has the following features:
+### [found in: Dialogue System](https://github.com/Sad-AI-dev/dev-kit_Package/blob/main/Documentation/SubPages/Systems/DialogueSystem/DialogueSystem.md)
+## Response
+Holds data for a response, has the following features:  
 
-- **variable name** *type*  
-Description.
+- **Response Title** *string*  
+Name of the response, this will also be filled into the textfield on the response button.
 
-It has the following functions:
-
-- **Function name**(parameter name *type*)  
-Description.
+- **Dialogue Data** *DialogueData*  
+Holds a reference to the follow up dialogue, if left empty, dialogue will end when response is chosen.

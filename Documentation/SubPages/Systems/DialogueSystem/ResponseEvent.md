@@ -1,12 +1,3 @@
-#### Category/System
-## Class Name
-Short Description.  
-It has the following features:
-
-- **variable name** *type*  
-Description.
-
-It has the following functions:
-
-- **Function name**(parameter name *type*)  
-Description.
+### [found in: Dialogue System](https://github.com/Sad-AI-dev/dev-kit_Package/blob/main/Documentation/SubPages/Systems/DialogueSystem/DialogueSystem.md)
+## Response Event
+Holds data for when response is chosen, holds the **On Response** *UnityEvent*.
