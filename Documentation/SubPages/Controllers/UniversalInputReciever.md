@@ -1,4 +1,4 @@
-#### [found in: Controllers](https://github.com/Sad-AI-dev/dev-kit_Package/blob/main/Documentation/SubPages/Controllers.md)
+### [found in: Controllers](https://github.com/Sad-AI-dev/dev-kit_Package/blob/main/Documentation/SubPages/Controllers.md)
 ## Universal Input Reciever
 allows for setting up of inputs through the editor.  
 It supports keycode inputs and codes from the input manager.
