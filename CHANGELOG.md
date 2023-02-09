@@ -10,6 +10,10 @@ New Scripts:
 
 - LifeTime
     - a new behaviour that destroys or disables the gameobject after a set time.
+        - this class is in a very basic state, I intend on expanding upon it at a later point.
+    
+- TimeSpanConverter
+    - a util for converting float time values to formatted strings.
 
 Additions to existing classes:
 
@@ -18,6 +22,10 @@ Additions to existing classes:
         - use this function to prevent audio clipping.
 
 ### Changed
+- WaveSpawner
+    - WaveSpawner recieved a complete rewrite.
+        - It now makes use of some of the newer util scripts. It now also uses scriptable objects for determining wave content.
+
 - UnityDictionary
     - Cleaned up appearance in inspector.
     - Internal dictionary is now private.

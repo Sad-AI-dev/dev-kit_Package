@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace DevKit {
-    [CreateAssetMenu(menuName = "ScriptableObjects/Dialogue")]
+    [CreateAssetMenu(menuName = "ScriptableObjects/DevKit/Dialogue")]
     public class DialogueData : ScriptableObject
     {
         [System.Serializable]

@@ -278,49 +278,27 @@ Used to spawn an object of the prefab at *index* using the baviors settings.
 - **SpawnAtAllPoints**()  
 Used to spawn an object at every spawn point using the behaviours settings.
 
-## Wave Spawner
-The Wave Spawner is used to spawn a predetermined set of prefabs in waves at a list of positions.  
+## Wave Spawner 
+The Wave Spawner is a behaviour that spawns predetermined sets of prefabs in set waves.  
 It has the following features:
 
-- **Activation Mode** *enum*  
+- **Spawn On Start** *bool*  
+When set to *true*, SpawnNextWave will be called on start. When set to *false*, does nothing.
+
+- **Activate Mode** *enum*  
 Dictates how waves are started, has the following options:
     - *Manual*: each wave must be manually started using the *StartWave* function.
     - *Delay*: the next wave will automatically be started after a configurable delay.
-    
-- **Spawn on Start** *bool*  
-If set to true, automatically spawns the first wave when *Start* is Invoked, otherwise, does nothing.
-- **Repeat Final Wave** *bool*  
-If set to true, final wave can be spawned multiple times, otherwise, does nothing.  
 
-- **Spawn Point Selection Mode** *enum*  
-Dictates which spawnpoint is chosen when spawning a prefab, has the following options:
-    - *Random*: a random spawn point is chosen.
-    - *Round_robin*: the spawn point is chosen in order, starting at index 0 and 
-    resetting after the last spawn point in the list has been chosen.
+- **On Wave End** *UnityEvent*  
+This event invokes when a wave finishes spawning.
 
-- **Object Selection Mode** *enum*  
-Dictates the order prefabs within a wave are spawned, has the following options:
-    - *In_order*: prefabs are spawned in the order of the content list.
-    - *Random*: prefabs are spawned in a random order.
-    
-- **Waves** *List\<WaveData\>*  
-Stores the information for each wave. Each wave has the following information:
-    - **Name** *string*  
-    Used for orginazation in the editor, has no technical purpose.
-    - **Content** *List\<PrefabCount\>*  
-    Defines the content of the wave, each element has the following features:
-        - **Prefab** *GameObject*  
-        The prefab to be spawned.
-        - **Count** *int*  
-        The amount of times the prefab should be spawned in this wave.
-        - **Spawn Delay** *float*  
-        Determines the delay before spawning the next prefab.
-        - **Wave Delay** *float*
-        Only used when *activation mode* is set to *Delay*. 
-        Determines the delay before spawning the next wave.
-        
-- **Spawn Points** *List\<Transform\>*  
-A list that holds all the possible spawn locations that a prefab is allowed to be spawned at.
+- **Waves** *List\<WaveContentSO\>*  
+Stores the information for each wave.
+
+- **Spawn Points** *OptionPicker\<Transform\>*  
+Stores settings for where objects should be spawned.
+
 
 **Editor functions**
 The following features are to speed up development and don't influence the functionality of the behaviour in any way.
@@ -334,8 +312,26 @@ and adds them to the spawn points list.
 
 It has the following functions:
 
-- **SpawnWave**()  
+- **SpawnNextWave**()  
 Used to spawn the next wave.
+
+### Wave Content SO
+This scriptable object stores the information for an individual wave.  
+Objects are spawned in the same order as the scriptable object.  
+It has the following features:
+
+- **Wave Content** *List\<ObjectGroup\>*  
+The list storing all information for the wave.  
+Each ObjectGroup has the following features:
+    - **Prefab** *GameObject*  
+    A prefab of the object that should be spawned.
+    - **Count** *int*  
+    The amount of this prefab to be spawned.
+    - **Next Object Delay** *float*  
+    The amount of time the behaviour waits between spawning each individual object.
+    - **Next Group Delay** *float*  
+    The amount of time the behaviour waits before it starts spawning the next element in the list.
+
 
 ## Cost Based Activator
 The Cost Based Activator is a procedural behaviour that can invoke unity events based on their assigned costs.  
@@ -1242,19 +1238,30 @@ This class does not have the **GetBehaviour** function, but instead has the **Ge
 A class for chosing an option from a list.  
 It has the following features:
 
-**selectMode** *enum*  
+- **selectMode** *enum*  
 Determines how options are selected.  
 Has the following options:
     - *Random*: option is selected randomly.
     - *Round_Robin*: options is selected in order, starting at index 0 and ending at the end of the list, then looping back to 0 again.
 
-**options** *WeightedChance\<T\>*  
+- **options** *WeightedChance\<T\>*  
 Options that the class can pick from.
 
 It has the following functions:
 
-**GetOption**() returns *T*  
+- **GetOption**() returns *T*  
 Returns an option, which is picked according to *selectMode*.
 
-**GetOptionAtIndex**(index *int*) returns *T*  
+- **GetOptionAtIndex**(index *int*) returns *T*  
 Returns the option at *index*.
+
+## TimeSpan Converter
+A static util for converting time representing *float* values to formatted *string* values.  
+It has the following functions:
+
+- **SecondsToTimeSpan**(seconds *float*) returns *TimeSpan*  
+Returns *seconds* as a *TimeSpan*.
+
+- **SecondsToFormatString**(seconds *float*, format *string*(optional)) returns *string*  
+Returns *seconds* as a formatted timespan string. If *format* is not set, hh:mm:ss will be used.  
+For more information on formatting timespan strings, see [the c# documentation](https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-timespan-format-strings)
