@@ -7,8 +7,3 @@ It has the following features:
 
 - **On Interact** *UnityEvent\<Interactor\>*  
 Identical to On Interact Void, but passes the interactor that interacted with the object as a parameter.
-
-It has the following functions:
-
-- **DestroyInteractable**()  
-Used to properly destroy an interactable object.

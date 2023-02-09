@@ -22,6 +22,9 @@ Additions to existing classes:
         - use this function to prevent audio clipping.
 
 ### Changed
+All documentation has been restructured to make use of subpages.
+    - This hopefully makes the documentation more friendly to work with
+
 - WaveSpawner
     - WaveSpawner recieved a complete rewrite.
         - It now makes use of some of the newer util scripts. It now also uses scriptable objects for determining wave content.
@@ -34,6 +37,11 @@ Additions to existing classes:
 - WeightedChance
     - Cleaned up appearance in inspector.
 
+### Removed
+- Interactable
+    - DestroyInteractable function
+        - functionality of this function is now automatically handled
+
 ### Fixed
 Documentation link in package window linking to readme instead of documentation file.
 
@@ -42,6 +50,9 @@ Documentation link in package window linking to readme instead of documentation 
 
 - TransformHealthBar
     - Initial size being calculated at *Start*, causing it to occasionally not properly initialize.
+
+- Interactable
+    - Not handling decoupling on destroy / disable
 
 - BehaviourPool & ObjectPool
     - New objects not being added to internal pool

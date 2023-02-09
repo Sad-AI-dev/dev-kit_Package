@@ -15,15 +15,6 @@ namespace DevKit {
             interactors = new List<Interactor>();
         }
 
-        //--------------remove management-----------
-        public void DestroyInteractable()
-        {
-            foreach (Interactor interactor in interactors) {
-                interactor.RemoveInteractable(this);
-            }
-            Destroy(gameObject);
-        }
-
         //-------------trigger events--------------
         private void OnTriggerEnter(Collider other) {
             AddToInteractor(other.gameObject);
@@ -53,6 +44,24 @@ namespace DevKit {
         {
             if (obj.TryGetComponent(out Interactor interactor)) {
                 interactors.Remove(interactor);
+                interactor.RemoveInteractable(this);
+            }
+        }
+
+        //---------handle disable/destroy-----------
+        private void OnDestroy()
+        {
+            RemoveFromAllInteractors();
+        }
+
+        private void OnDisable()
+        {
+            RemoveFromAllInteractors();
+        }
+
+        private void RemoveFromAllInteractors()
+        {
+            foreach (Interactor interactor in interactors) {
                 interactor.RemoveInteractable(this);
             }
         }
