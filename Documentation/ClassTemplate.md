@@ -1,5 +1,8 @@
-### [found in: Category/System](link)
-## Class Name
+# Class Name
+*class in: [Category][link] /*
+ *Inherits from: [MonoBehaviour][https://docs.unity3d.com/ScriptReference/MonoBehaviour.html]*
+
+
 Short Description.  
 It has the following features:
 

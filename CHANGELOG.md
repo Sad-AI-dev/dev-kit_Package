@@ -2,6 +2,15 @@
 All notable changes to this package will be documented in this file.  
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [] - Unreleased
+
+### Fixed
+- Platformer 3D Rigidbody
+    - *OnMoveDirChanged* event not passing through new move direction.
+    
+- CameraShaker
+    - Camera position not being reset after the camera shake.
+
 ## [2.3.0] - Cleaning up Update - 09-02-2023
 This update fixes various issues found during recent events.  
 It also restructeres the documentation, rewrites the wave spawner and cleans up certain inspector windows.  

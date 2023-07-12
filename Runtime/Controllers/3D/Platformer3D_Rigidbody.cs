@@ -12,7 +12,7 @@ namespace DevKit {
         public float acceleration;
         public float deceleration;
         [Space(10f)]
-        public UnityEvent onMoveDirChanged;
+        public UnityEvent<Vector2> onMoveDirChanged;
         //movement vars
         private Vector2 moveDir = Vector2.zero;
         private float speed;
@@ -55,7 +55,7 @@ namespace DevKit {
         public void SetMoveDir(Vector2 input)
         {
             if (input.magnitude > 1f) { input.Normalize(); }
-            if (moveDir != input) { onMoveDirChanged?.Invoke(); }
+            if (moveDir != input) { onMoveDirChanged?.Invoke(input); }
             moveDir = input;
         }
 

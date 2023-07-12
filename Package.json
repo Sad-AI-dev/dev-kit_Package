@@ -5,7 +5,7 @@
   "description": "A collection of scripts that aims to speed up prototyping in Unity.",
   "unity": "2021.3",
   "unityRelease": "1f1",
-  "documentationUrl": "https://github.com/Sad-AI-dev/dev-kit_Package/blob/main/Documentation/dev-kit.md",
+  "documentationUrl": "https://github.com/Sad-AI-dev/dev-kit_Package/wiki",
   "changelogUrl": "https://github.com/Sad-AI-dev/dev-kit_Package/blob/main/CHANGELOG.md",
   "dependencies": {
     "com.unity.textmeshpro": "3.0.6"

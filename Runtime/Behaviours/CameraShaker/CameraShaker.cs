@@ -27,6 +27,8 @@ namespace DevKit {
                 elapsed += Time.deltaTime;
                 yield return null;
             }
+            //reset camera position
+            transform.localPosition = startPos;
         }
     }
 }
