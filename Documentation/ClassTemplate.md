@@ -1,15 +1,15 @@
+*class in: [Category](link) /*
+ *Inherits from: [MonoBehaviour](https://docs.unity3d.com/ScriptReference/MonoBehaviour.html)*
+
 # Class Name
-*class in: [Category][link] /*
- *Inherits from: [MonoBehaviour][https://docs.unity3d.com/ScriptReference/MonoBehaviour.html]*
-
-
 Short Description.  
-It has the following features:
+
+## Properties
 
 - **variable name** *type*  
 Description.
 
-It has the following functions:
+## Public Methods
 
-- **Function name**(parameter name *type*)  
+- **Function name**(parameter name *type*) returns *type*  
 Description.
