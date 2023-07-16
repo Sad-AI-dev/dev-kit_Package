@@ -6,7 +6,7 @@ Short Description.
 
 ## Properties
 
-- **variable name** *type*  
+- *private/public* **variable name** *type*  
 Description.
 
 ## Public Methods
