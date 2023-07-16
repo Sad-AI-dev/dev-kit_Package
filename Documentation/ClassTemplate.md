@@ -13,3 +13,15 @@ Description.
 
 - **Function name**(parameter name *type*) returns *type*  
 Description.
+
+## Data Types
+
+### Data Type Name
+
+Short Description
+
+- **variable name** *type*
+Description
+
+## Developer Notes
+Notes
