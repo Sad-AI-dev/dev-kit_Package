@@ -8,7 +8,7 @@ namespace DevKit {
     [RequireComponent(typeof(ResponseHandler), typeof(TypewriterEffect))]
     public class DialogueUI : MonoBehaviour
     {
-        [SerializeField] GameObject dialogueBox;
+        [SerializeField] private GameObject dialogueBox;
         [SerializeField] private TMP_Text dialogueLabel, nameLabel;
         [Header("Events")]
         [SerializeField] private UnityEvent onDialogueStart;

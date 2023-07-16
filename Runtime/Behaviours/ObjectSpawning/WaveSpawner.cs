@@ -29,7 +29,7 @@ namespace DevKit {
         [SerializeField] private Transform pointHolder;
 
         //vars
-        public bool isSpawning { get; private set; }
+        public bool IsSpawning { get; private set; }
         [HideInInspector] public int currentWave = 0;
 
         private void Start()
@@ -39,8 +39,8 @@ namespace DevKit {
 
         public void SpawnNextWave()
         {
-            if (!isSpawning) {
-                isSpawning = true;
+            if (!IsSpawning) {
+                IsSpawning = true;
                 StartCoroutine(SpawnWaveContentCo());
             }
         }
@@ -67,7 +67,7 @@ namespace DevKit {
             onWaveEnd?.Invoke();
             //handle activate mode
             if (activateMode == ActivateMode.Manual) {
-                isSpawning = false;
+                IsSpawning = false;
             }
             else { //spawn next wave
                 StartCoroutine(SpawnWaveContentCo());
