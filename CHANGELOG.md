@@ -3,13 +3,48 @@ All notable changes to this package will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [] - Unreleased
+This update includes a major documentation overhaul. All documentation has been moved to the gitHub's wiki page and has been reformatted.
+Additionally, a lot of scripts depend on *FixedUpdate*, but still used *Time.deltaTime*, causing many issues.  
+This has been addressed in this update by replacing these instances with *Time.fixedDeltaTime*.
+
+### Added
 
 ### Fixed
+- Platformer 2D
+    - no longer uses *Time.deltaTime*.
+
+- Top Down Controller
+    - no longer uses *Time.deltaTime*.
+
+- Drone Controller
+    - no longer uses *Time.deltaTime*.
+
+- Platformer 3D Character Controller
+    - no longer uses *Time.deltaTime*.
+
 - Platformer 3D Rigidbody
+    - no longer uses *Time.deltaTime*.
     - *OnMoveDirChanged* event not passing through new move direction.
     
 - CameraShaker
     - Camera position not being reset after the camera shake.
+
+- Mover
+    - no longer uses *Time.deltaTime*.
+
+### Changed
+All Documentation has been moved to the gitHub's wiki page.
+    - This also means that documentation is no longer included with the package files.
+
+- Universal Input Receiver
+    - The Universal Input Reciever no longer reads inputs when *Time.timeScale* is set to 0.
+        - This is a simple solution to prevent functions from being called when a game is a paused.
+        - This may become a setting.
+
+### Removed
+- Top Down Controller
+    - Removed the *Set Position* option from *Move Mode*.
+        - Directly setting the position causes countless issues and is not encouraged, so the option has been removed.
 
 ## [2.3.0] - Cleaning up Update - 09-02-2023
 This update fixes various issues found during recent events.  

@@ -8,7 +8,7 @@ namespace DevKit {
     {
         [System.Serializable] //mode
         private enum MoveMode {
-            SetPosition, SetVelocity, UseForce
+            SetVelocity, UseForce
         }
 
         [Header("Settings")]
@@ -19,7 +19,6 @@ namespace DevKit {
 
         [Header("Technical")]
         [Tooltip("Sets the way movement is handled" +
-            "\nSet Position: Directly sets the position of the object." +
             "\nSet Velocity: Directly sets the velocity of the object." +
             "\nUse Force: Uses force to move the object.")]
         [SerializeField] private MoveMode mode;
@@ -60,12 +59,8 @@ namespace DevKit {
 
         private void Move()
         {
-            Vector2 toMove = moveDir * (speed * Time.deltaTime * 100);
+            Vector2 toMove = moveDir * (speed * Time.fixedDeltaTime * 100);
             switch (mode) {
-                case MoveMode.SetPosition:
-                    rigidBody.position += toMove;
-                    break;
-
                 case MoveMode.SetVelocity:
                     rigidBody.velocity = toMove;
                     break;

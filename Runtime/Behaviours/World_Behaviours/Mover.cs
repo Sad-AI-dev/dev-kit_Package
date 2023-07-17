@@ -43,7 +43,7 @@ namespace DevKit {
 
         private void Move()
         {
-            Vector3 speed = moveDirection * (100 * moveSpeed * Time.deltaTime);
+            Vector3 speed = moveDirection * (100 * moveSpeed * Time.fixedDeltaTime);
             rb.velocity = transform.right * speed.x + transform.up * speed.y + transform.forward * speed.z; //convert to local space
         }
     }

@@ -73,7 +73,9 @@ namespace DevKit {
         //--------------read inputs---------------
         private void Update()
         {
-            onReadInputs?.Invoke();
+            if (Time.timeScale > 0f) { //Don't read inputs when paused
+                onReadInputs?.Invoke();
+            }
         }
 
         private void ReadButtonInputs()

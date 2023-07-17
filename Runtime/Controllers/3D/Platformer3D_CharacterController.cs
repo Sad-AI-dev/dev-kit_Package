@@ -68,8 +68,8 @@ namespace DevKit {
         private void SetMoveVelocity()
         {
             Vector2 toMove;
-            if (moveDir.magnitude > 0.1f) { toMove = moveDir * (speed * Time.deltaTime); } //don't allow stop through moveDir
-            else { toMove = new Vector2(velocity.x, velocity.z).normalized * (speed * Time.deltaTime); } //use old direction when there is no direct moveDir
+            if (moveDir.magnitude > 0.1f) { toMove = moveDir * (speed * Time.fixedDeltaTime); } //don't allow stop through moveDir
+            else { toMove = new Vector2(velocity.x, velocity.z).normalized * (speed * Time.fixedDeltaTime); } //use old direction when there is no direct moveDir
             //output result
             Vector3 result = transform.right * toMove.x + transform.forward * toMove.y;
             velocity = new Vector3(result.x, velocity.y, result.z);
@@ -79,7 +79,7 @@ namespace DevKit {
         private void ApplyGravity()
         {
             if (!grounded) {
-                velocity.y -= gravity * Time.deltaTime;
+                velocity.y -= gravity * Time.fixedDeltaTime;
             }
         }
     

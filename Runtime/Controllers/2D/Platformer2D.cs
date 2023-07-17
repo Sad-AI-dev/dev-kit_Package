@@ -79,7 +79,7 @@ namespace DevKit {
 
         private void Move()
         {
-            float toMove = speed * Time.deltaTime * 100;
+            float toMove = speed * 2.5f;//Time.fixedDeltaTime * 100;
             if (Mathf.Abs(moveDir) > 0.1f) { toMove *= moveDir; } //don't allow stop through moveDir
             else if (facingLeft) { toMove *= -1; } //when facing left and not stopped through moveDir, force right direction
             rb.velocity = new Vector2(toMove, rb.velocity.y);

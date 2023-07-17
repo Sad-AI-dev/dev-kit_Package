@@ -71,7 +71,7 @@ namespace DevKit {
         private void MoveHor()
         {
             Vector2 toMove;
-            float speed = horSpeed * Time.deltaTime * 100;
+            float speed = horSpeed * Time.fixedDeltaTime * 100;
             if (horMoveDir.magnitude > 0.1f) { toMove = horMoveDir * speed; } //don't allow stop through moveDir
             else { toMove = new Vector2(rb.velocity.x, rb.velocity.z).normalized * speed; } //use old direction when there is no direct moveDir
             //output result
@@ -89,7 +89,7 @@ namespace DevKit {
 
         private void MoveVer()
         {
-            float toMove = verSpeed * Time.deltaTime * 100;
+            float toMove = verSpeed * Time.fixedDeltaTime * 100;
             if (Mathf.Abs(verMoveDir) > 0.1f) { toMove *= verMoveDir; } //don't allow stop through moveDir
             else { toMove *= Mathf.Clamp(rb.velocity.y, -1f, 1f); } //use old direction when there is no direct moveDir
             //output result

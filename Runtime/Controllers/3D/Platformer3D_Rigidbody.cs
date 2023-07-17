@@ -69,8 +69,8 @@ namespace DevKit {
         private void Move()
         {
             Vector2 toMove;
-            if (moveDir.magnitude > 0.1f) { toMove = moveDir * (speed * Time.deltaTime * 100); } //don't allow stop through moveDir
-            else { toMove = new Vector2(rb.velocity.x, rb.velocity.z).normalized * (speed * Time.deltaTime); } //use old direction when there is no direct moveDir
+            if (moveDir.magnitude > 0.1f) { toMove = moveDir * (speed * Time.fixedDeltaTime * 100); } //don't allow stop through moveDir
+            else { toMove = new Vector2(rb.velocity.x, rb.velocity.z).normalized * (speed * Time.fixedDeltaTime); } //use old direction when there is no direct moveDir
             //output result
             Vector3 result = transform.right * toMove.x + transform.forward * toMove.y;
             rb.velocity = new Vector3(result.x, rb.velocity.y, result.z);
