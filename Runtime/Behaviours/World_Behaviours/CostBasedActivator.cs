@@ -56,23 +56,35 @@ namespace DevKit {
             "Interval: save behavior will be activated once per set interval.\n" +
             "Interval_Random: similar to 'Interval', but interval time is randomly picked.")]
         public SaveMode saveMode;
-        [Space(10f)]
+
+        [HideIf(nameof(SaveModeDisabled))]
+        [Range(0f, 100f)] public float minSavePercent;
+        [HideIf(nameof(SaveModeDisabled))]
+        [Range(0f, 100f)] public float maxSavePercent;
+
         [Tooltip("Only used when 'Save Mode' is set to 'Random'.\n" +
             "Determines the chance for the save behavior to activate, in percentage.")]
+        [HideIf(nameof(SaveModeNotRandom))]
         [Range(0f, 100f)] public float saveChance;
         [Tooltip("Only used when 'Save Mode' is set to 'Interval'.\n" +
             "Determines after how many budget gains the save behavior should activate.")]
+        [HideIf(nameof(SaveModeNotInterval))]
         public int saveInterval;
         [Tooltip("Only used when 'Save Mode' is set to 'Interval_Random'.")]
+        [HideIf(nameof(SaveModeNotIntervalRandom))]
         public int minRandInterval;
         [Tooltip("Only used when 'Save Mode' is set to 'Interval_Random'.")]
+        [HideIf(nameof(SaveModeNotIntervalRandom))]
         public int maxRandInterval;
-        [Space(10f)]
-        [Range(0f, 100f)] public float minSavePercent;
-        [Range(0f, 100f)] public float maxSavePercent;
 
         [Header("Options")]
         [SerializeField] private List<Option> options;
+
+        //editor conditionals
+        public bool SaveModeDisabled => saveMode == SaveMode.None;
+        public bool SaveModeNotRandom => saveMode != SaveMode.Random;
+        public bool SaveModeNotInterval => saveMode != SaveMode.Interval;
+        public bool SaveModeNotIntervalRandom => saveMode != SaveMode.Interval_Random;
 
         //vars
         private int rampupCounter;

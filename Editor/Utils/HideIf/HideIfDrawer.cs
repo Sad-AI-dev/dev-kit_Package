@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Collections;
 using UnityEngine;
 using UnityEditor;
 using DevKit;
@@ -20,27 +21,29 @@ public class HideIfDrawer : PropertyDrawer
     //========================= Should property be hidden? ======================================
     private bool GetConditionalResult(HideIfAttribute hideIf, SerializedProperty property)
     {
+        bool result;
+
         //look for conditional field
-        string conditionalPath = property.propertyPath;
-        //change path to look for conditional field within same object
-        conditionalPath = conditionalPath.Replace(property.name, hideIf.conditionalField);
+        string conditionalPath = property.propertyPath.Contains(".") ?
+            System.IO.Path.ChangeExtension(property.propertyPath, hideIf.conditionalField) :
+            hideIf.conditionalField;
 
         SerializedProperty conditionalProperty = property.serializedObject.FindProperty(conditionalPath);
 
-        bool result = false;
         if (conditionalProperty != null) {
-            result = conditionalProperty.boolValue;
+            result = CheckPropertyType(conditionalProperty);
         }
         else {
-            PropertyInfo propertyInfo = property.serializedObject.targetObject.GetType().GetProperty(conditionalPath, 
-                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance); //Stole this, have no clue what it does
-
+            PropertyInfo propertyInfo = property.serializedObject.targetObject.GetType().GetProperty(conditionalPath,
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+ 
             if (propertyInfo != null) {
-                object value = propertyInfo.GetValue(property.serializedObject.targetObject);
+                var value = propertyInfo.GetValue(property.serializedObject.targetObject);
                 result = CheckPropertyType(value);
             }
             else {
-                Debug.LogWarning("HideIf attribute conditional field could not be found: " + hideIf.conditionalField);
+                Debug.LogWarning("HideIf attribute || the field \"" + hideIf.conditionalField + "\" could not be found!");
+                result = false;
             }
         }
         return result;

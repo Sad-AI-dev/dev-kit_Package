@@ -1380,6 +1380,9 @@ MonoBehaviour:
     dictionary:
     - key: 
       value: 0
+  listTest:
+  - number: 4
+    hideable: 
 --- !u!1 &417115249
 GameObject:
   m_ObjectHideFlags: 0
@@ -1439,14 +1442,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   intervalTimers:
     dictionary:
-    - key: debug
+    - key: Debug
       value:
         activateOnStart: 1
-        timerLength: 1
-        repeatCount: 5
-        timerLengthMode: 1
-        minTimerLength: 0.5
-        maxTimerLength: 1.5
+        timerLength: 2
+        repeatCount: 0
+        timerLengthMode: 0
+        minTimerLength: 0
+        maxTimerLength: 0
         onTimerActivated:
           m_PersistentCalls:
             m_Calls:
@@ -1459,7 +1462,7 @@ MonoBehaviour:
                 m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
                 m_IntArgument: 0
                 m_FloatArgument: 0
-                m_StringArgument: Activated!
+                m_StringArgument: timer started
                 m_BoolArgument: 0
               m_CallState: 2
         onTimerEnded:
@@ -1474,10 +1477,10 @@ MonoBehaviour:
                 m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
                 m_IntArgument: 0
                 m_FloatArgument: 0
-                m_StringArgument: Ended!
+                m_StringArgument: timer ended
                 m_BoolArgument: 0
               m_CallState: 2
-        oldMinTimer: 0.5
+        oldMinTimer: 0
 --- !u!1 &421488573
 GameObject:
   m_ObjectHideFlags: 0
@@ -1927,8 +1930,8 @@ MonoBehaviour:
   moveSpeed: 1
   stepMode: 2
   loopMode: 1
+  rotateMode: 0
   rotateSpeed: 100
-  rotateMode: 2
   moveOnStart: 1
   path:
   - point: {fileID: 1050804990}
@@ -2162,12 +2165,12 @@ MonoBehaviour:
   activateMode: 0
   ActivateIntervalTime: 0
   saveMode: 0
+  minSavePercent: 50
+  maxSavePercent: 50
   saveChance: 0
   saveInterval: 0
   minRandInterval: 0
   maxRandInterval: 0
-  minSavePercent: 50
-  maxSavePercent: 50
   options:
   - name: cheap option
     price: 1
@@ -2509,7 +2512,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetGroup: {fileID: 588714970}
-  fadeMode: 3
+  fadeMode: 2
   fadeOnStart: 1
   fadeTime: 1
   fadedInDelay: 0.5
@@ -4110,10 +4113,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feb6c237d0f0fa24080b5c1250d3b2a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveOnStart: 1
   moveSpeed: 2
   stepMode: 2
   loopMode: 0
-  moveOnStart: 1
   path:
   - transform: {fileID: 989393452}
     delay: 0
@@ -5557,7 +5560,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1648663448
 Transform:
   m_ObjectHideFlags: 0
@@ -6897,7 +6900,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2074569220
 RectTransform:
   m_ObjectHideFlags: 0

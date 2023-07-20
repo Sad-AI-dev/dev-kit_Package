@@ -26,9 +26,12 @@ namespace DevKit {
         [Tooltip("Delay between end of fade-out and start of fade-in.")]
         public float fadedOutDelay = 1f;
 
-        [Header("Blink Settings")]
         [Tooltip("If Fade Mode is set to 'blink', sets total time fader blinks.")]
+        [HideIf(nameof(IsNotBlinkMode))]
         public float blinkTime = 1f;
+
+        //editor conditionals
+        public bool IsNotBlinkMode => fadeMode != FadeMode.Blink;
 
         //vars
         private float timer = 0f;

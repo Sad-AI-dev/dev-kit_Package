@@ -25,6 +25,7 @@ namespace DevKit {
 
         //settings
         [Header("movement settings")]
+        [SerializeField] private bool moveOnStart;
         public float moveSpeed;
 
         [Tooltip("Dictates how many steps are taken along the path when StartMove() is called.\n\n" +
@@ -40,9 +41,6 @@ namespace DevKit {
         public LoopMode loopMode;
 
         [Header("path settings")]
-        [SerializeField] private bool moveOnStart;
-
-        [Space(10f)]
         public List<PathPoint> path;
         [Tooltip("==OPTIONAL==\n\n" +
             "Rect transform that holds all spawnpoint transforms. used to auto compile spawnpoint list.")]

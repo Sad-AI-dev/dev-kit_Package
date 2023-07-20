@@ -40,13 +40,14 @@ namespace DevKit {
         public LoopMode loopMode;
 
         [Header("rotation settings")]
-        [SerializeField] private float rotateSpeed;
-
         [Tooltip("Dictates how rotation is handled while following the path\n\n" +
             "None: the object will not rotate\n" +
             "Look_ahead: the object will look towards the next point in the path\n" +
             "Use_point_rotation: the object will look towards the rotation of the next point in the path")]
         public RotateMode rotateMode;
+
+        [HideIf(nameof(NoRotationMode))]
+        [SerializeField] private float rotateSpeed;
 
         [Header("path settings")]
         [SerializeField] private bool moveOnStart;
@@ -56,6 +57,9 @@ namespace DevKit {
         [Tooltip("==OPTIONAL==\n\n" +
             "Transform that holds all spawnpoint transforms. used to auto compile spawnpoint list.")]
         [SerializeField] private Transform pathHolder;
+
+        //editor conditionals
+        public bool NoRotationMode => rotateMode == RotateMode.None;
 
         //vars
         private int currentPathIndex;

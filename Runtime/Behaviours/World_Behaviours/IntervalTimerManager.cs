@@ -20,12 +20,19 @@ namespace DevKit {
                 "Set: uses the 'timerLength' variable on repeats\n" +
                 "Random: uses a random number between 'minTimerLength' and 'maxTimerLength'")]
             public TimerLengthMode timerLengthMode;
+
             [Header("Random Time Settings")]
+            //[HideIf(nameof(LengthModeSet))]
             public float minTimerLength;
+            //[HideIf(nameof(LengthModeSet))]
             public float maxTimerLength;
+
             [Header("Events")]
             public UnityEvent onTimerActivated;
             public UnityEvent onTimerEnded;
+
+            //Editor Conditionals
+            public bool LengthModeSet => timerLengthMode == TimerLengthMode.Set;
 
             //vars
             [HideInInspector] public float oldMinTimer;
