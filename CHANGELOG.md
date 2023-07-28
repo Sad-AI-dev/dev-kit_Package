@@ -8,6 +8,11 @@ Additionally, a lot of scripts depend on *FixedUpdate*, but still used *Time.del
 This has been addressed in this update by replacing these instances with *Time.fixedDeltaTime*.
 
 ### Added
+New Scripts:
+
+- Hide If Attribute
+    - A new Util, which is a property that can be used to hide fields in the editor based on a conditional argument.
+        - This has been a long time coming, and I'm very excited about its inclusion.
 
 ### Fixed
 - Platformer 2D
