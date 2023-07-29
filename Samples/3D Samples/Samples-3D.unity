@@ -1378,51 +1378,34 @@ MonoBehaviour:
   valueToHide: 5
   keys:
     dictionary:
-    - key: 
-      value: 2
+    - key: test
+      value: 7
+    - key: hello
+      value: 7
   testEvent:
     m_PersistentCalls:
       m_Calls: []
+  testList: 000000000400000003000000
+  hide1: 0
+  hide2: 0
+  lastField: 0
+  subClasses:
+    dictionary:
+    - key: 
+      value:
+        number: 16
+        hideable:
+          m_PersistentCalls:
+            m_Calls: []
+        color: {r: 0, g: 0, b: 0, a: 0}
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
   listTest:
-  - number: 17
-    hideable:
-      m_PersistentCalls:
-        m_Calls: []
-    color: {r: 0, g: 0, b: 0, a: 0}
-    curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: -0.039497375
-        value: 0.7227783
-        inSlope: 0.52396244
-        outSlope: 0.52396244
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.36657405
-        value: 0.9355445
-        inSlope: 0.17379773
-        outSlope: 0.17379773
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.5409552
-      - serializedVersion: 3
-        time: 0.9763031
-        value: 0.77197266
-        inSlope: 1.7181795
-        outSlope: 1.7181795
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.2436922
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  - number: 4
+  - number: 0
     hideable:
       m_PersistentCalls:
         m_Calls: []
@@ -1430,9 +1413,9 @@ MonoBehaviour:
     curve:
       serializedVersion: 2
       m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
+      m_PreInfinity: 0
+      m_PostInfinity: 0
+      m_RotationOrder: 0
 --- !u!1 &417115249
 GameObject:
   m_ObjectHideFlags: 0
@@ -3707,7 +3690,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1090040645
 Transform:
   m_ObjectHideFlags: 0

@@ -41,7 +41,7 @@ public class HideIfDrawer : PropertyDrawer
         SerializedProperty conditionalProperty = property.serializedObject.FindProperty(conditionalPath);
 
         if (conditionalProperty != null) {
-            result = CheckPropertyType(conditionalProperty);
+            result = conditionalProperty.boolValue;
         }
         else {
             object propertyParent = GetParentObject(property);
@@ -66,21 +66,14 @@ public class HideIfDrawer : PropertyDrawer
             }
             else {
                 propertyParent = propertyObject;
-                FieldInfo objInfo = propertyObject.GetType().GetField(path[i]);
+                FieldInfo objInfo = propertyObject.GetType().GetField(path[i], 
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic); //internet told me this fixes things... Seems to fix hidden fields return null in this function
                 if (objInfo != null) { //make sure field exists
                     propertyObject = objInfo.GetValue(propertyObject);
                 }
             }
         }
         return propertyParent;
-    }
-
-    private bool CheckPropertyType(object value)
-    {
-        if (value is bool) {
-            return (bool)value;
-        }
-        return true;
     }
 
     //=========================== Property Height =======================

@@ -1,8 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace DevKit
-{
+namespace DevKit {
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property |
     AttributeTargets.Class | AttributeTargets.Struct, Inherited = true)]
     public class HideIfAttribute : PropertyAttribute

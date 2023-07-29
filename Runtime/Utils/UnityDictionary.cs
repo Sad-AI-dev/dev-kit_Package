@@ -1,59 +1,83 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace DevKit {
     [Serializable]
-    public class UnityDictionary<TKey, TValue> : ISerializationCallbackReceiver
+    public class UnityDictionary<Key, Value> : ISerializationCallbackReceiver//, IList
     {
         [System.Serializable]
-        public struct Pair {
-            public TKey key;
-            public TValue value;
+        public struct Pair
+        {
+            public Key key;
+            public Value value;
         }
 
         [SerializeField] private List<Pair> dictionary;
 
-        private Dictionary<TKey, TValue> dict = new Dictionary<TKey, TValue>();
+        private Dictionary<Key, Value> dict;
 
-        //----------------serialization--------------------
-        //dictionary to lists
-        public void OnBeforeSerialize() {
-            if (dict != null && ListIsValid()) {
+        //ctor
+        public UnityDictionary()
+        {
+            dictionary = new List<Pair>();
+            dict = new Dictionary<Key, Value>();
+        }
+
+        //================= serialization =================
+        //dictionary to list
+        public void OnBeforeSerialize()
+        {
+            //initialize values if needed
+            dict ??= new Dictionary<Key, Value>();
+            dictionary ??= new List<Pair>();
+
+            TryPopulateList();
+        }
+        private void TryPopulateList()
+        {
+            if (IsValidList()) {
                 dictionary.Clear();
-                //populate list
-                foreach (var kvp in dict) {
+
+                //populate list from dict
+                foreach (KeyValuePair<Key, Value> kvp in dict) {
                     dictionary.Add(new Pair { key = kvp.Key, value = kvp.Value });
                 }
             }
         }
+        private bool IsValidList()
+        {
+            Key[] keys = new Key[dictionary.Count];
+            for (int i = 0; i < dictionary.Count; i++) {
+                if (keys.Contains(dictionary[i].key)) { //found dupe key, list is invalid
+                    return false;
+                }
+                keys[i] = dictionary[i].key;
+            }
+            return true; //no dupes
+        }
 
-        //lists to dictionary
+        //list to dictionary
         public void OnAfterDeserialize()
         {
-            dict = new Dictionary<TKey, TValue>();
-
-            for (int i = 0; i < dictionary.Count; i++) {
-                dict.Add(dictionary[i].key, dictionary[i].value);
-            }
+            dict = new Dictionary<Key, Value>();
+            ListToValidDictionary();
         }
 
-        //-----------valid lists check------------
-        private bool ListIsValid()
+        private void ListToValidDictionary()
         {
-            List<TKey> keys = new List<TKey>();
-            foreach (Pair pair in dictionary) {
-                if (keys.Contains(pair.key)) {
-                    return false; //duplicate key found
+            for (int i = 0; i < dictionary.Count; i++) {
+                if (!dict.ContainsKey(dictionary[i].key)) {
+                    dict.Add(dictionary[i].key, dictionary[i].value);
                 }
-                keys.Add(pair.key); //register key
             }
-            return true; //no duplicate keys found
         }
 
-        //-------------dictionary interfacing-------------------
-        public TValue this[TKey key] { 
+        //=================== dictionary interfacing ===================
+        public Value this[Key key]
+        {
             get { return dict[key]; }
             set { dict[key] = value; }
         }
@@ -61,17 +85,23 @@ namespace DevKit {
         //custom foreach support
         public IEnumerator GetEnumerator() { return dict.GetEnumerator(); }
 
-        //---count/keys/values---
+        //=== count/keys/values ===
         public int Count { get { return dict.Count; } }
-        public Dictionary<TKey,TValue>.KeyCollection Keys { get { return dict.Keys; } }
-        public Dictionary<TKey, TValue>.ValueCollection Values { get { return dict.Values; } }
+        public Dictionary<Key, Value>.KeyCollection Keys { get { return dict.Keys; } }
+        public Dictionary<Key, Value>.ValueCollection Values { get { return dict.Values; } }
 
-        public bool ContainsKey(TKey key) { return dict.ContainsKey(key); }
-        public bool ContainsValue(TValue value) { return dict.ContainsValue(value); }
+        public bool ContainsKey(Key key) { return dict.ContainsKey(key); }
+        public bool ContainsValue(Value value) { return dict.ContainsValue(value); }
 
-        //---add/remove/clear--
-        public void Add(TKey key, TValue value) { dict.Add(key, value); }
-        public void Remove(TKey key) { dict.Remove(key); }
+        //=== add/remove/clear ===
+        public void Add(Key key, Value value) { dict.Add(key, value); }
+        public void Remove(Key key) { dict.Remove(key); }
         public void Clear() { dict.Clear(); }
+
+        //==== explicit typecasts ====
+        public static explicit operator List<Pair>(UnityDictionary<Key, Value> dict)
+        {
+            return dict.dictionary;
+        }
     }
 }

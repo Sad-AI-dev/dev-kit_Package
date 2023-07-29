@@ -22,9 +22,9 @@ namespace DevKit {
             public TimerLengthMode timerLengthMode;
 
             [Header("Random Time Settings")]
-            //[HideIf(nameof(LengthModeSet))]
+            [HideIf(nameof(LengthModeSet))]
             public float minTimerLength;
-            //[HideIf(nameof(LengthModeSet))]
+            [HideIf(nameof(LengthModeSet))]
             public float maxTimerLength;
 
             [Header("Events")]
