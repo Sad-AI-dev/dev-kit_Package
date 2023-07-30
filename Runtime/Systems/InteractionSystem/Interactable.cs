@@ -15,7 +15,7 @@ namespace DevKit {
             interactors = new List<Interactor>();
         }
 
-        //-------------trigger events--------------
+        //============ trigger events ============
         private void OnTriggerEnter(Collider other) {
             AddToInteractor(other.gameObject);
         }
@@ -23,7 +23,7 @@ namespace DevKit {
             RemoveFromInteractor(other.gameObject);
         }
 
-        //-----2D trigger events----
+        //========= 2D trigger events =========
         private void OnTriggerEnter2D(Collider2D collision) {
             AddToInteractor(collision.gameObject);
         }
@@ -31,7 +31,7 @@ namespace DevKit {
             RemoveFromInteractor(collision.gameObject);
         }
 
-        //---on find interactor reactions---
+        //====== on find interactor reactions ======
         private void AddToInteractor(GameObject obj)
         {
             if (obj.TryGetComponent(out Interactor interactor)) {
@@ -48,7 +48,7 @@ namespace DevKit {
             }
         }
 
-        //---------handle disable/destroy-----------
+        //============ handle disable/destroy ============
         private void OnDestroy()
         {
             RemoveFromAllInteractors();

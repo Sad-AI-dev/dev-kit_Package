@@ -1,47 +1,122 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace DevKit {
     [System.Serializable]
-    public class WeightedChance<T>
+    public class WeightedChance<T> : IList<T>
     {
         [System.Serializable]
-        public struct WeightedOption {
+        public class WeightedOption {
             public T option;
             public float chance;
         }
 
-        public List<WeightedOption> chances;
-        public int Count { get { return chances.Count; } }
+        public List<WeightedOption> options;
 
         //vars
         private float totalChance;
 
-        //-------------compile options----------------
+        //ctor
+        public WeightedChance()
+        {
+            options = new List<WeightedOption>();
+        }
+
+        //=============== compile options===============
         private void CalcTotalChance()
         {
             totalChance = 0;
-            foreach (WeightedOption option in chances) {
+            foreach (WeightedOption option in options) {
                 totalChance += option.chance;
             }
         }
 
-        //--------------random chance----------------
+        //=============== random chance ===============
         public T GetRandomEntry()
         {
             if (totalChance <= 0f) { CalcTotalChance(); }
             //choose random option
             T chosenOption = default;
             float rand = Random.Range(0, totalChance);
-            for (int i = 0; i < chances.Count; i++) {
+            for (int i = 0; i < options.Count; i++) {
                 //found chosen option
-                if (rand < chances[i].chance) {
-                    chosenOption = chances[i].option;
+                if (rand < options[i].chance) {
+                    chosenOption = options[i].option;
                     break;
                 }
-                rand -= chances[i].chance;
+                rand -= options[i].chance;
             }
             return chosenOption;
+        }
+
+        //============== IList vars ==============
+        public int Count { get { return options.Count; } }
+        public T this[int index] {
+            get { return options[index].option; }
+            set { options[index].option = value; }
+        }
+        public bool IsReadOnly { get { return false; } }
+
+        //============== IList funcs ==============
+        public int IndexOf(T option) 
+        { 
+            for (int i = 0; i < Count; i++) {
+                if (options[i].option.Equals(option)) { return i; }
+            }
+            return -1; //not found
+        }
+
+        public void Insert(int index, T option) { 
+            options.Insert(index, new WeightedOption { option = option, chance = 1f });
+            CalcTotalChance();
+        }
+        public void RemoveAt(int index) { 
+            options.RemoveAt(index);
+            CalcTotalChance();
+        }
+
+        //ICollection funcs
+        public void Add(T option) { 
+            options.Add(new WeightedOption { option = option, chance = 1f });
+            CalcTotalChance();
+        }
+        public void Clear() { 
+            options.Clear();
+            CalcTotalChance();
+        }
+        public bool Contains(T option) {
+            foreach (WeightedOption weightedOption in options) {
+                if (weightedOption.option.Equals(option)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        public void CopyTo(T[] array, int startIndex) {
+            array = new T[Count - startIndex];
+            //fill new array
+            for (int i = startIndex; i < Count; i++) {
+                array[i] = options[i].option;
+            }
+        }
+        public bool Remove(T option) {
+            int foundIndex = IndexOf(option);
+            if (foundIndex >= 0) { options.RemoveAt(foundIndex); }
+            //recalculate chances
+            CalcTotalChance();
+            //return result
+            return foundIndex >= 0;
+        }
+        //Enumerator funcs
+        public IEnumerator<T> GetEnumerator() {
+            T[] array = new T[0];
+            CopyTo(array, 0);
+            //return Enumerator
+            return (IEnumerator<T>)array.GetEnumerator();
+        }
+        IEnumerator IEnumerable.GetEnumerator() {
+            return GetEnumerator();
         }
     }
 }

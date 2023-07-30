@@ -22,7 +22,7 @@ namespace DevKit {
         //external components
         private AudioSource source;
 
-        //---------------------------setup--------------------------
+        //======================== setup ========================
         private void Awake()
         {
             if (instance != null && instance != this) {
@@ -46,7 +46,7 @@ namespace DevKit {
             source.loop = true;
         }
 
-        //--------------------setup track--------------------
+        //================== setup track ==================
         private void SetupTrack(Sound sound)
         {
             //settings
@@ -57,7 +57,7 @@ namespace DevKit {
             source.Play();
         }
 
-        //-------------------------manage music track--------------------
+        //================== manage music track ==================
         public void SwitchTrack(string name)
         {
             if (!switching) {
@@ -68,7 +68,7 @@ namespace DevKit {
             }
         }
 
-        //------------------------switch music track--------------------
+        //===================== switch music track =====================
         private IEnumerator SwitchCo(Sound nextSound)
         {
             switching = true;

@@ -11,7 +11,7 @@ namespace DevKit {
             "transform that holds all spawnpoint transforms. used to auto compile spawnpoint list.")]
         [SerializeField] private Transform pointHolder;
 
-        //-----------spawn object modes--------------
+        //============ spawn object modes ============
         public void SpawnObject()
         {
             InstantiateAtPoint(GetSpawnPoint(), GetPrefab());
@@ -29,34 +29,34 @@ namespace DevKit {
             }
         }
 
-        //----------------------spawn logic----------------------
+        //===================== spawn logic =====================
         private void InstantiateAtPoint(Transform t, GameObject prefab)
         {
             GameObject obj = Instantiate(prefab);
             obj.transform.SetPositionAndRotation(t.position, t.rotation);
         }
 
-        //----select spawn point----
+        //====== select spawn point ======
         private Transform GetSpawnPoint()
         {
             return spawnPoints.GetOption();
         }
 
-        //----select prefab----
+        //====== select prefab ======
         private GameObject GetPrefab()
         {
             return prefabs.GetOption();
         }
 
-        //---------------------compile spawn points------------------------
+        //===================== compile spawn points =====================
         public void CompileSpawnPoints()
         {
             if (pointHolder != null) {
                 //clear list
-                spawnPoints.options.chances.Clear();
+                spawnPoints.options.options.Clear();
                 //add options
                 foreach (Transform child in pointHolder) {
-                    spawnPoints.options.chances.Add(new WeightedChance<Transform>.WeightedOption { option = child, chance = 1f });
+                    spawnPoints.options.options.Add(new WeightedChance<Transform>.WeightedOption { option = child, chance = 1f });
                 }
             }
         }

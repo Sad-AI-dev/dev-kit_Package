@@ -50,7 +50,7 @@ namespace DevKit {
             GroundCheck();
         }
 
-        //---------------------Movement--------------------------------
+        //===================== Movement =====================
         public void SetMoveDir(Vector2 input)
         {
             if (input.magnitude > 1f) { input.Normalize(); }
@@ -75,7 +75,7 @@ namespace DevKit {
             velocity = new Vector3(result.x, velocity.y, result.z);
         }
 
-        //------------------------Jumping--------------------------
+        //======================== Jumping ========================
         private void ApplyGravity()
         {
             if (!grounded) {
@@ -96,7 +96,7 @@ namespace DevKit {
             velocity.y = jumpHeight;
         }
 
-        //---------timers-----------
+        //========= timers =========
         private IEnumerator BufferJumpCo()
         {
             canBufferJump = true;
@@ -111,7 +111,7 @@ namespace DevKit {
             canCoyoteJump = false;
         }
 
-        //----------Ground check----------
+        //========= Ground check =========
         private void GroundCheck()
         {
             if (!grounded && controller.isGrounded) {

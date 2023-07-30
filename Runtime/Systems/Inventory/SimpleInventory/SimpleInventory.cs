@@ -4,7 +4,7 @@ namespace DevKit {
     {
         public UnityDictionary<T, int> inventory;
 
-        //-----------Item Management---------------
+        //=============== Item Management ===============
         public bool UseItem(T item, int count = 1)
         {
             if (inventory.ContainsKey(item)) {
@@ -26,7 +26,7 @@ namespace DevKit {
             else { inventory.Add(item, count); }
         }
 
-        //----------------remove item types--------------
+        //=============== remove item types ===============
         private void RemoveItemTypeCheck(T item)
         {
             if (inventory[item] <= 0) {

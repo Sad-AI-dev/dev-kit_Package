@@ -9,7 +9,7 @@ namespace DevKit {
             Debug.Log(transform.name + ": " + msg);
         }
 
-        //---------------value debugging------------------
+        //================== value debugging ==================
         public void DebugMessage(MonoBehaviour behaviour)
         {
             DebugMessage(behaviour as Object);
@@ -20,7 +20,7 @@ namespace DevKit {
             Debug.Log(transform.name + " reported value: " + obj.name);
         }
 
-        //---common num types---
+        //=== common number types ===
         public void DebugMessage(int i)
         {
             DebugMessageGeneric(i);
@@ -43,7 +43,7 @@ namespace DevKit {
             DebugMessageGeneric(v);
         }
 
-        //---other common types---
+        //=== other common types ===
         public void DebugMessage(bool b)
         {
             DebugMessageGeneric(b);
@@ -54,7 +54,7 @@ namespace DevKit {
             DebugMessageGeneric(c);
         }
 
-        //---generic---
+        //=== generic ===
         public void DebugMessageGeneric<T>(T input)
         {
             Debug.Log(transform.name + " reported value: " + input.ToString());

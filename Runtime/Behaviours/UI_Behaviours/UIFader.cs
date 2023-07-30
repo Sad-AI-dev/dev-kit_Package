@@ -54,7 +54,7 @@ namespace DevKit {
             if (targetGroup.alpha >= 0.5f) { fadingIn = false; }
         }
 
-        //----------state management-----------
+        //========= state management =========
         public void StartFade()
         {
             timer = 0f;
@@ -69,7 +69,7 @@ namespace DevKit {
             fading = false;
         }
 
-        //--------------fading---------------
+        //============ fading ============
         private void Update()
         {
             if (fading) {
@@ -91,7 +91,7 @@ namespace DevKit {
             if (timer >= fadeTime) { OnEndFade(); }
         }
 
-        //------------reach end fade--------------
+        //============ reach end fade ============
         private void OnEndFade()
         {
             StopFadeCheck();
@@ -124,7 +124,7 @@ namespace DevKit {
             }
         }
 
-        //-----------------Timers------------------
+        //=============== Timers ===============
         private IEnumerator FadedInDelayCo()
         {
             fading = false;

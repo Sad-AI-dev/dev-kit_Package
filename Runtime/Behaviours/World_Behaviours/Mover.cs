@@ -24,7 +24,7 @@ namespace DevKit {
             if (moveOnStart) StartMove();
         }
 
-        //----------states------------
+        //========= states =========
         public void StartMove()
         {
             moving = true;
@@ -35,7 +35,7 @@ namespace DevKit {
             moving = false;
         }
 
-        //----------movement----------
+        //========= movement =========
         private void FixedUpdate()
         {
             if (moving) Move();

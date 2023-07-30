@@ -28,7 +28,7 @@ namespace DevKit {
             }
         }
 
-        //----------------play sound fx------------------
+        //=============== play sound fx ===============
         public void Play(string name)
         {
             if (sounds.ContainsKey(name)) {

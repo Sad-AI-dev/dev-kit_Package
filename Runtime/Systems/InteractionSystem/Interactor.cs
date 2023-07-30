@@ -19,7 +19,7 @@ namespace DevKit {
             interactables = new List<Interactable>();
         }
 
-        //---------------interactables management------------------
+        //=============== interactables management ===============
         public void AddInteractable(Interactable interactable)
         {
             interactables.Add(interactable);
@@ -34,7 +34,7 @@ namespace DevKit {
             if (interactables.Count == 0) { onStopCanInteract.Invoke(); }
         }
 
-        //----------------interact with interactable---------------
+        //=============== interact with interactable ===============
         public void TryInteract()
         {
             if (interactables.Count > 0) {

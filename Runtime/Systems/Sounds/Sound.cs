@@ -37,7 +37,7 @@ namespace DevKit {
             source.bypassReverbZones = bypassReverbZones;
         }
 
-        //----------serialization------------
+        //============ serialization ============
         public void OnBeforeSerialize() { }
         public void OnAfterDeserialize() {
             if (!setBaseValues) {

@@ -19,7 +19,7 @@ namespace DevKit {
             imgShower.material.SetTextureOffset("_MainTex", scrollDirection.normalized * offset);
         }
 
-        //-------------get image component-------------
+        //============ get image component ============
         public void InitializeImage()
         {
             imgShower = GetComponent<Image>();

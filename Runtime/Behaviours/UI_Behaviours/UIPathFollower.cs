@@ -75,7 +75,7 @@ namespace DevKit {
             moving = false;
         }
 
-        //----------movement-----------
+        //=========== movement ===========
         private void Update()
         {
             if (moving && !waiting) {
@@ -94,7 +94,7 @@ namespace DevKit {
             }
         }
 
-        //--------------Reach Point-------------
+        //============ Reach Point ============
         private void OnReachPoint()
         {
             StartCoroutine(OnReachPointCo());
@@ -126,7 +126,7 @@ namespace DevKit {
             waiting = false;
         }
 
-        //----------------Reach end of path-------------
+        //=============== Reach end of path ===============
         private void OnReachEnd()
         {
             if (stepMode == StepMode.Cycle) { moving = false; }
@@ -147,7 +147,7 @@ namespace DevKit {
             }
         }
 
-        //---------auto compile---------
+        //============ auto compile ============
         public void CompilePathPoints()
         {
             if (pathHolder != null) {

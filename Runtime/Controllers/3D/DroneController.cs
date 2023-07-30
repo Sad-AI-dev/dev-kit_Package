@@ -34,7 +34,7 @@ namespace DevKit {
             rb = GetComponent<Rigidbody>();
         }
 
-        //---------read inputs-----------
+        //========= read inputs =========
         public void SetHorMoveDir(Vector2 dir)
         {
             if (dir.magnitude > 1f) { dir.Normalize(); } //force dir in expected bounds
@@ -49,7 +49,7 @@ namespace DevKit {
             verMoveDir = dir;
         }
 
-        //----------main update loop-------------
+        //============ main update loop ============
         private void FixedUpdate()
         {
             //hor movement
@@ -60,7 +60,7 @@ namespace DevKit {
             MoveVer();
         }
 
-        //---------------horizontal movement----------------
+        //=============== horizontal movement ===============
         private void UpdateHorSpeed()
         {
             if (horMoveDir.magnitude > 0.1f) { horSpeed += horAcceleration; } //accelerate
@@ -79,7 +79,7 @@ namespace DevKit {
             rb.velocity = new Vector3(result.x, rb.velocity.y, result.z);
         }
 
-        //----------------vertical movement-----------------
+        //=============== vertical movement ===============
         private void UpdateVerSpeed()
         {
             if (Mathf.Abs(verMoveDir) > 0.1f) { verSpeed += verAcceleration; } //accelerate

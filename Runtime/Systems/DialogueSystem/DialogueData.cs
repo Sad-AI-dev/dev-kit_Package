@@ -15,7 +15,7 @@ namespace DevKit {
         [SerializeField] private DialogueMessage[] dialogue;
         [SerializeField] private Response[] responses;
 
-        //--------------------------getter functions---------------------------------
+        //======================== getter functions ========================
         public DialogueMessage[] Dialogue => dialogue;
         public Response[] Responses => responses;
         //responseCheck

@@ -57,7 +57,7 @@ namespace DevKit {
             JumpUpdate();
         }
 
-        //---------------------Movement--------------------------------
+        //===================== Movement =====================
         public void SetMoveDir(Vector2 input) {
             SetMoveDir(input.x);
         }
@@ -85,14 +85,14 @@ namespace DevKit {
             rb.velocity = new Vector2(toMove, rb.velocity.y);
         }
 
-        //-----------update face dir
+        //========= update face dir =========
         private void Flip()
         {
             facingLeft = !facingLeft;
             transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
         }
 
-        //------------------------Jumping--------------------------
+        //======================== Jumping ========================
         public void StartJump()
         {
             if (grounded || canCoyoteJump) { AddJumpForce(); } //normal jump if grounded, else coyote jump
@@ -126,7 +126,7 @@ namespace DevKit {
             rising = false;
         }
 
-        //-----------timers-----------
+        //========= timers =========
         private IEnumerator BufferJumpCo()
         {
             canBufferJump = true;
@@ -141,7 +141,7 @@ namespace DevKit {
             canCoyoteJump = false;
         }
 
-        //----------detector event responses----------
+        //========= detector event responses =========
         private void OnTouchGround()
         {
             grounded = true;

@@ -16,7 +16,7 @@ namespace DevKit {
             if (rotateOnStart) StartRotate();
         }
 
-        //-----------states--------------
+        //============ states ============
         public void StartRotate()
         {
             rotating = true;
@@ -27,7 +27,7 @@ namespace DevKit {
             rotating = false;
         }
 
-        //------------rotation-------------
+        //============ rotation ============
         private void Update()
         {
             if (rotating) Rotate();

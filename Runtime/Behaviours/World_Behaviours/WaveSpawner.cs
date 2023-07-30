@@ -74,20 +74,20 @@ namespace DevKit {
             }
         }
 
-        //--------------spawn objects-----------------
+        //============ spawn objects ============
         private void SpawnObject(GameObject prefab)
         {
             Transform t = Instantiate(prefab).transform;
             t.position = spawnPoints.GetOption().position;
         }
 
-        //-------------compile spawn points----------------
+        //=============== compile spawn points ===============
         public void CompileSpawnPoints()
         {
             if (pointHolder != null) {
-                spawnPoints.options.chances.Clear();
+                spawnPoints.options.options.Clear();
                 foreach (Transform child in pointHolder) {
-                    spawnPoints.options.chances.Add(new WeightedChance<Transform>.WeightedOption { option = child, chance = 1f });
+                    spawnPoints.options.options.Add(new WeightedChance<Transform>.WeightedOption { option = child, chance = 1f });
                 }
             }
         }

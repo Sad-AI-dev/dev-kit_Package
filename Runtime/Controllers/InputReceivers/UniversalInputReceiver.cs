@@ -7,7 +7,7 @@ namespace DevKit {
     [AddComponentMenu("DevKit/Controllers/Universal Input Receiver")]
     public class UniversalInputReceiver : MonoBehaviour
     {
-        //------------define input reading types-------------
+        //============ define input reading types ============
         [Serializable]
         private struct ButtonInput
         {
@@ -53,7 +53,7 @@ namespace DevKit {
             public List<string> yAxisCodes;
         }
 
-        //--------------vars-------------------
+        //=============== vars ===============
         [Tooltip("Used to read key presses.")]
         [SerializeField] private List<ButtonInput> buttonInputs;
         [Tooltip("Used to read a set of keys as an opposing axis.\nReturns a float between -1 and 1")]
@@ -70,7 +70,7 @@ namespace DevKit {
             if (directionalInputs != null && directionalInputs.Count > 0) { onReadInputs += ReadDirectionalInputs; }
         }
 
-        //--------------read inputs---------------
+        //============ read inputs ============
         private void Update()
         {
             if (Time.timeScale > 0f) { //Don't read inputs when paused
@@ -149,7 +149,7 @@ namespace DevKit {
             }
         }
 
-        //--------------sort inputs-----------------
+        //=============== sort inputs ===============
         private float GetLargestInput(List<string> inputs, float compare)
         {
             float largest = compare;

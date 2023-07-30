@@ -39,7 +39,7 @@ namespace DevKit {
             if (moveOnStart) StartMove();
         }
 
-        //-------------movement------------
+        //============ movement ============
         public void StartMove()
         {
             moving = true;
@@ -74,7 +74,7 @@ namespace DevKit {
             rt.anchoredPosition = Vector2.Lerp(rt.anchoredPosition, targetPos, moveSpeed * Time.deltaTime);
         }
 
-        //--------------reach end------------
+        //============ reach end ============
         private void ReachEndCheck()
         {
             if (Vector2.Distance(rt.anchoredPosition, targetPos) < 0.1f) {

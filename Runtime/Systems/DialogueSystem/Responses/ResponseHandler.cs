@@ -23,13 +23,13 @@ namespace DevKit {
             dialogueUI = GetComponent<DialogueUI>();
         }
 
-        //-----------------------handle events----------------------------
+        //===================== handle events =====================
         public void AddResponseEvents(ResponseEvent[] responseEvents)
         {
             this.responseEvents = responseEvents;
         }
 
-        //-----------------------Handle Responses------------------------------
+        //===================== Handle Responses =====================
         public void ShowResponses(Response[] responses)
         {
             for (int i = 0; i < responses.Length; i++) {
@@ -51,7 +51,7 @@ namespace DevKit {
             tempButtons.Add(button);
         }
 
-        //----------------------Handle Response Events------------------
+        //===================== Handle Response Events =====================
         private void OnPickedResponse(Response response, int responseIndex)
         {
             //reset buttons

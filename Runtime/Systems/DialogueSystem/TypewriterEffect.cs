@@ -26,7 +26,7 @@ namespace DevKit {
         //states
         public bool isRunning { get; private set; }
 
-        //------------------manage state------------------------
+        //======================== manage state ========================
         public void Run(string msg, TMP_Text label)
         {
             isRunning = true;
@@ -39,7 +39,7 @@ namespace DevKit {
             isRunning = false;
         }
 
-        //---------------run effect---------------
+        //=============== run effect ===============
         private IEnumerator TypeText(string msg, TMP_Text label)
         {
             //reset label
@@ -59,7 +59,7 @@ namespace DevKit {
             isRunning = false;
         }
 
-        //---------------Punctuation------------------
+        //================== Punctuation ==================
         private bool IsPunctuation(char character, out float waitTime)
         {
             foreach (Punctuation puncCategory in punctuations) {

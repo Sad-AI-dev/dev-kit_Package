@@ -21,7 +21,7 @@ namespace DevKit {
             trackedObjects = new();
         }
 
-        //---------------------------2D detection-------------------------------
+        //=========================== 2D detection ===========================
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (ValidObjectCheck(collision.transform)) {
@@ -39,7 +39,7 @@ namespace DevKit {
             }
         }
 
-        //------------------------------------3D detection-------------------------------------------------
+        //==================================== 3D detection ====================================
         private void OnTriggerEnter(Collider collision)
         {
             if (ValidObjectCheck(collision.transform)) {
@@ -56,7 +56,7 @@ namespace DevKit {
             }
         }
 
-        //-----------------------util-------------------------
+        //===================== util =====================
         private bool ValidObjectCheck(Transform toCheck)
         {
             if (whitelistTags != null && whitelistTags.Count > 0) {

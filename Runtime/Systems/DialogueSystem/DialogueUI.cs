@@ -32,7 +32,7 @@ namespace DevKit {
             EndDialogue();
         }
 
-        //------------------------state management-----------------------------
+        //======================== state management ========================
         public void ShowDialogue(DialogueData data)
         {
             IsOpen = true;
@@ -57,13 +57,13 @@ namespace DevKit {
             onDialogueEnd?.Invoke();
         }
 
-        //---------------------events-------------------
+        //===================== events =====================
         public void AddResponseEvents(ResponseEvent[] responseEvents)
         {
             responseHandler.AddResponseEvents(responseEvents);
         }
 
-        //--------------------display dialogue------------------------
+        //======================== display dialogue ========================
         private IEnumerator StepThroughDialogue(DialogueData data)
         {
             for (int i = 0; i < data.Dialogue.Length - 1; i++) {
@@ -104,7 +104,7 @@ namespace DevKit {
             }
         }
 
-        //----------handle typing effect---------------
+        //=============== handle typing effect ===============
         private IEnumerator RunTypingEffect(DialogueData.DialogueMessage msg)
         {
             writeEffect.Run(msg.dialogue, dialogueLabel);
@@ -119,7 +119,7 @@ namespace DevKit {
             }
         }
 
-        //-------------------external inputs-------------------
+        //================== external inputs ==================
         public void AdvanceDialogue()
         {
             if (IsOpen) {

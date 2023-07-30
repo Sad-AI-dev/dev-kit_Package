@@ -70,7 +70,7 @@ namespace DevKit {
         //rotate vars
         private Quaternion targetRotation;
 
-        //----------------start moving-------------
+        //=============== start moving ===============
         private void Start()
         {
             //path check
@@ -91,7 +91,7 @@ namespace DevKit {
             moving = false;
         }
 
-        //--------------Movement---------------
+        //=============== Movement ===============
         private void Update()
         {
             if (moving && !waiting) {
@@ -109,7 +109,7 @@ namespace DevKit {
             }
         }
 
-        //--------------Reach Point-------------
+        //============ Reach Point ============
         private void OnReachPoint()
         {
             StartCoroutine(OnReachPointCo());
@@ -142,7 +142,7 @@ namespace DevKit {
             waiting = false;
         }
 
-        //----------------Reach end of path-------------
+        //=============== Reach end of path ===============
         private void OnReachEnd()
         {
             if (stepMode == StepMode.Cycle) { moving = false; }
@@ -163,7 +163,7 @@ namespace DevKit {
             }
         }
 
-        //-------------Rotation-------------
+        //============ Rotation ============
         private void SetRotateTarget()
         {
             switch (rotateMode) {
@@ -185,7 +185,7 @@ namespace DevKit {
             }
         }
 
-        //---------auto compile---------
+        //========= auto compile =========
         public void CompilePathPoints()
         {
             if (pathHolder != null) {

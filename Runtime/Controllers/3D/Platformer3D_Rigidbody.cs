@@ -51,7 +51,7 @@ namespace DevKit {
             Move();
         }
 
-        //---------------------Movement--------------------------------
+        //===================== Movement =====================
         public void SetMoveDir(Vector2 input)
         {
             if (input.magnitude > 1f) { input.Normalize(); }
@@ -76,7 +76,7 @@ namespace DevKit {
             rb.velocity = new Vector3(result.x, rb.velocity.y, result.z);
         }
 
-        //------------------------Jumping--------------------------
+        //======================== Jumping ========================
         public void Jump()
         {
             if (grounded || canCoyoteJump) { AddJumpForce(); } //jump or coyote jump
@@ -90,7 +90,7 @@ namespace DevKit {
             rb.AddForce(new Vector2(0, jumpHeight), ForceMode.Impulse);
         }
 
-        //-----------timers-----------
+        //========= timers =========
         private IEnumerator BufferJumpCo()
         {
             canBufferJump = true;
@@ -105,7 +105,7 @@ namespace DevKit {
             canCoyoteJump = false;
         }
 
-        //----------detector event responses----------
+        //========= detector event responses =========
         private void OnTouchGround()
         {
             grounded = true;

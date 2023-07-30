@@ -14,6 +14,23 @@ New Scripts:
     - A new Util, which is a property that can be used to hide fields in the editor based on a conditional argument.
         - This has been a long time coming, and I'm very excited about its inclusion.
 
+Existing Scripts:
+
+- Cost Based Activator
+    - Exponential Scaling feature.
+        - This allows for exponential scaling of the behaviour, instead of being restricted to linear scaling.
+    - Budget Spike feature.
+        - This allows for temporary increases to the budget. Ideal for "boss" rounds and more.
+    - Preview Editor feature.
+        - This should give a better idea of how the behaviour will perform over a set amount of cycles.
+    - ResetVars function.
+        - Part of the Preview Editor feature.  
+        Allows for a full internal reset of the behaviour.
+
+- Weighted Chance
+    - Now implements the *IList* interface.
+        - This replaces the old functionality of the *Options* variable. *(for more info, see the changed section)* 
+
 ### Fixed
 - Platformer 2D
     - no longer uses *Time.deltaTime*.
@@ -31,11 +48,16 @@ New Scripts:
     - no longer uses *Time.deltaTime*.
     - *OnMoveDirChanged* event not passing through new move direction.
     
-- CameraShaker
+- Camera Shaker
     - Camera position not being reset after the camera shake.
 
 - Mover
     - no longer uses *Time.deltaTime*.
+
+- Unity Dictionary
+    - Various serialization related issues.
+        - This is the result of a major internal overhaul of the class, but it should behave the same as before.
+
 
 ### Changed
 All Documentation has been moved to the gitHub's wiki page.
@@ -45,6 +67,13 @@ All Documentation has been moved to the gitHub's wiki page.
     - The Universal Input Reciever no longer reads inputs when *Time.timeScale* is set to 0.
         - This is a simple solution to prevent functions from being called when a game is a paused.
         - This may become a setting.
+
+- Weighted Chance
+    - Renamed *Chances* to *Options*.
+        - This better reflects the functionality of the class.
+    - Made *Options* private.
+        - Directly interacting with the *Options* list caused various issues with internal calculations.  
+        - The functionality has been replaced by implementing the *IList* interface.
 
 ### Removed
 - Top Down Controller

@@ -17,7 +17,7 @@ namespace DevKit {
             responseEvents = GetComponent<DialogueResponseEvents>();
         }
 
-        //----------------start dialgue--------------
+        //=============== start dialgue ===============
         public void StartDialogue(DialogueUI targetUI)
         {
             //subscribe response events
@@ -31,7 +31,7 @@ namespace DevKit {
             targetUI.ShowDialogue(data);
         }
 
-        //-------------manage data-------------
+        //============ manage data ============
         public void SetDialogueData(DialogueData data)
         {
             this.data = data;

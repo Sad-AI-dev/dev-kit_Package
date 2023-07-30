@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace DevKit {
     [Serializable]
-    public class UnityDictionary<Key, Value> : ISerializationCallbackReceiver//, IList
+    public class UnityDictionary<Key, Value> : ISerializationCallbackReceiver
     {
         [System.Serializable]
         public struct Pair
@@ -97,11 +97,5 @@ namespace DevKit {
         public void Add(Key key, Value value) { dict.Add(key, value); }
         public void Remove(Key key) { dict.Remove(key); }
         public void Clear() { dict.Clear(); }
-
-        //==== explicit typecasts ====
-        public static explicit operator List<Pair>(UnityDictionary<Key, Value> dict)
-        {
-            return dict.dictionary;
-        }
     }
 }

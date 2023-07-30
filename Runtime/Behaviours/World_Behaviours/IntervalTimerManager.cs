@@ -46,7 +46,7 @@ namespace DevKit {
             }
         }
 
-        //----------------------activate timer-------------------
+        //================== activate timer ==================
         public Coroutine ActivateTimer(string timerName)
         {
             if (intervalTimers.ContainsKey(timerName)) {
@@ -62,7 +62,7 @@ namespace DevKit {
             return StartCoroutine(IntervalTimerCo(timer));
         }
 
-        //-----------------------run timer----------------------
+        //===================== run timer =====================
         private IEnumerator IntervalTimerCo(IntervalTimer timer)
         {
             int counter = 0;
@@ -92,7 +92,7 @@ namespace DevKit {
             }
         }
 
-        //---------------------manage timers-------------------
+        //===================== manage timers =====================
         public IntervalTimer GetTimer(string timerName)
         {
             if (intervalTimers.ContainsKey(timerName)) {
@@ -101,7 +101,7 @@ namespace DevKit {
             return null;
         }
 
-        //-----------------------editor pollish-----------------------
+        //===================== editor pollish =====================
         private void OnValidate()
         {
             if (intervalTimers != null) {

@@ -34,7 +34,7 @@ namespace DevKit {
             if (healthBar != null) { UpdateHealthBar(); } //initialize health bar
         }
 
-        //-------manage health-------
+        //========= manage health =========
         public void TakeDamage(float damage)
         {
             if (!allowNegDamage && damage < 0f) { return; } //neg damage check
@@ -70,7 +70,7 @@ namespace DevKit {
             }
         }
 
-        //-----------manage health bar------------
+        //============ manage health bar ============
         private void UpdateHealthBar()
         {
             if (healthBar != null) {

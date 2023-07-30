@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &41907651
 Transform:
   m_ObjectHideFlags: 0
@@ -420,23 +420,11 @@ MonoBehaviour:
   prefabs:
     selectMode: 0
     options:
-      chances:
-      - option: {fileID: 892004208509729914, guid: d529581e4c7e19d43a4c5c9e4abd2d0e, type: 3}
-        chance: 1
-      - option: {fileID: 2873900153179204623, guid: b01bdff4d1a380c409d1b6fa23e8746e, type: 3}
-        chance: 1
+      options: []
   spawnPoints:
     selectMode: 1
     options:
-      chances:
-      - option: {fileID: 876933357}
-        chance: 1
-      - option: {fileID: 2039914367}
-        chance: 1
-      - option: {fileID: 317101063}
-        chance: 1
-      - option: {fileID: 764809579}
-        chance: 1
+      options: []
   pointHolder: {fileID: 146180731}
 --- !u!114 &146180733
 MonoBehaviour:
@@ -1391,7 +1379,7 @@ MonoBehaviour:
   lastField: 0
   subClasses:
     dictionary:
-    - key: 
+    - key: yes
       value:
         number: 16
         hideable:
@@ -1404,8 +1392,21 @@ MonoBehaviour:
           m_PreInfinity: 0
           m_PostInfinity: 0
           m_RotationOrder: 0
+    - key: no
+      value:
+        number: 15
+        hideable:
+          m_PersistentCalls:
+            m_Calls: []
+        color: {r: 0.6981132, g: 0.10208259, b: 0.10208259, a: 0.95686275}
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
   listTest:
-  - number: 0
+  - number: 16
     hideable:
       m_PersistentCalls:
         m_Calls: []
@@ -2190,17 +2191,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed7d855c52a1fff419907e7929e696df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  budget: 10
-  activateOnStart: 0
-  budgetGain: 10
-  GainRampup: 0
-  GainRampupFrequency: 0
   activateMode: 0
-  ActivateIntervalTime: 0
-  saveMode: 0
-  minSavePercent: 50
-  maxSavePercent: 50
-  saveChance: 0
+  activateIntervalTime: 0
+  activateOnStart: 0
+  budget: 0
+  budgetGain: 10
+  gainRampup: 2
+  gainRampupFrequency: 2
+  enableExponentialScaling: 1
+  exponentialRampup: 1
+  exponentialRampupFrequency: 2
+  budgetSpikeMode: 2
+  budgetSpikeMultiplier: 2
+  budgetSpikeActivationChance: 0
+  budgetSpikeInterval: 5
+  budgetSpikeIntervalMin: 0
+  budgetSpikeIntervalMax: 0
+  saveMode: 1
+  minSavePercent: 10
+  maxSavePercent: 30
+  saveChance: 10
   saveInterval: 0
   minRandInterval: 0
   maxRandInterval: 0
@@ -2259,6 +2269,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     initialized: 1
+  cyclesToSimulate: 20
 --- !u!114 &647866013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5293,13 +5304,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   logs:
-    chances:
-    - option: 1st option
+    options:
+    - option: Hi
       chance: 1
-    - option: 2nd option
-      chance: 1
-    - option: 3rd option
-      chance: 1
+    - option: Hello
+      chance: 2
+    - option: Greetings good sir!
+      chance: 0.5
 --- !u!1 &1506543867
 GameObject:
   m_ObjectHideFlags: 0
@@ -5387,19 +5398,7 @@ MonoBehaviour:
   spawnPoints:
     selectMode: 0
     options:
-      chances:
-      - option: {fileID: 2104837823}
-        chance: 1
-      - option: {fileID: 1506543868}
-        chance: 1
-      - option: {fileID: 1812850213}
-        chance: 1
-      - option: {fileID: 190547714}
-        chance: 1
-      - option: {fileID: 1666775205}
-        chance: 1
-      - option: {fileID: 1728729050}
-        chance: 1
+      options: []
   pointHolder: {fileID: 717333919}
   currentWave: 0
 --- !u!1 &1573287243

@@ -28,13 +28,13 @@ namespace DevKit {
         {
             roundRobinIndex++;
             if (roundRobinIndex >= options.Count) { roundRobinIndex = 0; }
-            return options.chances[roundRobinIndex].option;
+            return options.options[roundRobinIndex].option;
         }
 
-        //-----------set index------------
+        //============ set index ============
         public T GetOptionAtIndex(int index)
         {
-            return options.chances[index].option;
+            return options.options[index].option;
         }
     }
 }
