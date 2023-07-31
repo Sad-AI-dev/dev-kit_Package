@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &41907651
 Transform:
   m_ObjectHideFlags: 0
@@ -4005,8 +4005,8 @@ MonoBehaviour:
   onLeaveLastObject:
     m_PersistentCalls:
       m_Calls: []
-  whitelistTags: []
-  blacklistTags:
+  filterMode: 2
+  tagsToFilter:
   - Player
 --- !u!1 &1178354025
 GameObject:

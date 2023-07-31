@@ -27,6 +27,15 @@ Existing Scripts:
         - Part of the Preview Editor feature.  
         Allows for a full internal reset of the behaviour.
 
+- Object Detector
+    - Filter Mode property
+        - This is a cleaner, more intuitive organization of the class.
+
+- CollectionUtils
+    - Get Random Entry methods
+        - The Collection Utils has been fairly empty for a long time.  
+        I've been meaning to address this for a while, and this methods is a nice addition.
+
 - Weighted Chance
     - Now implements the *IList* interface.
         - This replaces the old functionality of the *Options* variable. *(for more info, see the changed section)* 
@@ -67,6 +76,9 @@ All Documentation has been moved to the gitHub's wiki page.
     - The Universal Input Reciever no longer reads inputs when *Time.timeScale* is set to 0.
         - This is a simple solution to prevent functions from being called when a game is a paused.
         - This may become a setting.
+
+- Object Detector
+    - The *Whitelist Tags* and *Blacklist Tags* lists have been merged and renamed to *Tags To Filter*.
 
 - Weighted Chance
     - Renamed *Chances* to *Options*.

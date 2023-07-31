@@ -6,15 +6,30 @@ namespace DevKit {
     [AddComponentMenu("DevKit/Behaviours/Object Detector")]
     public class ObjectDetector : MonoBehaviour
     {
+        public enum FilterMode {
+            None,
+            WhiteList,
+            BlackList
+        }
+
         [Header("Events")]
         public UnityEvent onDetectFirstObject;
         public UnityEvent onDetectObject;
         public UnityEvent onLeaveLastObject;
 
-        [Header("Settings")]
-        public List<string> whitelistTags;
-        public List<string> blacklistTags;
+        [Header("Filter Settings")]
+        [Tooltip("Determines how detected objects are filtered.\n\n" +
+            "None: objects will not be filtered.\n" +
+            "WhiteList: objects will be ignored, unless their tag is in the tagsToFilter list.\n" +
+            "BlackList: objects will be ignored if their tag is in the tagsToFilter list.")]
+        public FilterMode filterMode;
+        [HideIf(nameof(FilterModeIsNone))]
+        public List<string> tagsToFilter;
 
+        //editor conditionals
+        public bool FilterModeIsNone => filterMode == FilterMode.None;
+
+        //vars
         private List<Transform> trackedObjects;
 
         private void Start() {
@@ -59,25 +74,16 @@ namespace DevKit {
         //===================== util =====================
         private bool ValidObjectCheck(Transform toCheck)
         {
-            if (whitelistTags != null && whitelistTags.Count > 0) {
-                return IsInWhiteList(toCheck);
-            }
-            else {
-                return !IsInBlackList(toCheck);
-            }
+            return filterMode switch {
+                FilterMode.WhiteList => IsInTagList(toCheck),
+                FilterMode.BlackList => !IsInTagList(toCheck),
+                _ => true,
+            };
         }
 
-        private bool IsInWhiteList(Transform toCheck)
+        private bool IsInTagList(Transform toCheck)
         {
-            foreach (string tag in whitelistTags) {
-                if (toCheck.CompareTag(tag)) { return true; }
-            }
-            return false;
-        }
-
-        private bool IsInBlackList(Transform toCheck)
-        {
-            foreach (string tag in blacklistTags) {
+            foreach (string tag in tagsToFilter) {
                 if (toCheck.CompareTag(tag)) { return true; }
             }
             return false;

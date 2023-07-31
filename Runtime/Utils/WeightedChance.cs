@@ -50,6 +50,12 @@ namespace DevKit {
             return chosenOption;
         }
 
+        public void SetChance(int index, float newChance = 1f)
+        {
+            if (newChance < 0f) { newChance = 1f; }
+            options[index].chance = newChance;
+        }
+
         //============== IList vars ==============
         public int Count { get { return options.Count; } }
         public T this[int index] {
@@ -67,20 +73,30 @@ namespace DevKit {
             return -1; //not found
         }
 
-        public void Insert(int index, T option) { 
-            options.Insert(index, new WeightedOption { option = option, chance = 1f });
+        public void Insert(int index, T option) {
+            Insert(index, option, 1f);
+        }
+        public void Insert(int index, T option, float chance) {
+            if (chance < 0) { chance = 0; }
+            options.Insert(index, new WeightedOption { option = option, chance = chance });
             CalcTotalChance();
         }
+
         public void RemoveAt(int index) { 
             options.RemoveAt(index);
             CalcTotalChance();
         }
 
         //ICollection funcs
-        public void Add(T option) { 
-            options.Add(new WeightedOption { option = option, chance = 1f });
+        public void Add(T option) {
+            Add(option, 1f);
+        }
+        public void Add(T option, float chance) {
+            if (chance < 0f) { chance = 1f; }
+            options.Add(new WeightedOption { option = option, chance = chance });
             CalcTotalChance();
         }
+
         public void Clear() { 
             options.Clear();
             CalcTotalChance();
