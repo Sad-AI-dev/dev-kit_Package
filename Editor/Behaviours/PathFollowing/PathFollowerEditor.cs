@@ -24,6 +24,7 @@ public class PathFollowerEditor : Editor
 
     private void OnSceneGUI()
     {
+        if (follower.path == null) { return; }
         //draw path
         Handles.color = Color.green;
         for (int i = 0; i < follower.path.Count - 1; i++) {

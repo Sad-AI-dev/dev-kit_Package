@@ -63,13 +63,19 @@ Existing Scripts:
 - Mover
     - no longer uses *Time.deltaTime*.
 
+- PathFollower
+    - issue where an empty *path* would make the custom editor throw errors.
+
+- Behaviour & Object Pool
+    - issue that prevented the pools from appearing in the inspector.
+
 - Unity Dictionary
     - Various serialization related issues.
         - This is the result of a major internal overhaul of the class, but it should behave the same as before.
 
 
 ### Changed
-All Documentation has been moved to the gitHub's wiki page.
+- All Documentation has been moved to the gitHub's wiki page.
     - This also means that documentation is no longer included with the package files.
 
 - Universal Input Receiver

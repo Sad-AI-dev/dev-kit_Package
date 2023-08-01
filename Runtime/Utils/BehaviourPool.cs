@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace DevKit {
+    [System.Serializable]
     public class BehaviourPool<T> where T : MonoBehaviour
     {
         [SerializeField] private GameObject prefab;
@@ -30,6 +31,7 @@ namespace DevKit {
         }
     }
 
+    [System.Serializable]
     public class ObjectPool
     {
         [SerializeField] private GameObject prefab;
