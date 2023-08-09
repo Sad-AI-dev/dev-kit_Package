@@ -3,11 +3,16 @@ All notable changes to this package will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [] - Unreleased
-This update includes a major documentation overhaul. All documentation has been moved to the gitHub's wiki page and has been reformatted.
+This update includes a major documentation overhaul. All documentation has been moved to the gitHub's wiki page and has been reformatted.  
 Additionally, a lot of scripts depend on *FixedUpdate*, but still used *Time.deltaTime*, causing many issues.  
-This has been addressed in this update by replacing these instances with *Time.fixedDeltaTime*.
+This has been addressed in this update by replacing these instances with *Time.fixedDeltaTime*.  
+A final large change is that all samples have been recreated for better clarity.
 
 ### Added
+New Samples have been created for all scripts included with the package.
+    - This was needed as the old samples were just the development environment.  
+    I added better tools to help with development, and made the descision that samples should be seperated from this environment.
+
 New Scripts:
 
 - Hide If Attribute
@@ -15,6 +20,10 @@ New Scripts:
         - This has been a long time coming, and I'm very excited about its inclusion.
 
 Existing Scripts:
+
+- Platformer 3D Rigidbody
+    - Gravity Scale variable.
+        - This allows for greater control over how the controllers behaves in the air.
 
 - Cost Based Activator
     - Exponential Scaling feature.
@@ -36,6 +45,11 @@ Existing Scripts:
         - The Collection Utils has been fairly empty for a long time.  
         I've been meaning to address this for a while, and this methods is a nice addition.
 
+- Unity Dictionary
+    - Added implicit casts to and from *Dictionary*.
+    - Now implements the *IDictionary* interface.
+        - Some functions slightly changed in functionality because of this.
+
 - Weighted Chance
     - Now implements the *IList* interface.
         - This replaces the old functionality of the *Options* variable. *(for more info, see the changed section)* 
@@ -56,18 +70,33 @@ Existing Scripts:
 - Platformer 3D Rigidbody
     - no longer uses *Time.deltaTime*.
     - *OnMoveDirChanged* event not passing through new move direction.
-    
+
 - Camera Shaker
     - Camera position not being reset after the camera shake.
+    - Various issues related to *ShakeCamera* being called in quick succession.
 
 - Mover
     - no longer uses *Time.deltaTime*.
 
-- PathFollower
+- Object Detector
+    - issue where *OnDetectObject* wouldn't be invoked when a 3D object was detected.
+
+- Path Follower
     - issue where an empty *path* would make the custom editor throw errors.
+
+- Wave Spawner
+    - issue where out of range exceptions would occur after the final wave is spawned.
+
+- Dialogue UI
+    - *OnDialogueEnd* being invoked on game start.
+    - issue where final dialogue of a *Dialogue Data* would not be displayed.
+
+- Music Manager
+    - issue where the playing track would get muted faster than intended.
 
 - Behaviour & Object Pool
     - issue that prevented the pools from appearing in the inspector.
+    - issue where objects would be incorrectly recycled.
 
 - Unity Dictionary
     - Various serialization related issues.
@@ -85,6 +114,10 @@ Existing Scripts:
 
 - Object Detector
     - The *Whitelist Tags* and *Blacklist Tags* lists have been merged and renamed to *Tags To Filter*.
+
+- Slider Health Bar
+    - Inversed the order the *Gradient* field is interpreted.
+        - The new order is a lot more intuitive (left is empty, right if full).
 
 - Weighted Chance
     - Renamed *Chances* to *Options*.

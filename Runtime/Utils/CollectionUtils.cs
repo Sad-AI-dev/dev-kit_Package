@@ -4,6 +4,7 @@ using UnityEngine;
 namespace DevKit {
     public class CollectionUtils
     {
+        //=================== Key from Value ===================
         public static Key GetKeyFromValue<Key, Value>(Dictionary<Key, Value> dictionary, Value value)
         {
             foreach (var pair in dictionary) {
@@ -13,7 +14,6 @@ namespace DevKit {
             }
             return default;
         }
-
         //=================== Get Random Entry ===================
         public static T GetRandomEntry<T>(IList<T> list)
         {

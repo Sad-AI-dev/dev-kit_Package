@@ -5,16 +5,31 @@ namespace DevKit {
     [AddComponentMenu("DevKit/Behaviours/Camera Shaker")]
     public class CameraShaker : MonoBehaviour
     {
+        //vars
+        private Vector3 startPos;
+        private float currentMagnitude;
+
+        private void Start()
+        {
+            startPos = transform.localPosition;
+            currentMagnitude = 0;
+        }
+
         public void ShakeCamera(float duration, float magnitude)
         {
-            StartCoroutine(ShakeCo(duration, magnitude));
+            if (magnitude > currentMagnitude) { //only overwrite camshake when magnitude is higher
+                //reset pos
+                transform.localPosition = startPos;
+                StopAllCoroutines();
+                StartCoroutine(ShakeCo(duration, magnitude));
+            }
         }
 
         private IEnumerator ShakeCo(float duration, float magnitude)
         {
-            Vector3 startPos = transform.localPosition;
+            startPos = transform.localPosition;
             float elapsed = 0.0f;
-            float currentMagnitude = magnitude;
+            currentMagnitude = magnitude;
             //shake camera
             while (elapsed < duration) {
                 //step 1, set camera offset

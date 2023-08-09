@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace DevKit {
     [Serializable]
-    public class UnityDictionary<Key, Value> : ISerializationCallbackReceiver
+    public class UnityDictionary<Key, Value> : IDictionary<Key, Value>, ISerializationCallbackReceiver
     {
         [System.Serializable]
         public struct Pair
@@ -24,6 +24,16 @@ namespace DevKit {
         {
             dictionary = new List<Pair>();
             dict = new Dictionary<Key, Value>();
+        }
+
+        public UnityDictionary(Dictionary<Key, Value> dictionary)
+        {
+            this.dictionary = new List<Pair>();
+            foreach (KeyValuePair<Key,Value> pair in dictionary) {
+                this.dictionary.Add(new Pair() { key = pair.Key, value = pair.Value });
+            }
+
+            dict = new Dictionary<Key, Value>(dictionary);
         }
 
         //================= serialization =================
@@ -82,20 +92,59 @@ namespace DevKit {
             set { dict[key] = value; }
         }
 
-        //custom foreach support
-        public IEnumerator GetEnumerator() { return dict.GetEnumerator(); }
-
-        //=== count/keys/values ===
+        //=== properties ===
         public int Count { get { return dict.Count; } }
-        public Dictionary<Key, Value>.KeyCollection Keys { get { return dict.Keys; } }
-        public Dictionary<Key, Value>.ValueCollection Values { get { return dict.Values; } }
-
-        public bool ContainsKey(Key key) { return dict.ContainsKey(key); }
-        public bool ContainsValue(Value value) { return dict.ContainsValue(value); }
+        public ICollection<Key> Keys { get { return dict.Keys; } }
+        public ICollection<Value> Values { get { return dict.Values; } }
+        public bool IsReadOnly { get { return false; } }
 
         //=== add/remove/clear ===
         public void Add(Key key, Value value) { dict.Add(key, value); }
-        public void Remove(Key key) { dict.Remove(key); }
+        public void Add(KeyValuePair<Key, Value> pair) { dict.Add(pair.Key, pair.Value); }
+
+        public bool Remove(Key key) { return dict.Remove(key); }
+        public bool Remove(KeyValuePair<Key, Value> pair) { return dict.Remove(pair.Key); }
+
         public void Clear() { dict.Clear(); }
+
+        public bool Contains(KeyValuePair<Key, Value> pair) { return dict.Contains(pair); }
+        public bool ContainsKey(Key key) { return dict.ContainsKey(key); }
+        public bool ContainsValue(Value value) { return dict.ContainsValue(value); }
+
+        public bool TryGetValue(Key key, out Value value)
+        {
+            if (ContainsKey(key)) {
+                value = this[key];
+                return true;
+            }
+            value = default; //not found
+            return false;
+        }
+
+        //ICollection Method
+        public void CopyTo(KeyValuePair<Key, Value>[] pairs, int startIndex)
+        {
+            pairs = new KeyValuePair<Key, Value>[Count - startIndex];
+            int counter = 0;
+            foreach (KeyValuePair<Key, Value> pair in dict) {
+                if (counter >= startIndex) { 
+                    pairs[counter - startIndex] = pair;
+                }
+                counter++;
+            }
+        }
+
+        //custom foreach support
+        public IEnumerator<KeyValuePair<Key, Value>> GetEnumerator() { return dict.GetEnumerator(); }
+        IEnumerator IEnumerable.GetEnumerator() { return GetEnumerator(); }
+
+        //==== Type Casts ====
+        public static implicit operator Dictionary<Key, Value> (UnityDictionary<Key, Value> dict) {
+            return dict.dict;
+        }
+        public static implicit operator UnityDictionary<Key, Value> (Dictionary<Key, Value> dict)
+        {
+            return new UnityDictionary<Key, Value>(dict);
+        }
     }
 }

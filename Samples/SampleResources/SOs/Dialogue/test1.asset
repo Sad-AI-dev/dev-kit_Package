@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b78c6dc0aaccb949a3867c5b024092c, type: 3}
+  m_Name: test1
+  m_EditorClassIdentifier: 
+  dialogue:
+  - speaker: cylinder
+    dialogue: 'hi there!
+
+      how you doing?'
+    unskippable: 0
+  - speaker: me
+    dialogue: I am doing fine I guess...
+    unskippable: 1
+  - speaker: cylinder
+    dialogue: Same
+    unskippable: 0
+  - speaker: me
+    dialogue: 'damn
+
+
+
+      sound rough....'
+    unskippable: 0
+  - speaker: cylinder
+    dialogue: 'I know right?
+
+      -------------------................................------------------------------------
+
+      long
+      message time!'
+    unskippable: 0
+  responses:
+  - responseTitle: what?
+    dialogueData: {fileID: 11400000, guid: 07f16907556902446a023b8351febbf0, type: 2}
+  - responseTitle: Imma leave now
+    dialogueData: {fileID: 0}

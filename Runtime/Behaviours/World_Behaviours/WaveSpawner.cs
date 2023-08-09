@@ -39,7 +39,7 @@ namespace DevKit {
 
         public void SpawnNextWave()
         {
-            if (!IsSpawning) {
+            if (!IsSpawning && currentWave < waves.Count) {
                 IsSpawning = true;
                 StartCoroutine(SpawnWaveContentCo());
             }
@@ -69,7 +69,7 @@ namespace DevKit {
             if (activateMode == ActivateMode.Manual) {
                 IsSpawning = false;
             }
-            else { //spawn next wave
+            else if (currentWave < waves.Count) { //spawn next wave
                 StartCoroutine(SpawnWaveContentCo());
             }
         }

@@ -19,7 +19,7 @@ namespace DevKit {
         public override void UpdateHealthBar(float percentage)
         {
             targetSlider.value = (percentage);
-            fillImage.color = gradient.Evaluate(1f - percentage);
+            fillImage.color = gradient.Evaluate(percentage);
         }
     }
 }

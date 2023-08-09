@@ -17,6 +17,9 @@ namespace DevKit {
         private Vector2 moveDir = Vector2.zero;
         private float speed;
 
+        [Header("Gravity Settings")]
+        public float gravityScale = 1f;
+
         [Header("Jump Settings")]
         public float jumpHeight;
         [Space(10)]
@@ -35,6 +38,7 @@ namespace DevKit {
         private void Start()
         {
             rb = GetComponent<Rigidbody>();
+            rb.useGravity = false;
             //ground detection
             if (groundDetector == null) { Debug.LogError("Please assign an object detector on" + transform.name + "!"); }
             else { RegisterDetectorEvents(); }
@@ -49,6 +53,7 @@ namespace DevKit {
         {
             UpdateSpeed();
             Move();
+            ApplyGravity();
         }
 
         //===================== Movement =====================
@@ -74,6 +79,12 @@ namespace DevKit {
             //output result
             Vector3 result = transform.right * toMove.x + transform.forward * toMove.y;
             rb.velocity = new Vector3(result.x, rb.velocity.y, result.z);
+        }
+
+        //======================== Gravity ========================
+        private void ApplyGravity()
+        {
+            rb.AddForce(Physics.gravity * gravityScale);
         }
 
         //======================== Jumping ========================

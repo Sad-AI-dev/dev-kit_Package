@@ -14,7 +14,7 @@ namespace DevKit {
         public T GetBehaviour()
         {
             foreach (T obj in pool) {
-                if (obj.gameObject.activeSelf) {
+                if (!obj.gameObject.activeSelf) {
                     obj.gameObject.SetActive(true);
                     return obj;
                 }
@@ -41,10 +41,10 @@ namespace DevKit {
 
         public GameObject GetObject()
         {
-            foreach (GameObject gO in pool) {
-                if (gO.activeSelf) {
-                    gO.SetActive(true);
-                    return gO;
+            foreach (GameObject obj in pool) {
+                if (!obj.activeSelf) {
+                    obj.SetActive(true);
+                    return obj;
                 }
             }
             return CreateNewObject();

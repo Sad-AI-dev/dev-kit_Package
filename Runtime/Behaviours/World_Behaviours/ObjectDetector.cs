@@ -58,6 +58,7 @@ namespace DevKit {
         private void OnTriggerEnter(Collider collision)
         {
             if (ValidObjectCheck(collision.transform)) {
+                onDetectObject?.Invoke();
                 if (trackedObjects.Count <= 0) { onDetectFirstObject?.Invoke(); } //check if just detected first object
                 if (!trackedObjects.Contains(collision.transform)) { trackedObjects.Add(collision.transform); } //track object
             }

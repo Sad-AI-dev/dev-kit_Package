@@ -29,7 +29,7 @@ namespace DevKit {
             responseHandler = GetComponent<ResponseHandler>();
             writeEffect = GetComponent<TypewriterEffect>();
             //start with dialogue closed
-            EndDialogue();
+            EndDialogue(false);
         }
 
         //======================== state management ========================
@@ -45,7 +45,7 @@ namespace DevKit {
             onDialogueStart?.Invoke();
         }
 
-        public void EndDialogue()
+        public void EndDialogue(bool invokeEvents = true)
         {
             //update vars
             IsOpen = false;
@@ -54,7 +54,7 @@ namespace DevKit {
             dialogueBox.SetActive(false);
             dialogueLabel.text = string.Empty;
             //events
-            onDialogueEnd?.Invoke();
+            if (invokeEvents) { onDialogueEnd?.Invoke(); }
         }
 
         //===================== events =====================
@@ -66,7 +66,7 @@ namespace DevKit {
         //======================== display dialogue ========================
         private IEnumerator StepThroughDialogue(DialogueData data)
         {
-            for (int i = 0; i < data.Dialogue.Length - 1; i++) {
+            for (int i = 0; i < data.Dialogue.Length; i++) {
                 HandleNameLabel(data.Dialogue[i].speaker);
                 //type text on screen
                 yield return RunTypingEffect(data.Dialogue[i]);

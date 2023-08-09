@@ -85,7 +85,7 @@ namespace DevKit {
             float startVolume = source.volume;
             while (source.volume > 0f) {
                 timer += Time.deltaTime;
-                source.volume = startVolume - (timer / (startVolume * muteTime));
+                source.volume = startVolume - Mathf.Lerp(0, startVolume, timer / muteTime);
                 yield return null;
             }
         }
@@ -95,7 +95,7 @@ namespace DevKit {
             float timer = 0f;
             while (source.volume < nextSound.volume) {
                 timer += Time.deltaTime;
-                source.volume = nextSound.volume * (timer / transitionTime);
+                source.volume = Mathf.Lerp(0, nextSound.volume, timer / transitionTime);
                 yield return null;
             }
         }
