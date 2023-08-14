@@ -10,10 +10,22 @@ A final large change is that all samples have been recreated for better clarity.
 
 ### Added
 New Samples have been created for all scripts included with the package.
-    - This was needed as the old samples were just the development environment.  
-    I added better tools to help with development, and made the descision that samples should be seperated from this environment.
+- This was needed as the old samples were just the development environment.  
+I added better tools to help with development, and made the descision that samples should be seperated from this environment.
 
 New Scripts:
+
+- Mouse Input Receiver
+    - A new Input Receiver, which specifically targets the mouse.
+        - This marks the first new input receiver since the package was first launched almost a year ago. 
+        This input Receiver covers some the area's that the universal input receiver couldn't.
+
+- Status Effect System
+    - A system for managing status effects. 
+    Includes the following scripts:
+        - Status Effect
+        - Status Effect Manager
+    - This system was suggested to me all the way back in version 1.0.0, so I'm glad to finally follow up on it.
 
 - Hide If Attribute
     - A new Util, which is a property that can be used to hide fields in the editor based on a conditional argument.
@@ -42,7 +54,7 @@ Existing Scripts:
 
 - CollectionUtils
     - Get Random Entry methods
-        - The Collection Utils has been fairly empty for a long time.  
+        - The Collection Utils has been fairly empty for a long time. 
         I've been meaning to address this for a while, and this methods is a nice addition.
 
 - Unity Dictionary
@@ -53,6 +65,39 @@ Existing Scripts:
 - Weighted Chance
     - Now implements the *IList* interface.
         - This replaces the old functionality of the *Options* variable. *(for more info, see the changed section)* 
+
+### Changed
+- All Documentation has been moved to the gitHub's wiki page.
+    - This also means that documentation is no longer included with the package files.
+
+- Universal Input Receiver
+    - The Universal Input Reciever no longer reads inputs when *Time.timeScale* is set to 0.
+        - This is a simple solution to prevent functions from being called when a game is paused.
+        - This may become a setting.
+
+- Object Detector
+    - The *Whitelist Tags* and *Blacklist Tags* lists have been merged and renamed to *Tags To Filter*.
+
+- Slider Health Bar
+    - Inversed the order the *Gradient* field is interpreted.
+        - The new order is a lot more intuitive (left is empty, right if full).
+
+- Weighted Chance
+    - Renamed *Chances* to *Options*.
+        - This better reflects the functionality of the class.
+    - Made *Options* private.
+        - Directly interacting with the *Options* list caused various issues with internal calculations.  
+        - The functionality has been replaced by implementing the *IList* interface.
+
+### Removed
+- Top Down Controller
+    - Removed the *Set Position* option from *Move Mode*.
+        - Directly setting the position causes countless issues and is not encouraged, so the option has been removed.
+
+- Universal Input Receiver
+    - *Read Mouse Scroll Wheel* option in *Axis Input*.
+        - This functionality has been replaced in the *Mouse Input Receiver*. 
+        The feature was already marked for deprication since I had been planning for the *Mouse Input Receiver* to replace it.
 
 ### Fixed
 - Platformer 2D
@@ -70,6 +115,10 @@ Existing Scripts:
 - Platformer 3D Rigidbody
     - no longer uses *Time.deltaTime*.
     - *OnMoveDirChanged* event not passing through new move direction.
+
+- Universal Input Receiver
+    - onButtonDown prevents onButton being invoked.
+        - this issue would result in a 1 frame delay in any onButton event.
 
 - Camera Shaker
     - Camera position not being reset after the camera shake.
@@ -102,34 +151,6 @@ Existing Scripts:
     - Various serialization related issues.
         - This is the result of a major internal overhaul of the class, but it should behave the same as before.
 
-
-### Changed
-- All Documentation has been moved to the gitHub's wiki page.
-    - This also means that documentation is no longer included with the package files.
-
-- Universal Input Receiver
-    - The Universal Input Reciever no longer reads inputs when *Time.timeScale* is set to 0.
-        - This is a simple solution to prevent functions from being called when a game is a paused.
-        - This may become a setting.
-
-- Object Detector
-    - The *Whitelist Tags* and *Blacklist Tags* lists have been merged and renamed to *Tags To Filter*.
-
-- Slider Health Bar
-    - Inversed the order the *Gradient* field is interpreted.
-        - The new order is a lot more intuitive (left is empty, right if full).
-
-- Weighted Chance
-    - Renamed *Chances* to *Options*.
-        - This better reflects the functionality of the class.
-    - Made *Options* private.
-        - Directly interacting with the *Options* list caused various issues with internal calculations.  
-        - The functionality has been replaced by implementing the *IList* interface.
-
-### Removed
-- Top Down Controller
-    - Removed the *Set Position* option from *Move Mode*.
-        - Directly setting the position causes countless issues and is not encouraged, so the option has been removed.
 
 ## [2.3.0] - Cleaning up Update - 09-02-2023
 This update fixes various issues found during recent events.  

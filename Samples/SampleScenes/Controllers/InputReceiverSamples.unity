@@ -343,7 +343,6 @@ MonoBehaviour:
     posInput: 64000000
     negInput: 61000000
     axisCodes: []
-    readMouseScrollWheel: 0
   directionalInputs:
   - name: Directional Input Sample
     output:
@@ -367,6 +366,141 @@ MonoBehaviour:
     yNegInput: 12010000
     xAxisCodes: []
     yAxisCodes: []
+--- !u!1 &972640233
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 972640236}
+  - component: {fileID: 972640235}
+  - component: {fileID: 972640234}
+  m_Layer: 0
+  m_Name: == Mouse Input Receiver ==
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &972640234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972640233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efb26f828d43a0b46931cc310eae3d0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &972640235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972640233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffd1bab8bb74d4a45b34e9ad35171010, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonInputs:
+  - name: Click
+    onButtonDown:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 972640234}
+          m_TargetAssemblyTypeName: DevKit.MessageDebugger, arvid-dev.dev-kit
+          m_MethodName: DebugMessage
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: started click
+            m_BoolArgument: 0
+          m_CallState: 2
+    onButtonHeld:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 972640234}
+          m_TargetAssemblyTypeName: DevKit.MessageDebugger, arvid-dev.dev-kit
+          m_MethodName: DebugMessage
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: click
+            m_BoolArgument: 0
+          m_CallState: 2
+    onButtonUp:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 972640234}
+          m_TargetAssemblyTypeName: DevKit.MessageDebugger, arvid-dev.dev-kit
+          m_MethodName: DebugMessage
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: ended click
+            m_BoolArgument: 0
+          m_CallState: 2
+    inputCodes: 00000000
+  onScrollWheelInput:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 972640234}
+        m_TargetAssemblyTypeName: DevKit.MessageDebugger, arvid-dev.dev-kit
+        m_MethodName: DebugMessage
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onMouseMove:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 972640234}
+        m_TargetAssemblyTypeName: DevKit.MessageDebugger, arvid-dev.dev-kit
+        m_MethodName: DebugMessage
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!4 &972640236
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972640233}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1500560512
 GameObject:
   m_ObjectHideFlags: 0
