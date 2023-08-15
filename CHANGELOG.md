@@ -2,7 +2,7 @@
 All notable changes to this package will be documented in this file.  
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [] - Unreleased
+## [3.0.0] - Anniversary Update - 15-08-2023
 This update includes a major documentation overhaul. All documentation has been moved to the gitHub's wiki page and has been reformatted.  
 Additionally, a lot of scripts depend on *FixedUpdate*, but still used *Time.deltaTime*, causing many issues.  
 This has been addressed in this update by replacing these instances with *Time.fixedDeltaTime*.  
